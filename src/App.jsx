@@ -1,5 +1,9 @@
+import LoginPage from "./pages/LoginPage";
+
 export default function App() {
   return (
-    <div>App</div>
+    <div>
+      <LoginPage/>
+    </div>
   )
 }
