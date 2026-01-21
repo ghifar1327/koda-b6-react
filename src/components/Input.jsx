@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Input({src, alt, htmlFor,label, type, name, id,value, onChange,placeholder , eye }) {
     
   return (

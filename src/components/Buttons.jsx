@@ -1,5 +1,3 @@
-import React from "react";
-
 export function ButtonOrange({ title }) {
   return (
     <button className="bg-[#FF8906] p-2 rounded-md">
