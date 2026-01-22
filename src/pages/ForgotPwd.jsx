@@ -1,12 +1,12 @@
-import React from 'react'
-import AuthLayout from '../layouts/AuthLayout'
-import Input from '../components/Input'
-import { Button } from '../components/Button'
+import React from "react";
+import AuthLayout from "../components/layouts/AuthLayout";
+import Input from "../components/common/Input";
+import { Button } from "../components/common/Button";
 
 export default function ForgotPwd() {
   return (
     <AuthLayout src={"/auth3.png"} alt={"woman"}>
-        <div>
+      <div>
         <img src="/logos/coffiebrown.png" alt="coffie" />
       </div>
       <div className="font-semibold text-[#8E6447] text-[22px]">
@@ -26,8 +26,8 @@ export default function ForgotPwd() {
           id={"email"}
           placeholder={"Enter your email"}
         />
-        <Button title={"Submit"} orange />
+        <Button orange>Submit</Button>
       </form>
     </AuthLayout>
-  )
+  );
 }
