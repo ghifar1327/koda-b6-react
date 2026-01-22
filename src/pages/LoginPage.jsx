@@ -17,7 +17,7 @@ export default function LoginPage() {
       <form action="" className="flex flex-col gap-5">
         <Input src={"/icons/mail.png"} alt={"mail"} htmlFor={"email"} label={"Email"} type={"text"} name={"email"} id={"email"} placeholder={"Enter your email"}
         />
-        <Input src={"/icons/key.png"} alt={"key"} htmlFor={"password"} label={"Password"} type={"password"} name={"password"} id={"password"} placeholder={"Enter your password"} eye={"/icons/EyeSlash.png"} password
+        <Input src={"/icons/key.png"} alt={"key"} htmlFor={"password"} label={"Password"} type={"password"} name={"password"} id={"password"} placeholder={"Enter your password"} eye={"/icons/EyeSlash.png"} password imgSize={'w-4'}
         />
         <div className="text-[#FF8906] flex justify-end">
           <p>Forgot Password?</p>
