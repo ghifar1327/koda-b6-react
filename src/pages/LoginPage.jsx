@@ -1,3 +1,4 @@
+import { KeyRoundIcon, Mail } from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import AuthLayout from "../components/layouts/AuthLayout";
@@ -16,8 +17,8 @@ export default function LoginPage() {
       </div>
       <form action="" className="flex flex-col gap-5">
         <Input
-          src={"/icons/mail.png"}
-          alt={"mail"}
+          icon={Mail}
+          iconSize={18}
           htmlFor={"email"}
           label={"Email"}
           type={"text"}
@@ -26,8 +27,6 @@ export default function LoginPage() {
           placeholder={"Enter your email"}
         />
         <Input
-          src={"/icons/key.png"}
-          alt={"key"}
           htmlFor={"password"}
           label={"Password"}
           type={"password"}
@@ -36,7 +35,8 @@ export default function LoginPage() {
           placeholder={"Enter your password"}
           eye={"/icons/EyeSlash.png"}
           password
-          imgSize={"w-4"}
+          icon={KeyRoundIcon}
+          iconSize={18}
         />
         <div className="text-[#FF8906] flex justify-end">
           <p>Forgot Password?</p>

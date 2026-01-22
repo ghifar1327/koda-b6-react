@@ -2,6 +2,7 @@ import React from "react";
 import AuthLayout from "../components/layouts/AuthLayout";
 import Input from "../components/common/Input";
 import { Button } from "../components/common/Button";
+import { Mail } from "lucide-react";
 
 export default function ForgotPwd() {
   return (
@@ -17,8 +18,8 @@ export default function ForgotPwd() {
       </div>
       <form action="" className="flex flex-col gap-5">
         <Input
-          src={"/icons/mail.png"}
-          alt={"mail"}
+          icon={Mail}
+          iconSize={18}
           htmlFor={"email"}
           label={"Email"}
           type={"text"}

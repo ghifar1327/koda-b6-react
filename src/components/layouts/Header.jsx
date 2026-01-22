@@ -1,3 +1,4 @@
+import { Search, ShoppingCart } from "lucide-react";
 import { Button } from "../common/Button";
 
 export default function Header() {
@@ -13,8 +14,8 @@ export default function Header() {
         </div>
       </section>
       <section className="flex justify-center">
-        <Button src={"/icons/Search.svg"} size={"w-fit"}></Button>
-        <Button src={"/icons/ShoppingCart.png"} size={"w-fit hidden md:flex"}></Button>
+        <Button size={"w-fit"} icon={Search} iconSize={26}></Button>
+        <Button icon={ShoppingCart} iconSize={26} size={"w-fit hidden md:flex"}></Button>
         <div className="hidden md:flex gap-5">
           <Button border={"border"} size={"h-10 w-23"}>Sign in</Button>
           <Button orange size={"h-10 w-23"}>Sign up</Button>

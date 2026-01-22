@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import { KeyRound, Mail, User } from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import AuthLayout from "../components/layouts/AuthLayout";
@@ -17,30 +18,28 @@ export default function RegisterPage() {
       </div>
       <form action="" className="flex flex-col gap-5">
         <Input
-          src={"/icons/Profile.png"}
-          alt={"person"}
+          icon={User}
+          iconSize={18}
           htmlFor={"name"}
           label={"Full Name"}
           type={"text"}
           name={"name"}
           id={"name"}
           placeholder={"Enter your Full Name"}
-          imgSize={"w-5"}
         />
         <Input
-          src={"/icons/mail.png"}
-          alt={"mail"}
+          icon={Mail}
+          iconSize={18}
           htmlFor={"email"}
           label={"Email"}
           type={"email"}
           name={"email"}
           id={"email"}
           placeholder={"Enter your email"}
-          imgSize={"w-3"}
         />
         <Input
-          src={"/icons/key.png"}
-          alt={"key"}
+          icon={KeyRound}
+          iconSize={18}
           htmlFor={"pwd"}
           label={"Password"}
           type={"password"}
@@ -48,20 +47,17 @@ export default function RegisterPage() {
           id={"pwd"}
           placeholder={"Enter your password"}
           password
-          imgSize={"w-4"}
         />
         <Input
-          src={"/icons/key.png"}
-          alt={"key"}
+          icon={KeyRound}
+          iconSize={18}
           htmlFor={"tryPwd"}
           label={"Confirm Password"}
           type={"password"}
           name={"tryPwd"}
           id={"tryPwd"}
           placeholder={"Enter your password Again"}
-          eye={"/icons/EyeSlash.png"}
           password
-          imgSize={"w-4"}
         />
         <div className="text-[#FF8906] flex justify-end">
           <p>Forgot Password?</p>

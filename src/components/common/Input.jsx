@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Button } from "./Button";
+import { Eye, EyeClosed } from "lucide-react";
 
 export default function Input({
-  src,
-  alt,
-  imgSize,
+  iconSize,
   htmlFor,
   label,
   type,
@@ -14,6 +13,7 @@ export default function Input({
   onChange,
   placeholder,
   password,
+  icon: Icon,
 }) {
   const [show, setShow] = useState(false);
   function tooglePWD(e) {
@@ -24,9 +24,9 @@ export default function Input({
   return (
     <div>
       <label htmlFor={htmlFor}>{label}</label>
-      <div className="flex border border-[#DEDEDE] p-2 pr-0 items-center gap-3 mt-3 rounded-md">
+      <div className="flex border border-[#DEDEDE] p-2 px-3 items-center gap-3 mt-3 rounded-md">
         <span>
-          <img src={src} alt={alt} className={imgSize} />
+          {Icon && <Icon size={iconSize} />}
         </span>
         <span className="w-full">
           <input
@@ -43,9 +43,13 @@ export default function Input({
           {password && (
             <Button
               onClick={tooglePWD}
-              src={show ? "/icons/eye.png" : "/icons/eyeClose.png"}
-              imgSize={"w-4 relative left-[40%]"}
-            />
+              // src={show ? "/icons/eye.png" : "/icons/eyeClose.png"}
+
+              iconSize={iconSize}
+              size
+            >
+              {show ? <Eye size={18}/> : <EyeClosed size={18}/>}
+            </Button>
           )}
         </span>
       </div>
