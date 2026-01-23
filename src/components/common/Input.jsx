@@ -23,7 +23,7 @@ export default function Input({
 
   return (
     <div>
-      <label htmlFor={htmlFor}>{label}</label>
+      <label htmlFor={htmlFor} className="font-semibold">{label}</label>
       <div className="flex border border-[#DEDEDE] p-2 px-3 items-center gap-3 mt-3 rounded-md">
         <span>
           {Icon && <Icon size={iconSize} />}
@@ -44,7 +44,6 @@ export default function Input({
             <Button
               onClick={tooglePWD}
               // src={show ? "/icons/eye.png" : "/icons/eyeClose.png"}
-
               iconSize={iconSize}
               size
             >

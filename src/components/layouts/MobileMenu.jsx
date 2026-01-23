@@ -1,0 +1,45 @@
+import React from "react";
+import { Button } from "../common/Button";
+import { Search, XCircle } from "lucide-react";
+import Input from "../common/Input";
+
+export default function MobileMenu({ toggle, onClick }) {
+  return (
+    <section
+      className={`${toggle && "hidden"} flex flex-col md:hidden fixed inset-0 bg-black/80 z-10 text-black`}
+    >
+      <div className="bg-white h-screen w-[80%] p-[5%] flex flex-col justify-between">
+        <div className="flex flex-col gap-3">
+          <header className="flex justify-between items-center mb-3">
+            <img src="/logos/coffiebrown.png" alt="coffie" className="h-10" />
+            <Button
+              icon={XCircle}
+              iconSize={26}
+              size
+              iconColor={"#ff0000"}
+              onClick={onClick}
+            />
+          </header>
+          <Input
+            label={"Search Product"}
+            icon={Search}
+            iconSize={18}
+            htmlFor={"name"}
+            type={"text"}
+            name={"name"}
+            id={"name"}
+            placeholder={"Find Product"}
+          />
+          <p className="mt-3 ">Menu</p>
+          <div className="bg-[#FF8906] h-0.5 w-full"></div>
+          <p>Products</p>
+          <div className="bg-[#DEDEDE] h-0.5 w-full"></div>
+        </div>
+        <div className="flex flex-col gap-3">
+          <Button border={"border"}>Sign in</Button>
+          <Button orange>Sign up</Button>
+        </div>
+      </div>
+    </section>
+  );
+}
