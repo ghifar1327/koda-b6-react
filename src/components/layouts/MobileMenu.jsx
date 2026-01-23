@@ -6,7 +6,7 @@ import Input from "../common/Input";
 export default function MobileMenu({ toggle, onClick }) {
   return (
     <section
-      className={`${toggle && "hidden"} flex flex-col md:hidden fixed inset-0 bg-black/80 z-10 text-black`}
+      className={`${!toggle && "hidden"} flex flex-col md:hidden fixed inset-0 bg-black/80 z-10 text-black`}
     >
       <div className="bg-white h-screen w-[80%] p-[5%] flex flex-col justify-between">
         <div className="flex flex-col gap-3">
