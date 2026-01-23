@@ -31,7 +31,7 @@ export default function Footer() {
       </section>
       <section className="w-fit flex flex-col gap-3">
         <p className="font-semibold text-xl">Social Media</p>
-        <div className="flex relative right-[7%]">
+        <div className="flex --x-[7%]">
           <img src="/logos/Facebook.svg" alt="facebook" className="w-15" />
           <img src="/logos/Twitter.svg" alt="twitter" className="w-15" />
           <img src="/logos/Instagram.png" alt="instagram" className="w-15" />

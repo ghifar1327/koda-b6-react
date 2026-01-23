@@ -3,6 +3,7 @@ import { Button } from "./Button";
 import { Eye, EyeClosed } from "lucide-react";
 
 export default function Input({
+  size,
   iconSize,
   htmlFor,
   label,
@@ -22,9 +23,9 @@ export default function Input({
   }
 
   return (
-    <div>
+    <div className="w-full">
       <label htmlFor={htmlFor} className="font-semibold">{label}</label>
-      <div className="flex border border-[#DEDEDE] p-2 px-3 items-center gap-3 mt-3 rounded-md">
+      <div className={`${size ? size :"flex items-center gap-3 mt-3 p-2 px-3" } border border-[#DEDEDE] rounded-md w-full`}>
         <span>
           {Icon && <Icon size={iconSize} />}
         </span>
