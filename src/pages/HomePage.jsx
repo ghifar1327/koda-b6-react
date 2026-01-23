@@ -1,42 +1,98 @@
 import React from "react";
 import { Button } from "../components/common/Button";
 import Message from "../components/feature/Message";
+import Card from "../components/product/Card";
 
 export default function HomePage() {
   return (
-    <hero className={"bg-black flex flex-col-reverse md:flex-row md:h-auto h-screen"}>
-      <section className="flex-1/2 h-full md:h-auto bg-linear-to-br from-[#777C82] to-[#0B0909] px-[5%] md:px-[10%] text-white flex flex-col justify-center gap-5 md:gap-5 lg:gap-7">
-        <h1 className="text-3xl lg:text-5xl">Start Your Day with Coffee and Good Meals</h1>
-        <p className="md:text-sm lg:text-lg xl:text-xl">
-          We provide high quality beans, good taste, and healthy meals made by
-          love just for you. Start your day with us for a bigger smile!
-        </p>
-        <div>
-          <Button orange size={"px-5 p-2 text-black"}>
-            Get Started
-          </Button>
-        </div>
-        <div className="flex justify-between">
-          <div className="flex flex-col gap-2">
-            <p className="text-primary text-3xl lg:text-5xl font-semibold">90+</p>
-            <p className="md:text-sm lg:text-lg xl:text-xl">Staf</p>
+    <>
+      <hero
+        className={
+          "flex flex-col-reverse md:flex-row md:h-auto h-screen"
+        }
+      >
+        <section className="flex-1/2 h-full w-full md:h-auto bg-linear-to-br from-[#777C82] to-[#0B0909] px-[5%] md:px-[10%] text-white flex flex-col justify-center gap-5 md:gap-5 lg:gap-7">
+          <h1 className="text-3xl lg:text-5xl">
+            Start Your Day with Coffee and Good Meals
+          </h1>
+          <p className="md:text-sm lg:text-lg xl:text-xl">
+            We provide high quality beans, good taste, and healthy meals made by
+            love just for you. Start your day with us for a bigger smile!
+          </p>
+          <div>
+            <Button orange size={"px-5 p-2 text-black"}>
+              Get Started
+            </Button>
           </div>
-          <div className="w-0.5 h-full bg-white"></div>
-          <div className="flex flex-col gap-2">
-            <p className="text-primary text-3xl lg:text-5xl font-semibold">30+</p>
-            <p className="md:text-sm lg:text-lg xl:text-xl">Store</p>
+          <div className="flex justify-between">
+            <div className="flex flex-col gap-2">
+              <p className="text-primary text-3xl lg:text-5xl font-semibold">
+                90+
+              </p>
+              <p className="md:text-sm lg:text-lg xl:text-xl">Staf</p>
+            </div>
+            <div className="w-0.5 h-full bg-white"></div>
+            <div className="flex flex-col gap-2">
+              <p className="text-primary text-3xl lg:text-5xl font-semibold">
+                30+
+              </p>
+              <p className="md:text-sm lg:text-lg xl:text-xl">Store</p>
+            </div>
+            <div className="w-0.5 h-full bg-white"></div>
+            <div className="flex flex-col gap-2">
+              <p className="text-primary text-3xl lg:text-5xl font-semibold">
+                800+
+              </p>
+              <p className="md:text-sm lg:text-lg xl:text-xl">Customer</p>
+            </div>
           </div>
-          <div className="w-0.5 h-full bg-white"></div>
-          <div className="flex flex-col gap-2">
-            <p className="text-primary text-3xl lg:text-5xl font-semibold">800+</p>
-            <p className="md:text-sm lg:text-lg xl:text-xl">Customer</p>
-          </div>
-        </div>
-      </section>
-      <section className="md:flex-1/2 h-[50%] md:h-auto">
-        <img src="/retangle1.png" alt="coffie" className="w-full h-[100%] object-cover" />
-      </section>
-      <Message/>
-    </hero>
+        </section>
+        <section className="md:flex-1/2 h-[50%] md:h-auto">
+          <img
+            src="/retangle1.png"
+            alt="coffie"
+            className="w-full h-[100%] object-cover"
+          />
+        </section>
+        <Message />
+      </hero>
+      <main className="flex flex-col gap-10">
+          <article className="flex flex-col-reverse md:flex-row text-gray-500">
+            <section className="flex-1/2 lg:pl-[10%] p-[5%] md:p-[4%] flex flex-col justify-center gap-3 md:gap-1 lg:gap-3 xl:gap-6">
+              <div className="flex items-center h-fit md:gap-5 lg:gap-8 ">
+                <div className="w-1 lg:w-3 md:h-[50%] bg-primary"></div>
+                <h1 className="text-4xl text-black md:text-xl lg:text-3xl xl:text-5xl font-semibold">We Provide <span className="text-[#8E6447]">Good Coffee</span> and <span className="text-[#8E6447]">Healthy Meals</span></h1>
+              </div>
+              <div className=" md:text-sm text-xl xl:text-xl"><p>You can explore the menu that we provide with fun and have their own taste and make your day better.</p></div>
+              <div className="flex gap-3 items-center md:text-sm text-xl xl:text-xl"><img src="/icons/checkGreen.png" alt="check" className="w-6 md:w-4 lg:w-6"/><p>High quality beans</p></div>
+              <div className="flex gap-3 items-center md:text-sm text-xl xl:text-xl"><img src="/icons/checkGreen.png" alt="check" className="w-6 md:w-4 lg:w-6"/><p>Healthy meals, you can request the ingredients</p></div>
+              <div className="flex gap-3 items-center md:text-sm text-xl xl:text-xl"><img src="/icons/checkGreen.png" alt="check" className="w-6 md:w-4 lg:w-6"/><p>Chat with our staff to get better experience for ordering</p></div>
+              <div className="flex gap-3 items-center md:text-sm text-xl xl:text-xl"><img src="/icons/checkGreen.png" alt="check" className="w-6 md:w-4 lg:w-6"/><p>Free member card with a minimum purchase of IDR 200.000.</p></div>
+            </section>
+            <section className="flex-1/2">
+              <img src="/Rectangle2.png" alt="" className="w-full"/>
+            </section>
+
+          </article>
+            {/* PRUDUCTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT */}
+          <article className="flex-col flex items-center text-center px-[5%] gap-5">
+            <h1 className="text-4xl md:text-3xl lg:text-5xl ">Here is People’s <span className="text-[#8E6447]">Favorite</span></h1>
+            <div className="bg-primary h-1 lg:h-2 w-[20%]"></div>
+            <p className="text-gray-500">Let’s choose and have a bit taste of poeple’s favorite. It might be yours too!</p>
+          </article>
+          <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-5 md:gap-3">
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={'You can explore the menu that we provide with fun and have their own taste and make your day better.'} rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={'You can explore the menu that we provide with fun and have their own taste and make your day better.'} rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={'You can explore the menu that we provide with fun and have their own taste and make your day better.'} rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={'You can explore the menu that we provide with fun and have their own taste and make your day better.'} rating={"/ratting.png"}/>
+          </figure>
+          <article className="flex-col flex items-center text-center px-[5%] gap-5 lg:gap-8  bg-[#F8F8F8] py-10">
+            <h1 className="text-4xl md:text-3xl lg:text-5xl "><span className="text-[#8E6447]">Visit Our People</span> in The Spot on The Map Below</h1>
+            <div className="bg-primary h-1 lg:h-2 w-[20%]"></div>
+            <p className="text-gray-500 md:w-[50%]">You can explore the menu that we provide with fun and have their own taste and make your day better.</p>
+            <img src="/map.png" alt="" className="w-full"/>
+          </article>
+      </main>
+    </>
   );
 }

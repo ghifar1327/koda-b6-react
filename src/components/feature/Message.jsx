@@ -26,7 +26,7 @@ export default function Message() {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`z-10 fixed right-[10%] bottom-[22%] bg-white border-t-20 border-primary h-[70%] w-[80%] md:h-[60%] md:w-[25%] rounded-xl`}
+          className={`z-10 fixed right-[10%] bottom-[22%] bg-white border-t-20 border-primary h-[70%] w-[80%] md:h-[60%] md:w-[45%] lg:w-[35%] xl:w-[25%] rounded-xl`}
         >
           <div className="relative flex h-full w-full flex-col justify-between">
             <section className="flex justify-start gap-3 p-3 border-b border-gray-400">
