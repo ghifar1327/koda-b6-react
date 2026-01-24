@@ -15,6 +15,7 @@ export default function Input({
   placeholder,
   password,
   icon: Icon,
+  children
 }) {
   const [show, setShow] = useState(false);
   function tooglePWD(e) {
@@ -28,6 +29,7 @@ export default function Input({
       <div className={`${size ? size :"flex items-center gap-3 mt-3 p-2 px-3" } border border-[#DEDEDE] rounded-md w-full`}>
         <span>
           {Icon && <Icon size={iconSize} />}
+          {children}
         </span>
         <span className="w-full">
           <input

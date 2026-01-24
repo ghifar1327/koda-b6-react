@@ -5,13 +5,13 @@ import { useState } from "react";
 
 export default function Header() {
     const [toggle, setToggle] = useState(false);
-    const home = true
+    const home = false
     function toogleButton(e) {
       e.preventDefault();
       setToggle((prev) => !prev);
     }
   return (
-    <nav className={`absolute w-full left-0 top-0 ${!home ? "bg-black": "bg-[#0B090921]" } text-white flex justify-between px-[5%] lg:px-[10%] p-3`}>
+    <nav className={`w-full left-0 top-0 ${!home ? "bg-black relative": "bg-[#0B090921] absolute" } text-white flex justify-between px-[5%] lg:px-[10%] p-3`}>
       <section className="flex items-center gap-3 md:gap-10">
         <img src="/logos/coffieWhite.png" alt="" className="h-8"/>
         <div className="hidden md:flex">
