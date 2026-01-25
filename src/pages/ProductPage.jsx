@@ -92,15 +92,15 @@ export default function ProductPage() {
       </h1>
       <section className="flex w-full gap-5 px-[5%]">
         <div className="hidden md:flex w-[50%]"><SearchFeat/></div>
-        <div className="grid grid-cols-2 gap-5">
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+        <div className="grid grid-cols-2 gap-2 md:gap-3 lg-gap5">
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
         </div>
       </section>
       <div onClick={toogleButton} className={`${toggle ? "block" : "hidden"} md:hidden p-[5%] absolute w-full h-full`}>

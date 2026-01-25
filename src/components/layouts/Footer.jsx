@@ -3,7 +3,7 @@ import React from "react";
 export default function Footer() {
   return (
     <footer className="grid grid-cols-1 md:grid-cols-5 bg-[#F8F8F8] px-[5%] lg:px-[10%] p-[3%] gap-10 md:gap-4 mt-[5%]">
-      <section className="col-span-2 h-auto flex flex-col justify-end lg:gap-7 pr-[10%]">
+      <section className="col-span-2 h-auto flex flex-col justify-end gap-5 lg:gap-7 pr-[10%]">
         <div>
           <img src="/logos/coffiebrown.png" alt="coffie" />
         </div>
