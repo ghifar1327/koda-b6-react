@@ -18,47 +18,31 @@ export default function RegisterPage() {
       </div>
       <form action="" className="flex flex-col gap-5">
         <Input
-          icon={User}
-          iconSize={18}
-          htmlFor={"name"}
           label={"Full Name"}
           type={"text"}
-          name={"name"}
           id={"name"}
           placeholder={"Enter your Full Name"}
-        />
+        ><User size={18}/></Input>
         <Input
-          icon={Mail}
-          iconSize={18}
-          htmlFor={"email"}
           label={"Email"}
           type={"email"}
-          name={"email"}
           id={"email"}
           placeholder={"Enter your email"}
-        />
+        ><Mail size={18}/></Input>
         <Input
-          icon={KeyRound}
-          iconSize={18}
-          htmlFor={"pwd"}
           label={"Password"}
           type={"password"}
-          name={"pwd"}
           id={"pwd"}
           placeholder={"Enter your password"}
           password
-        />
+        ><KeyRound size={18}/></Input>
         <Input
-          icon={KeyRound}
-          iconSize={18}
-          htmlFor={"tryPwd"}
           label={"Confirm Password"}
           type={"password"}
-          name={"tryPwd"}
           id={"tryPwd"}
           placeholder={"Enter your password Again"}
           password
-        />
+        ><KeyRound size={18}/></Input>
         <div className="text-[#FF8906] flex justify-end">
           <p>Forgot Password?</p>
         </div>

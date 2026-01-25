@@ -17,27 +17,21 @@ export default function LoginPage() {
       </div>
       <form action="" className="flex flex-col gap-5">
         <Input
-          icon={Mail}
-          iconSize={18}
           htmlFor={"email"}
           label={"Email"}
           type={"text"}
           name={"email"}
           id={"email"}
           placeholder={"Enter your email"}
-        />
+        ><Mail size={18}/></Input>
         <Input
-          htmlFor={"password"}
           label={"Password"}
           type={"password"}
-          name={"password"}
           id={"password"}
           placeholder={"Enter your password"}
           eye={"/icons/EyeSlash.png"}
           password
-          icon={KeyRoundIcon}
-          iconSize={18}
-        />
+        ><KeyRoundIcon size={18}/></Input>
         <div className="text-[#FF8906] flex justify-end">
           <p>Forgot Password?</p>
         </div>

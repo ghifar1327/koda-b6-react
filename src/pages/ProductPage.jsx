@@ -3,8 +3,8 @@ import { Button } from "../components/common/Button";
 import { ArrowLeft, ArrowRight, Search, SlidersHorizontal } from "lucide-react";
 import Input from "../components/common/Input";
 import Card from "../components/product/Card";
-import SearchFeat from "../components/feature/SearchFeat";
 import { useState } from "react";
+import Filter from "../components/feature/Filter";
 export default function ProductPage() {
     const [toggle, setToggle] = useState(false);
     function toogleButton(e) {
@@ -19,11 +19,13 @@ export default function ProductPage() {
           We Provide Good Coffee and Healthy Meals
         </h1>
       </div>
-      <section className="flex items-center border-b-[1px] border-gray-400 md:hidden gap-3 h-fit p-[5%]">
-        <Input size={"p-2 gap-2 flex"} placeholder={"Find Product"} icon={Search} iconSize={24} />
+      <section>
+      <form className="flex items-center border-b-[1px] border-gray-400 md:hidden gap-3 h-fit p-[5%]">
+        <Input size={"p-2 gap-2 flex"} placeholder={"Find Product"} ><Search size={24}/></Input>
         <Button onClick={toogleButton} orange size={" h-fit p-2"}>
           <SlidersHorizontal className="h-full" />
         </Button>
+      </form>
       </section>
       <section className="px-[5%] flex justify-between items-center md:px-[10%]">
         <h1 className="text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
@@ -87,7 +89,7 @@ export default function ProductPage() {
         Our <span className="text-[#8E6447]">Product</span>
       </h1>
       <section className="flex w-full gap-5 px-[5%]">
-        <div className="hidden md:flex w-[50%]"><SearchFeat/></div>
+        <div className="hidden md:flex w-[50%]"><Filter/></div>
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg-gap5">
           <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
           <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
@@ -100,7 +102,7 @@ export default function ProductPage() {
         </div>
       </section>
       <div onClick={toogleButton} className={`${toggle ? "block" : "hidden"} md:hidden p-[5%] absolute w-full h-full`}>
-        <SearchFeat/>
+        <Filter/>
       </div>
     </main>
   );

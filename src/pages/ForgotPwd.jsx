@@ -18,15 +18,11 @@ export default function ForgotPwd() {
       </div>
       <form action="" className="flex flex-col gap-5">
         <Input
-          icon={Mail}
-          iconSize={18}
-          htmlFor={"email"}
           label={"Email"}
           type={"text"}
-          name={"email"}
           id={"email"}
           placeholder={"Enter your email"}
-        />
+        ><Mail size={18}/></Input>
         <Button orange>Submit</Button>
       </form>
     </AuthLayout>

@@ -2,14 +2,14 @@ import React from 'react'
 import { Button } from '../common/Button'
 import Input from '../common/Input'
 
-export default function SearchFeat() {
+export default function Filter() {
   return (
     <div onClick={(e)=> e.stopPropagation()}>
       <form action="" className='bg-black flex flex-col gap-5 w-full h-fit text-white p-5  accent-primary rounded-2xl'>
         <section className='flex justify-between font-bold'><p>Filter</p> <Button size={"w-fitt"}>Reset Filter</Button></section>
         <section className='flex flex-col gap-3'>
         <label htmlFor='search' className='font-bold'>Search</label>
-        <Input type={"text"} id={"search"}  placeholder={"Search Your Product"} size={"bg-white text-black p-2"}/>
+        <Input type={"text"} id={"search"}  placeholder={"Search Your Product"} size={"bg-white text-black p-2"}></Input>
         </section>
         <section className='flex flex-col gap-3'>
           <label htmlFor="favorite-product" className='font-bold'>Catagory</label>

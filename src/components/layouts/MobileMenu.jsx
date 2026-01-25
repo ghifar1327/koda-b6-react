@@ -19,14 +19,10 @@ export default function MobileMenu({ toggle, onClick }) {
           </header>
           <Input
             label={"Search Product"}
-            icon={Search}
-            iconSize={18}
-            htmlFor={"name"}
             type={"text"}
-            name={"name"}
-            id={"name"}
+            id={"search"}
             placeholder={"Find Product"}
-          />
+          ><Search size={18}/></Input>
           <p className="mt-3 ">Menu</p>
           <div className="bg-[#FF8906] h-0.5 w-full"></div>
           <p>Products</p>
