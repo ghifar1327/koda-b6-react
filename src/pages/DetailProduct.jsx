@@ -54,63 +54,96 @@ export default function DetailProduct() {
                 <Minus />
               </Button>
               <p className="text-3xl px-3 ">{count}</p>
-              <Button
-                onClick={() => setCount(count + 1)}
-                size={"p-2 border-2 border-primary"}
-                orange
-              >
+              <Button onClick={() => setCount(count + 1)} size={"p-2 border-2 border-primary"} orange>
                 <Plus />
               </Button>
             </div>
-              <p className="text-2xl font-semibold">Choose Size</p>
-              {/* <div className="flex gap-3">
-                <label htmlFor="regular">
-                    <p>Regular</p>
-                    <input type="radio" name="size" value="regular" id="regular" />
-                </label>
-                <label htmlFor="medium">
-                    <p>Medium</p>
-                    <input type="radio" name="size" value="medium" id="medium" />
-                </label>
-                <label htmlFor="medium">
-                    <p>Large</p>
-                    <input type="radio" name="size" value="large" id="large" />
-                </label>
-                </div> */}
-                <Input type={"radio"}>test</Input>
-                <p className="text-2xl font-semibold">Hot ice?</p>
-                <div className="flex gap-3">
-                    <label htmlFor="hot">
-                        <p>Hot</p>
-                        <input type="radio" name="hot/ice" value="hot" id="hot"/>
-                    </label>
-                    <label htmlFor="ice">
-                        <p>Ice</p>
-                        <input type="radio" name="hot/ice" value="ice" id="ice"/>
-                    </label>
-                </div>
-            </section>
-            <section className="flex gap-5">
-                <Button className="flex gap-5"ton orange >Buy</Button>
-                <Button size={"border p-2 w-full border-primary"}><ShoppingCart color={"#FF8906"} size={18}/><p className="text-primary px-3">add to chart</p></Button>
-            </section>
+            <label htmlFor="medium" className="text-2xl font-semibold">Choose Size</label>
+            <div className="flex gap-3">
+                <Input type={"radio"} id={"regular"} name={"cup"} value={"regular"}>Regular</Input>
+                <Input type={"radio"} id={"medium"} name={"cup"} value={"medium"}>Medium</Input>
+                <Input type={"radio"} id={"large"} name={"cup"} value={"large"}>Large</Input>
+            </div>
+            <label htmlFor="hot" className="text-2xl font-semibold">Hot/ice</label>
+            <div className="flex gap-3">
+                <Input type={"radio"} id={"hot"} name={"hot/ice"} value={"hot"}>Hot</Input>
+                <Input type={"radio"} id={"ice"} name={"hot/ice"} value={"ice"}>Ice</Input>
+            </div>
+          </section>
+          <section className="flex gap-5 mt-10">
+            <Button border={"border-2 border-primary"} orange>
+              Buy
+            </Button>
+            <Button size={"border-2 p-2 w-full border-primary"}>
+              <ShoppingCart color={"#FF8906"} size={18} />
+              <p className="text-primary px-3">add to chart</p>
+            </Button>
+          </section>
         </figcaption>
-        </section>
-            <h1 className="text-5xl text-semibold">Recomendation <span className="text-[#8E6447]">For You</span></h1>
-            <section className="grid grid-cols-3 gap-5">
-                <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-                <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-                <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-            </section>
-            <search className="flex justify-center">
-                <div className="flex gap-5">
-                    <Button orange size={"p-2 w-10"} radius={"rounded-full"}>1</Button>
-                    <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"}>2</Button>
-                    <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"}>3</Button>
-                    <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"}>4</Button>
-                    <Button orange  size={"p-2 w-fit"} radius={"rounded-full"}><ArrowRight color={"#FFFFFF"}/></Button>
-                </div>
-            </search>
+      </section>
+      <h1 className="text-5xl text-semibold">
+        Recomendation <span className="text-[#8E6447]">For You</span>
+      </h1>
+      <section className="grid grid-cols-3 gap-5">
+        <Card
+          image={"/hazelnut.png"}
+          title={"Hazelnut Latte"}
+          price={"20.000"}
+          discon={"10.000"}
+          description={
+            "You can explore the menu that we provide with fun and have their own taste and make your day better."
+          }
+          rating={"/ratting.png"}
+        />
+        <Card
+          image={"/hazelnut.png"}
+          title={"Hazelnut Latte"}
+          price={"20.000"}
+          discon={"10.000"}
+          description={
+            "You can explore the menu that we provide with fun and have their own taste and make your day better."
+          }
+          rating={"/ratting.png"}
+        />
+        <Card
+          image={"/hazelnut.png"}
+          title={"Hazelnut Latte"}
+          price={"20.000"}
+          discon={"10.000"}
+          description={
+            "You can explore the menu that we provide with fun and have their own taste and make your day better."
+          }
+          rating={"/ratting.png"}
+        />
+      </section>
+      <search className="flex justify-center">
+        <div className="flex gap-5">
+          <Button orange size={"p-2 w-10"} radius={"rounded-full"}>
+            1
+          </Button>
+          <Button
+            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
+            radius={"rounded-full"}
+          >
+            2
+          </Button>
+          <Button
+            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
+            radius={"rounded-full"}
+          >
+            3
+          </Button>
+          <Button
+            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
+            radius={"rounded-full"}
+          >
+            4
+          </Button>
+          <Button orange size={"p-2 w-fit"} radius={"rounded-full"}>
+            <ArrowRight color={"#FFFFFF"} />
+          </Button>
+        </div>
+      </search>
     </main>
-    );
+  );
 }

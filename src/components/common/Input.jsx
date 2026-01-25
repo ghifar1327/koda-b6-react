@@ -5,6 +5,7 @@ import { Check, Eye, EyeClosed } from "lucide-react";
 export default function Input({
   size,
   label,
+  name,
   type,
   id,
   value,
@@ -22,8 +23,8 @@ export default function Input({
   return (
     <>
       {type === "checkbox" || type === "radio" ? (
-        <label className="group flex items-center gap-3 cursor-pointer">
-          <input type={type} name={id} id={id} value={value} className="hidden" />
+        <label className={`${type==="radio" && "w-full flex-1"} group flex items-center gap-3 cursor-pointer`}>
+          <input type={type} name={name} id={id} value={value} className="hidden" />
           {type === "checkbox" ? (
             <>
               <div className="w-5 h-5 border-2 rounded-full flex items-center justify-center group-has-[input:checked]:bg-primary group-has-[input:checked]:border-primary">
@@ -36,8 +37,10 @@ export default function Input({
             </>
           ) : (
             <>
-            <div className="w-full flex justify-center border ">
-                {children}
+            <div className="w-full flex justify-center border-2 rounded-sm  border-[#E8E8E8] p-1 group-has-[input:checked]:border-primary">
+                <p className="">
+                  {children}
+                </p>
             </div>
             </>
           )}
