@@ -1,11 +1,16 @@
-import React from "react";
 import Voucher from "../components/common/Voucher";
 import { Button } from "../components/common/Button";
 import { ArrowLeft, ArrowRight, Search, SlidersHorizontal } from "lucide-react";
 import Input from "../components/common/Input";
 import Card from "../components/product/Card";
-
+import SearchFeat from "../components/feature/SearchFeat";
+import { useState } from "react";
 export default function ProductPage() {
+    const [toggle, setToggle] = useState(false);
+    function toogleButton(e) {
+      e.preventDefault();  
+      setToggle((prev) => !prev);
+    }
   return (
     <main className="relative flex flex-col gap-10">
       <img src="/Rectangle4.png" alt="" className="w-full hidden md:block" />
@@ -16,7 +21,7 @@ export default function ProductPage() {
       </div>
       <section className="flex items-center border-b-[1px] border-gray-400 md:hidden gap-3 h-fit p-[5%]">
         <Input size={"p-2 gap-2 flex"} placeholder={"Find Product"} icon={Search} iconSize={24} />
-        <Button orange size={" h-fit p-2"}>
+        <Button onClick={toogleButton} orange size={" h-fit p-2"}>
           <SlidersHorizontal className="h-full" />
         </Button>
       </section>
@@ -40,7 +45,7 @@ export default function ProductPage() {
           />
         </div>
       </section>
-      <section className="no-scrollbar w-[99vw] overflow-x-scroll">
+      <section className="no-scrollbar w-full overflow-x-scroll">
         <div className="flex w-fit gap-5">
           <Voucher
             image={"/imgVoucher1.png"}
@@ -86,7 +91,7 @@ export default function ProductPage() {
         Our <span className="text-[#8E6447]">Product</span>
       </h1>
       <section className="flex w-full gap-5 px-[5%]">
-        <div className="hidden md:flex-2/3 border"></div>
+        <div className="hidden md:flex w-[50%]"><SearchFeat/></div>
         <div className="grid grid-cols-2 gap-5">
           <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
           <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
@@ -98,6 +103,9 @@ export default function ProductPage() {
           <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
         </div>
       </section>
+      <div onClick={toogleButton} className={`${toggle ? "block" : "hidden"} md:hidden p-[5%] absolute w-full h-full`}>
+        <SearchFeat/>
+      </div>
     </main>
   );
 }

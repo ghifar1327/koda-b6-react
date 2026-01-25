@@ -5,10 +5,8 @@ import { Eye, EyeClosed } from "lucide-react";
 export default function Input({
   size,
   iconSize,
-  htmlFor,
   label,
   type,
-  name,
   id,
   value,
   onChange,
@@ -24,9 +22,9 @@ export default function Input({
   }
 
   return (
-    <div className="w-full">
-      <label htmlFor={htmlFor} className="font-semibold">{label}</label>
-      <div className={`${size ? size :"flex items-center gap-3 mt-3 p-2 px-3" } border border-[#DEDEDE] rounded-md w-full`}>
+    <div className={`${type==="checkbox"? "flex items-center justify-end gap-[3%] flex-row-reverse" : "w-full"}`}>
+      <label htmlFor={id} className="font-semibold">{label}</label>
+      <div className={`${size ? size :"flex items-center gap-3 mt-3 p-2 px-3" } ${type !== "checkbox" && "border border-[#DEDEDE] rounded-md w-full"} `}>
         <span>
           {Icon && <Icon size={iconSize} />}
           {children}
@@ -34,12 +32,12 @@ export default function Input({
         <span className="w-full">
           <input
             type={password ? (show ? "text" : "password") : type}
-            name={name}
+            name={id}
             id={id}
             value={value}
             onChange={onChange}
             placeholder={placeholder}
-            className="outline-none w-full"
+            className={`outline-none w-full h-full ${type === "checkbox" && "cursor-pointer"}`}
           />
         </span>
         <span>
