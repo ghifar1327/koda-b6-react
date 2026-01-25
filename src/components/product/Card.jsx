@@ -21,7 +21,7 @@ export default function Card({ image, title, description, price ,discon , rating
             <Button orange size={"p-1 text-xl md:p-0 xl:p-1 md:text-xs xl:text-xl flex-8/3"}>
               Buy
             </Button>
-            <Button icon={ShoppingCart} border={"border border-primary"} size={"p-2 md:p-1 w-full"} iconSize={20} iconColor={"#FF8906"}/>
+            <Button border={"border border-primary"} size={"p-2 md:p-1 w-full"}><ShoppingCart size={20} color={"#FF8906"}/></Button>
           </div>
         </div>
       </div>

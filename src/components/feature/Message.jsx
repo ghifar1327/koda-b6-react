@@ -13,13 +13,11 @@ export default function Message() {
   return (
     <>
       <Button
-        icon={MessageCircleMore}
-        iconSize={26}
         size={"fixed z-10 bottom-[10%] right-[10%] p-5"}
         radius={"rounded-full"}
         orange
         onClick={toogleButton}
-      ></Button>
+      ><MessageCircleMore size={26}/> </Button>
       <div
         onClick={toogleButton}
         className={`${toggle ? "block fixed inset-0" : "hidden"}`}
@@ -41,11 +39,9 @@ export default function Message() {
               <div className="flex w-full justify-between gap-2 p-3">
                 <Input size={"px-2 p-1"} />
                 <Button
-                  icon={Send}
                   size={"p-1 px-2 w-fit z-50"}
-                  iconSize={18}
                   orange
-                />
+                ><Send size={18}/></Button>
               </div>
             </section>
           </div>

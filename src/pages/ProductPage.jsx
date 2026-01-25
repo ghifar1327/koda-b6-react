@@ -31,18 +31,14 @@ export default function ProductPage() {
         </h1>
         <div className="hidden md:flex h-fit gap-5">
           <Button
-            icon={ArrowLeft}
-            iconSize={22}
             size={"w-fit p-3 md:p-2 xl:p-3 bg-[#E8E8E8]"}
             radius={"rounded-full"}
-          />
+          ><ArrowLeft size={22}/></Button>
           <Button
-            icon={ArrowRight}
-            iconSize={22}
             orange
             size={"w-fit p-3 md:p-2 xl:p-3"}
             radius={"rounded-full"}
-          />
+          ><ArrowRight size={22}/></Button>
         </div>
       </section>
       <section className="no-scrollbar w-full overflow-x-scroll">

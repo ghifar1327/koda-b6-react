@@ -183,8 +183,8 @@ export default function HomePage() {
             <p className="text-xl md:text-sm lg:text-xl xl:text-xl text-white">“Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!</p>
             <img src="/rating2.png" alt="rating" className="w-[40%]"/>
             <div className="flex gap-5">
-              <Button icon={ArrowLeft} iconSize={22} size={"w-fit bg-white p-3 md:p-2 xl:p-3"} radius={"rounded-full"}/>
-              <Button icon={ArrowRight} iconSize={22} orange size={"w-fit p-3 md:p-2 xl:p-3"} radius={"rounded-full"}/>
+              <Button size={"w-fit bg-white p-3 md:p-2 xl:p-3"} radius={"rounded-full"}><ArrowLeft size={22} /></Button>
+              <Button orange size={"w-fit p-3 md:p-2 xl:p-3"} radius={"rounded-full"}><ArrowRight size={22}/></Button>
             </div>
             <img src="/slider.png" alt="" className="w-[13%]"/>
           </section>

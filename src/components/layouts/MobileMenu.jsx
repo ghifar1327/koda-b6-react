@@ -13,12 +13,9 @@ export default function MobileMenu({ toggle, onClick }) {
           <header className="flex justify-between items-center mb-3">
             <img src="/logos/coffiebrown.png" alt="coffie" className="h-10" />
             <Button
-              icon={XCircle}
-              iconSize={26}
               size
-              iconColor={"#ff0000"}
               onClick={onClick}
-            />
+            ><XCircle size={26} color="#ff0000"/></Button>
           </header>
           <Input
             label={"Search Product"}

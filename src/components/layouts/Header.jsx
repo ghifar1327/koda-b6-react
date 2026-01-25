@@ -22,9 +22,9 @@ export default function Header() {
         </div>
       </section>
       <section className="flex justify-center gap-5">
-        <Button size={"w-fit"} icon={Search} iconSize={26}></Button>
-        <Button icon={ShoppingCart} iconSize={26} size={"w-fit hidden md:flex"}></Button>
-        <Button icon={MenuIcon} onClick={toogleButton} iconSize={26} size={"flex md:hidden"}/>
+        <Button size={"w-fit"}><Search size={26}/></Button>
+        <Button icon={ShoppingCart} iconSize={26} size={"w-fit hidden md:flex"}><ShoppingCart size={26}/></Button>
+        <Button onClick={toogleButton} size={"flex md:hidden"}><MenuIcon size={26}/></Button>
         <div className="hidden md:flex gap-5">
           <Button border={"border"} size={"h-10 w-23"}>Sign in</Button>
           <Button orange size={"h-10 w-23"}>Sign up</Button>

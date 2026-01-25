@@ -12,7 +12,7 @@ export default function MainLayout() {
       <Header/>
       {/* <HomePage/> */}
       {/* <ProductPage/> */}
-      <DetailProduct/>
+      {/* <DetailProduct/> */}
       <Footer/>
     </>
   );
