@@ -2,6 +2,7 @@ import { ArrowRight, Minus, Plus, ShoppingCart, ThumbsUp } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
+import Input from "../components/common/Input";
 
 export default function DetailProduct() {
   const [count, setCount] = useState(0);
@@ -62,7 +63,7 @@ export default function DetailProduct() {
               </Button>
             </div>
               <p className="text-2xl font-semibold">Choose Size</p>
-              <div className="flex gap-3">
+              {/* <div className="flex gap-3">
                 <label htmlFor="regular">
                     <p>Regular</p>
                     <input type="radio" name="size" value="regular" id="regular" />
@@ -75,7 +76,8 @@ export default function DetailProduct() {
                     <p>Large</p>
                     <input type="radio" name="size" value="large" id="large" />
                 </label>
-                </div>
+                </div> */}
+                <Input type={"radio"}>test</Input>
                 <p className="text-2xl font-semibold">Hot ice?</p>
                 <div className="flex gap-3">
                     <label htmlFor="hot">

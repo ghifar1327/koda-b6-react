@@ -13,18 +13,18 @@ export default function Filter() {
         </section>
         <section className='flex flex-col gap-3'>
           <label htmlFor="favorite-product" className='font-bold'>Catagory</label>
-          <Input type={"checkbox"} id={"favarite-product"} label={"Favorite Product"} size={"w-4 h-4 bg-black"}/>
-          <Input type={"checkbox"} id={"coffie"} label={"Coffie"} size={"w-4 h-4 bg-black"}/>
-          <Input type={"checkbox"} id={"non-coffie"} label={"Non Coffie"} size={"w-4 h-4 bg-black"}/>
-          <Input type={"checkbox"} id={"foods"} label={"Foods"} size={"w-4 h-4 bg-black"}/>
-          <Input type={"checkbox"} id={"add-on"} label={"Add-On"} size={"w-4 h-4 bg-black"}/>
+          <Input type={"checkbox"} id={"favarite-product"} size={"w-4 h-4 bg-black"}>Favorite Product</Input>
+          <Input type={"checkbox"} id={"coffie"} size={"w-4 h-4 bg-black"}>Coffie</Input>
+          <Input type={"checkbox"} id={"non-coffie"} size={"w-4 h-4 bg-black"}>Non Coffie</Input>
+          <Input type={"checkbox"} id={"foods"} size={"w-4 h-4 bg-black"}>Foods</Input>
+          <Input type={"checkbox"} id={"add-on"} size={"w-4 h-4 bg-black"}>Add-On</Input>
         </section>
         <section className='flex flex-col gap-3'>
           <label htmlFor="" className='font-bold'>Short By</label>
-          <Input type={"checkbox"} id={"buy-1-get-1"} label={"Buy 1 Get 1"} size={"w-4 h-4 bg-black"}/>
-          <Input type={"checkbox"} id={"flash-sale"} label={"Flash Sale"} size={"w-4 h-4 bg-black"}/>
-          <Input type={"checkbox"} id={"birtday-package"} label={"Birtday Package"} size={"w-4 h-4 bg-black"}/>
-          <Input type={"checkbox"} id={"cheap"} label={"Cheap"} size={"w-4 h-4 bg-black"}/>
+          <Input type={"checkbox"} id={"buy-1-get-1"} size={"w-4 h-4 bg-black"}>Buy 1 Get 1</Input>
+          <Input type={"checkbox"} id={"flash-sale"} size={"w-4 h-4 bg-black"}>Flash Sale</Input>
+          <Input type={"checkbox"} id={"birtday-package"} size={"w-4 h-4 bg-black"}>Birtday Package</Input>
+          <Input type={"checkbox"} id={"cheap"} size={"w-4 h-4 bg-black"}>Cheap</Input>
           </section>
           <section>
             <label htmlFor="" className='font-bold'>Range Price</label>
