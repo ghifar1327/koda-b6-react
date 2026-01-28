@@ -2,8 +2,27 @@ import { KeyRoundIcon, Mail } from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import AuthLayout from "../components/layouts/AuthLayout";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+const scehema = yup.object({
+  email: yup.string()
+    .email("invalid format email")
+    .required("Email must be filled in"),
+  password: yup.string().required("password must be filled in"),
+});
 export default function LoginPage() {
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  }
+ = useForm({ resolver: yupResolver(scehema) });
+function action(form) {
+  console.log(form)
+}
   return (
     <AuthLayout src={"/auth1.png"} alt={"login coffie"}>
       <div>
@@ -15,23 +34,27 @@ export default function LoginPage() {
       <div className="text-[#4F5665]">
         <p>Fill out the form correctly</p>
       </div>
-      <form action="" className="flex flex-col gap-5">
+      <form action="" className="flex flex-col gap-5" onSubmit={handleSubmit(action)}>
         <Input
-          htmlFor={"email"}
           label={"Email"}
           type={"text"}
-          name={"email"}
           id={"email"}
           placeholder={"Enter your email"}
-        ><Mail size={18}/></Input>
+          {...register("email")}
+        >
+          <Mail size={18} />
+        </Input>
+        <span className="text-red-500">{errors.email?.message}</span>
         <Input
           label={"Password"}
           type={"password"}
-          id={"password"}
           placeholder={"Enter your password"}
-          eye={"/icons/EyeSlash.png"}
           password
-        ><KeyRoundIcon size={18}/></Input>
+          {...register("password")}
+        >
+          <KeyRoundIcon size={18} />
+        </Input>
+        <span className="text-red-500">{errors.password?.message}</span>
         <div className="text-[#FF8906] flex justify-end">
           <p>Forgot Password?</p>
         </div>
