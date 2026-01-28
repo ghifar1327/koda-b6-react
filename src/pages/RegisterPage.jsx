@@ -3,8 +3,40 @@ import { KeyRound, Mail, User } from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import AuthLayout from "../components/layouts/AuthLayout";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object({
+  fullName: yup.string().required("Name must be filled in"),
+  email: yup
+    .string()
+    .email("invalid format format")
+    .required("Email must be filled in"),
+  password: yup
+    .string()
+    .required("Password must be filled in")
+    .min(4, "password minimum 4 characters")
+    .matches(/[A-Z]/, "must contain capital letters"),
+  confirmPassword: yup
+    .string()
+    .required("Confirm password must be filled in")
+    .oneOf([yup.ref("password")], "Password does not match"),
+});
 
 export default function RegisterPage() {
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  function action(form) {
+    console.log(form);
+  }
   return (
     <AuthLayout src={"/auth2.png"} alt={"coffie"}>
       <div>
@@ -16,33 +48,53 @@ export default function RegisterPage() {
       <div className="text-[#4F5665]">
         <p>Fill out the form correctly</p>
       </div>
-      <form action="" className="flex flex-col gap-5">
+      <form
+        action=""
+        className="flex flex-col gap-5"
+        onSubmit={handleSubmit(action)}
+      >
         <Input
           label={"Full Name"}
           type={"text"}
           id={"name"}
           placeholder={"Enter your Full Name"}
-        ><User size={18}/></Input>
+          {...register("fullName")}
+        >
+          <User size={18} />
+        </Input>
+        <span className="text-red-500">{errors.fullName?.message}</span>
         <Input
           label={"Email"}
           type={"email"}
           id={"email"}
           placeholder={"Enter your email"}
-        ><Mail size={18}/></Input>
+          {...register("email")}
+        >
+          <Mail size={18} />
+        </Input>
+        <span className="text-red-500">{errors.email?.message}</span>
         <Input
           label={"Password"}
           type={"password"}
           id={"pwd"}
           placeholder={"Enter your password"}
           password
-        ><KeyRound size={18}/></Input>
+          {...register("password")}
+        >
+          <KeyRound size={18} />
+        </Input>
+        <span className="text-red-500">{errors.password?.message}</span>
         <Input
           label={"Confirm Password"}
           type={"password"}
           id={"tryPwd"}
           placeholder={"Enter your password Again"}
           password
-        ><KeyRound size={18}/></Input>
+          {...register("confirmPassword")}
+        >
+          <KeyRound size={18} />
+        </Input>
+        <span className="text-red-500">{errors.confirmPassword?.message}</span>
         <div className="text-[#FF8906] flex justify-end">
           <p>Forgot Password?</p>
         </div>
