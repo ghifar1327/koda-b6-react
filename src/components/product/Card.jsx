@@ -1,30 +1,75 @@
 import React from "react";
 import { Button } from "../common/Button";
 import { ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
 
-export default function Card({ image, title, description, price ,discon , rating }) {
+export default function Card({
+  id,
+  image,
+  name,
+  description,
+  price,
+  discount,
+  rating,
+}) {
+  // const navigate = useNavigate();
+
   return (
-    <section className="col-span-1">
-      <img src={image} alt={title} className="w-full rounded-md" />
-      <div className="md:p-3">
-        <div className=" md:relative p-3 -top-15 bg-white shadow-2xl rounded-md py-4 flex flex-col gap-2">
-          <p className="text-xl md:text-sm lg:text-xl xl-2xl font-bold">{title}</p>
-          <p className="text-sm md:text-[10px] xl:text-sm text-gray-500">{description}</p>
-          <div>
-            <img src={rating} alt="" />
-          </div>
-          <div className="flex gap-1 md-gap-2 lg:gap-5 items-center">
-          <p className={`${discon ? "line-through text-red-500 text-sm md:text-xs lg:text-lg xl-xl": "text-xl md:text-sm lg:text-xl xl-2xl font-semibold text-primary"}`}>IDR {price}</p>
-            {discon && <p className="text-lg md:text-sm lg:text-xl xl-2xl font-semibold text-primary">IDR {discon}</p> }
-          </div>
-          <div className="flex flex-col md:flex-row gap-3">
-            <Button orange size={"p-1 text-xl md:p-0 xl:p-1 md:text-xs xl:text-xl flex-8/3"}>
-              Buy
-            </Button>
-            <Button border={"border border-primary"} size={"p-2 md:p-1 w-full"}><ShoppingCart size={20} color={"#FF8906"}/></Button>
-          </div>
+    <figure key={id} className="col-span-1">
+      <div className="relative group w-full:">
+        <img src={image} alt={name} className="w-full rounded" />
+        <div className="absolute inset-0 opacity-0 bg-black/60 group-hover:opacity-100 rounded  transition-all duration-500 ease-in-out">
+          <Link to={`/product/detail/${id}/${encodeURIComponent(name)}`} className="w-full h-full flex justify-center items-center "><p className="text-white border border-white p-2 px-5 hover:bg-white hover:text-black rounded-md  transition-all duration-300 ease-in-out">Detail</p></Link>
+          {/* <Button onClick={() => navigate(`/product/detail/${id}${encodeURIComponent(name)}`)}> */}
+            {/* Detail
+          </Button> */}
         </div>
       </div>
-    </section>
+      <section className="md:p-3">
+        <div className=" md:relative p-3 -top-15 bg-white shadow-2xl rounded-md py-4 h-70 md:h-60  flex justify-between gap-2 flex-col">
+          <section className="flex flex-col gap-2">
+            <p className="text-2xl md:text-sm lg:text-xl xl-2xl font-bold line-clamp-1">
+              {name}
+            </p>
+            <p className="text-md md:text-md xl:text-md text-gray-500 line-clamp-2 md:line-clamp-3">
+              {description}
+            </p>
+            <div>
+              <p>{rating}</p>
+            </div>
+          </section>
+          <section className="flex flex-col gap-2">
+            <div className="flex gap-1 md-gap-2 lg:gap-5 items-center">
+              <p
+                className={`${discount ? "line-through text-red-500 text-sm md:text-xs lg:text-lg xl-xl" : "text-xl md:text-sm lg:text-xl xl-2xl font-semibold text-primary"}`}
+              >
+                IDR {price}
+              </p>
+              {discount && (
+                <p className="text-lg md:text-sm lg:text-xl xl-2xl font-semibold text-primary">
+                  IDR {discount}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col md:flex-row gap-3">
+              <Button
+                orange
+                size={
+                  "p-1 text-xl md:p-0 xl:p-1 md:text-xs xl:text-xl flex-8/3"
+                }
+              >
+                Buy
+              </Button>
+              <Button
+                border={"border border-primary"}
+                size={"p-2 md:p-1 w-full"}
+              >
+                <ShoppingCart size={20} color={"#FF8906"} />
+              </Button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </figure>
   );
 }

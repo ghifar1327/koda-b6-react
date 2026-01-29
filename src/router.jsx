@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./components/layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
@@ -16,7 +16,7 @@ export default function Router() {
       children: [
         { index: true, element: <HomePage /> },
         { path: "product", element: <ProductPage /> },
-        { path: "product/detail/:name", element: <DetailProduct /> },
+        { path: "product/detail/:id/:name", element: <DetailProduct /> },
       ],
     },
     {
