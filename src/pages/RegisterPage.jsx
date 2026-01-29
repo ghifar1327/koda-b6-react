@@ -6,6 +6,9 @@ import AuthLayout from "../components/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const schema = yup.object({
   fullName: yup.string().required("Name must be filled in"),
@@ -33,12 +36,15 @@ export default function RegisterPage() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
+  const { registerUser } = useContext(AuthContext);
   function action(form) {
+    const data = { ...form, role: "user" };
     console.log(form);
+    registerUser(data);
+    reset();
   }
   return (
-    <AuthLayout src={"/auth2.png"} alt={"coffie"}>
+    <>
       <div>
         <img src="/logos/coffiebrown.png" alt="coffie" />
       </div>
@@ -95,14 +101,14 @@ export default function RegisterPage() {
           <KeyRound size={18} />
         </Input>
         <span className="text-red-500">{errors.confirmPassword?.message}</span>
-        <div className="text-[#FF8906] flex justify-end">
-          <p>Forgot Password?</p>
-        </div>
         <Button orange>Register</Button>
       </form>
       <div className="flex justify-center">
         <p>
-          Have An Account? <span className="text-[#FF8906]">Login</span>
+          Have An Account?{" "}
+          <span className="text-[#FF8906]">
+            <Link to="/login">Login</Link>
+          </span>
         </p>
       </div>
       <div className="flex justify-between gap-20 items-center text-[#AAAAAA]">
@@ -118,6 +124,6 @@ export default function RegisterPage() {
           Google
         </Button>
       </div>
-    </AuthLayout>
+    </>
   );
 }

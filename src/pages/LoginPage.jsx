@@ -5,6 +5,9 @@ import AuthLayout from "../components/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const scehema = yup.object({
   email: yup.string()
@@ -13,6 +16,7 @@ const scehema = yup.object({
   password: yup.string().required("password must be filled in"),
 });
 export default function LoginPage() {
+  const {login} = useContext(AuthContext)
   const {
     handleSubmit,
     register,
@@ -21,10 +25,12 @@ export default function LoginPage() {
   }
  = useForm({ resolver: yupResolver(scehema) });
 function action(form) {
-  console.log(form)
+  login(form)
+  reset()
 }
   return (
-    <AuthLayout src={"/auth1.png"} alt={"login coffie"}>
+    // <AuthLayout src={"/auth1.png"} alt={"login coffie"}>
+      <>
       <div>
         <img src="/logos/coffiebrown.png" alt="coffie" />
       </div>
@@ -56,13 +62,13 @@ function action(form) {
         </Input>
         <span className="text-red-500">{errors.password?.message}</span>
         <div className="text-[#FF8906] flex justify-end">
-          <p>Forgot Password?</p>
+          <Link to="/forgotPassword">Forgot Password?</Link>
         </div>
         <Button orange>Login</Button>
       </form>
       <div className="flex justify-center">
         <p>
-          Not Have An Account? <span className="text-[#FF8906]">Register</span>
+          Not Have An Account? <span className="text-[#FF8906]"><Link to="/register">Register</Link></span>
         </p>
       </div>
       <div className="flex justify-between gap-20 items-center text-[#AAAAAA]">
@@ -83,6 +89,7 @@ function action(form) {
           Google
         </Button>
       </div>
-    </AuthLayout>
+      </>
+    // </AuthLayout>
   );
 }

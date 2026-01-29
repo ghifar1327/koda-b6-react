@@ -19,7 +19,8 @@ export default function ForgotPwd() {
   reset()
  }
   return (
-    <AuthLayout src={"/auth3.png"} alt={"woman"}>
+    // <AuthLayout src={"/auth3.png"} alt={"woman"}>
+    <>
       <div>
         <img src="/logos/coffiebrown.png" alt="coffie" />
       </div>
@@ -36,10 +37,11 @@ export default function ForgotPwd() {
           id={"email"}
           placeholder={"Enter your email"}
           {...register("email")}
-        ><Mail size={18}/></Input>
+          ><Mail size={18}/></Input>
         <span className="text-red-500">{errors.email?.message}</span>
         <Button orange>Submit</Button>
       </form>
-    </AuthLayout>
+      </>
+    // </AuthLayout>
   );
 }

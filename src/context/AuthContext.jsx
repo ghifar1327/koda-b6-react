@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
     const exists = users.some((user) => user.email === data.email);
     if (exists) return false;
     setUsers((prev) => [...prev, data]);
-    // navigate("/login");
+    navigate("/login");
   }
   function logout() {
     setIsLogin(null);
