@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import products from "../../products.json";
 
 export default function DetailProduct() {
@@ -20,9 +20,9 @@ export default function DetailProduct() {
     })();
   }, [id,name]);
 
-  // if (!render) return <p>Loading...</p>;
+  if (!render) return <p>Loading...</p>;
   return (
-    <main className="p-[5%] md:px-[10%] flex flex-col gap-10">
+    <>
       <section className="flex flex-col md:flex-row gap-5 w-full">
         <figure className="flex-1/2">
           <div className="w-full">
@@ -109,13 +109,10 @@ export default function DetailProduct() {
             </div>
           </section>
           <section className="flex gap-5 md:gap-3 text-md md:text-xs lg:text-xl mt-10 md:mt-5 lg:mt-10">
-            <Button
-              border={"border-2 border-primary"}
-              size={"border-2 p-2 md:p-1 lg:p-2 w-full"}
-              orange
+            <Link  to="/payment" className="border-2 border-primary rounded-md bg-primary text-center p-2 md:p-1 lg:p-2 w-full"
             >
               Buy
-            </Button>
+            </Link>
             <Button size={"border-2 p-2 md:p-1 lg:p-2 w-full border-primary"}>
               <ShoppingCart color={"#FF8906"} size={18} />
               <p className="text-primary px-3">add to chart</p>
@@ -184,6 +181,6 @@ export default function DetailProduct() {
           </Button>
         </div>
       </search>
-    </main>
+    </>
   );
 }

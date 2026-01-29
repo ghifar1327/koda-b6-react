@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "../common/Button";
 import { ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -19,7 +18,7 @@ export default function Card({
       <div className="relative group w-full:">
         <img src={image} alt={name} className="w-full rounded" />
         <div className="absolute inset-0 opacity-0 bg-black/60 group-hover:opacity-100 rounded  transition-all duration-500 ease-in-out">
-          <Link to={`/product/detail/${id}/${encodeURIComponent(name)}`} className="w-full h-full flex justify-center items-center "><p className="text-white border border-white p-2 px-5 hover:bg-white hover:text-black rounded-md  transition-all duration-300 ease-in-out">Detail</p></Link>
+          <Link to={`/detail/${id}/${encodeURIComponent(name)}`} className="w-full h-full flex justify-center items-center "><p className="text-white border border-white p-2 px-5 hover:bg-white hover:text-black rounded-md  transition-all duration-300 ease-in-out">Detail</p></Link>
           {/* <Button onClick={() => navigate(`/product/detail/${id}${encodeURIComponent(name)}`)}> */}
             {/* Detail
           </Button> */}

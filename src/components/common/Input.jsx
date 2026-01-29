@@ -20,7 +20,7 @@ const Input = forwardRef(
             <input
               ref={ref}
               type={type}
-              name={id}
+              // name={id}
               id={id}
               {...rest}
               className="hidden"

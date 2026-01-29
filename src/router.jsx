@@ -7,6 +7,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ForgotPwd from "./pages/ForgotPwd";
 import AuthLayout from "./components/layouts/AuthLayout";
+import DetailLayout from "./components/layouts/DetailLayOut";
+import Payment from "./pages/Payment";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -16,8 +18,14 @@ export default function Router() {
       children: [
         { index: true, element: <HomePage /> },
         { path: "product", element: <ProductPage /> },
-        { path: "product/detail/:id/:name", element: <DetailProduct /> },
       ],
+    },
+    {
+      element: <DetailLayout/>,
+      children:[
+        { path: "detail/:id/:name", element: <DetailProduct /> },
+        {path: "payment", element: <Payment/>}
+      ]
     },
     {
       element: <AuthLayout />,
