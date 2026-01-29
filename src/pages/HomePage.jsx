@@ -3,6 +3,8 @@ import { Button } from "../components/common/Button";
 import Message from "../components/feature/Message";
 import Card from "../components/product/Card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import products from "../../products.json";
+
 
 export default function HomePage() {
   return (
@@ -118,42 +120,9 @@ export default function HomePage() {
           </p>
         </article>
         <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-5 md:gap-3">
-          <Card
-            image={"/hazelnut.png"}
-            title={"Hazelnut Latte"}
-            price={"20.000"}
-            description={
-              "You can explore the menu that we provide with fun and have their own taste and make your day better."
-            }
-            rating={"/ratting.png"}
-          />
-          <Card
-            image={"/hazelnut.png"}
-            title={"Hazelnut Latte"}
-            price={"20.000"}
-            description={
-              "You can explore the menu that we provide with fun and have their own taste and make your day better."
-            }
-            rating={"/ratting.png"}
-          />
-          <Card
-            image={"/hazelnut.png"}
-            title={"Hazelnut Latte"}
-            price={"20.000"}
-            description={
-              "You can explore the menu that we provide with fun and have their own taste and make your day better."
-            }
-            rating={"/ratting.png"}
-          />
-          <Card
-            image={"/hazelnut.png"}
-            title={"Hazelnut Latte"}
-            price={"20.000"}
-            description={
-              "You can explore the menu that we provide with fun and have their own taste and make your day better."
-            }
-            rating={"/ratting.png"}
-          />
+          {products.slice(0,4).map((item)=>{
+            return <Card id={item.id} name={item.name} image={item.image} description={item.description} rating={item.rating} price={item.price}/>
+          })} 
         </figure>
         <article className="flex-col flex items-center text-center px-[5%] gap-5 lg:gap-8  bg-[#F8F8F8] py-10">
           <h1 className="text-4xl md:text-3xl lg:text-5xl ">

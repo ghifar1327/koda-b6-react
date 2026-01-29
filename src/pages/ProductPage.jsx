@@ -5,8 +5,13 @@ import Input from "../components/common/Input";
 import Card from "../components/product/Card";
 import { useState } from "react";
 import Filter from "../components/feature/Filter";
+import products from "../../products.json"
+
+
 export default function ProductPage() {
   const [toggle, setToggle] = useState(false);
+
+
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);
@@ -99,16 +104,9 @@ export default function ProductPage() {
           <Filter />
         </div>
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg-gap5">
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better." } rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."} rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."} rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={ "You can explore the menu that we provide with fun and have their own taste and make your day better." } rating={"/ratting.png"} />
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={ "You can explore the menu that we provide with fun and have their own taste and make your day better."  }
-            rating={"/ratting.png"}
-          />
+          {products.splice(0, 6).map((item)=>{
+            return <Card id={item.id} image={item.image} name={item.name} price={item.price} description={item.description} discount={"10.000"} rating={item.rating}/>
+          })}
         </div>
       </section>
       <section className="flex justify-center">
