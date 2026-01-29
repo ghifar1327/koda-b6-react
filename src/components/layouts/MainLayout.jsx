@@ -2,18 +2,16 @@ import React from "react";
 import { Outlet } from "react-router";
 import Footer from "./Footer";
 import Header from "./Header";
-import HomePage from "../../pages/HomePage";
-import ProductPage from "../../pages/ProductPage";
-import DetailProduct from "../../pages/DetailProduct";
+import { AuthProvider } from "../../context/AuthContext";
 
 export default function MainLayout() {
   return (
     <>
-      <Header/>
-      {/* <HomePage/> */}
-      {/* <ProductPage/> */}
-      <DetailProduct/>
-      <Footer/>
+      <AuthProvider>
+        <Header />
+        <Outlet />
+        <Footer />
+      </AuthProvider>
     </>
   );
 }
