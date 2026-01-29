@@ -3,17 +3,17 @@ export function Button({
   src,
   alt,
   shadow = false,
-  onClick,
   children,
   size,
   border,
   iconSize,
-  radius
+  radius,
+  ...rest
 
 }) { 
     return (
     <button
-      onClick={onClick}
+      {...rest}
       className={`${orange && "bg-[#FF8906]"} ${shadow && "shadow-md border border-[#DEDEDE]/10"} ${size ? size : "w-full p-2 gap-5"} ${border} ${radius ? radius : "rounded-md" } flex items-center justify-center  cursor-pointer`}
     >
       {src && <img src={src} alt={alt} className={iconSize} />}

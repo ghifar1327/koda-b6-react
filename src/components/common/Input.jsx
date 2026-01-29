@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import { Check, Eye, EyeClosed } from "lucide-react";
 
 const Input = forwardRef(
-  ({ size, label, type, id, password, children, ...rest }, ref) => {
+  ({ size, label, type, id, password,text,  children, ...rest }, ref) => {
     const [show, setShow] = useState(false);
     function tooglePWD(e) {
       e.preventDefault();
@@ -59,7 +59,7 @@ const Input = forwardRef(
                   name={id}
                   id={id}
                   {...rest}
-                  className={`outline-none w-full h-full ${type === "checkbox" && "cursor-pointer"}`}
+                  className={`outline-none ${text} w-full h-full ${type === "checkbox" && "cursor-pointer"}`}
                 />
               </span>
               <span>

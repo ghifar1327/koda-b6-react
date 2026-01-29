@@ -6,11 +6,11 @@ import Card from "../components/product/Card";
 import { useState } from "react";
 import Filter from "../components/feature/Filter";
 export default function ProductPage() {
-    const [toggle, setToggle] = useState(false);
-    function toogleButton(e) {
-      e.preventDefault();  
-      setToggle((prev) => !prev);
-    }
+  const [toggle, setToggle] = useState(false);
+  function toogleButton(e) {
+    e.preventDefault();
+    setToggle((prev) => !prev);
+  }
   return (
     <main className="relative flex flex-col gap-10">
       <img src="/Rectangle4.png" alt="" className="w-full hidden md:block" />
@@ -20,12 +20,14 @@ export default function ProductPage() {
         </h1>
       </div>
       <section>
-      <form className="flex items-center border-b-[1px] border-gray-400 md:hidden gap-3 h-fit p-[5%]">
-        <Input size={"p-2 gap-2 flex"} placeholder={"Find Product"} ><Search size={24}/></Input>
-        <Button onClick={toogleButton} orange size={" h-fit p-2"}>
-          <SlidersHorizontal className="h-full" />
-        </Button>
-      </form>
+        <form className="flex items-center border-b-[1px] border-gray-400 md:hidden gap-3 h-fit p-[5%]">
+          <Input size={"p-2 gap-2 flex"} placeholder={"Find Product"}>
+            <Search size={24} />
+          </Input>
+          <Button onClick={toogleButton} orange size={" h-fit p-2"}>
+            <SlidersHorizontal className="h-full" />
+          </Button>
+        </form>
       </section>
       <section className="px-[5%] flex justify-between items-center md:px-[10%]">
         <h1 className="text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
@@ -35,12 +37,16 @@ export default function ProductPage() {
           <Button
             size={"w-fit p-3 md:p-2 xl:p-3 bg-[#E8E8E8]"}
             radius={"rounded-full"}
-          ><ArrowLeft size={22}/></Button>
+          >
+            <ArrowLeft size={22} />
+          </Button>
           <Button
             orange
             size={"w-fit p-3 md:p-2 xl:p-3"}
             radius={"rounded-full"}
-          ><ArrowRight size={22}/></Button>
+          >
+            <ArrowRight size={22} />
+          </Button>
         </div>
       </section>
       <section className="no-scrollbar w-full overflow-x-scroll">
@@ -88,21 +94,38 @@ export default function ProductPage() {
       <h1 className="text-5xl md:text-4xl lg:text-5xl xl:text-6xl px-[5%] md:px-[10%]">
         Our <span className="text-[#8E6447]">Product</span>
       </h1>
-      <section className="flex w-full gap-5 px-[5%]">
-        <div className="hidden md:flex w-[50%]"><Filter/></div>
+      <section className="flex w-full gap-5 px-[3%] md:px-[10%]">
+        <div className="hidden md:block w-[50%]">
+          <Filter />
+        </div>
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg-gap5">
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better." } rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."} rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."} rating={"/ratting.png"}/>
           <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
           <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
           <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
-          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={"You can explore the menu that we provide with fun and have their own taste and make your day better."}rating={"/ratting.png"}/>
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={ "You can explore the menu that we provide with fun and have their own taste and make your day better." } rating={"/ratting.png"} />
+          <Card image={"/hazelnut.png"} title={"Hazelnut Latte"} price={"20.000"} discon={"10.000"} description={ "You can explore the menu that we provide with fun and have their own taste and make your day better."  }
+            rating={"/ratting.png"}
+          />
         </div>
       </section>
-      <div onClick={toogleButton} className={`${toggle ? "block" : "hidden"} md:hidden p-[5%] absolute w-full h-full`}>
-        <Filter/>
+      <section className="flex justify-center">
+        <div className="flex gap-5">
+          <Button orange size={"p-2 w-10"} radius={"rounded-full"}> 1 </Button> <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}  radius={"rounded-full"} > 2 </Button>
+          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"} > 3</Button>
+          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"} >4</Button>
+          <Button orange size={"p-2 w-fit"} radius={"rounded-full"}>
+            <ArrowRight color={"#FFFFFF"} />
+          </Button>
+        </div>
+      </section>
+      <div
+        onClick={toogleButton}
+        className={`${toggle ? "block" : "hidden"} md:hidden p-[5%] absolute w-full h-full`}
+      >
+        <Filter />
       </div>
     </main>
   );
