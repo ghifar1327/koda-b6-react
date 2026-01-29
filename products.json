@@ -1,0 +1,148 @@
+[{
+  "id": 1,
+  "name": "Raspberry Vanilla Greek Yogurt",
+  "image": "/hazelnut.png",
+  "description": "Creamy Greek yogurt infused with raspberry and vanilla flavors.",
+  "rating": 4.5,
+  "price": 17380
+}, {
+  "id": 2,
+  "name": "Organic Coconut Yogurt",
+  "image": "/hazelnut.png",
+  "description": "Dairy-free yogurt made from coconut milk.",
+  "rating": 4.7,
+  "price": 13242
+}, {
+  "id": 3,
+  "name": "Cotton Quilted Throw Blanket",
+  "image": "/hazelnut.png",
+  "description": "Cozy throw blanket perfect for adding warmth to your home.",
+  "rating": 4.0,
+  "price": 11145
+}, {
+  "id": 4,
+  "name": "Organic Whole Grain Oats",
+  "image": "/hazelnut.png",
+  "description": "Whole grain oats that are perfect for breakfast or baking.",
+  "rating": 4.2,
+  "price": 16580
+}, {
+  "id": 5,
+  "name": "High-Low Hem Tee",
+  "image": "/hazelnut.png",
+  "description": "Trendy high-low tee with a relaxed fit, ideal for weekends.",
+  "rating": 4.8,
+  "price": 18324
+}, {
+  "id": 6,
+  "name": "Ice Cream Maker",
+  "image": "/hazelnut.png",
+  "description": "Homemade ice cream maker for delicious desserts.",
+  "rating": 4.1,
+  "price": 11531
+}, {
+  "id": 7,
+  "name": "Quinoa Salad",
+  "image": "/hazelnut.png",
+  "description": "A nutritious quinoa salad with veggies and dressing, ready-to-eat.",
+  "rating": 4.9,
+  "price": 11769
+}, {
+  "id": 8,
+  "name": "Beet Salad",
+  "image": "/hazelnut.png",
+  "description": "Ready-to-eat beet salad with dressing, great side dish.",
+  "rating": 4.1,
+  "price": 15282
+}, {
+  "id": 9,
+  "name": "Thai Coconut Curry Sauce",
+  "image": "/hazelnut.png",
+  "description": "A rich coconut curry sauce perfect for simmering vegetables or meats.",
+  "rating": 4.8,
+  "price": 18879
+}, {
+  "id": 10,
+  "name": "Tailored Blazer",
+  "image": "/hazelnut.png",
+  "description": "Sharp tailored blazer perfect for office wear and professional events.",
+  "rating": 4.5,
+  "price": 14644
+}, {
+  "id": 11,
+  "name": "Portable Jump Starter",
+  "image": "/hazelnut.png",
+  "description": "Compact jump starter for emergency vehicle starts.",
+  "rating": 4.2,
+  "price": 10029
+}, {
+  "id": 12,
+  "name": "Fresh Cilantro",
+  "image": "/hazelnut.png",
+  "description": "Bright and fragrant cilantro, great for garnishes.",
+  "rating": 4.3,
+  "price": 11484
+}, {
+  "id": 13,
+  "name": "Denim Jacket",
+  "image": "/hazelnut.png",
+  "description": "A classic denim jacket that never goes out of style.",
+  "rating": 4.2,
+  "price": 15185
+}, {
+  "id": 14,
+  "name": "Pretzel Bites",
+  "image": "/hazelnut.png",
+  "description": "Soft pretzel bites, perfect for dipping in mustard or cheese sauce.",
+  "rating": 4.6,
+  "price": 17702
+}, {
+  "id": 15,
+  "name": "Almond Coconut Granola",
+  "image": "/hazelnut.png",
+  "description": "Crunchy granola with almonds and coconut.",
+  "rating": 4.6,
+  "price": 19418
+}, {
+  "id": 16,
+  "name": "LED Desk Lamp",
+  "image": "/hazelnut.png",
+  "description": "Dimmable LED desk lamp with USB charging port.",
+  "rating": 4.7,
+  "price": 15249
+}, {
+  "id": 17,
+  "name": "Slim Fit Chinos",
+  "image": "/hazelnut.png",
+  "description": "Comfortable slim fit chinos for a polished look.",
+  "rating": 4.3,
+  "price": 17398
+}, {
+  "id": 18,
+  "name": "Fitness Tracker",
+  "image": "/hazelnut.png",
+  "description": "Track steps, heart rate, and sleep patterns.",
+  "rating": 4.1,
+  "price": 12382
+}, {
+  "id": 19,
+  "name": "Chicken Fajita Kit",
+  "image": "/hazelnut.png",
+  "description": "All ingredients included for delicious chicken fajitas.",
+  "rating": 4.1,
+  "price": 17153
+}, {
+  "id": 20,
+  "name": "Personal Safety Alarm",
+  "image": "/hazelnut.png",
+  "description": "Compact alarm for personal safety and security.",
+  "rating": 4.9,
+  "price": 10866
+}, {
+  "id": 21,
+  "name": "Chicken Broth",
+  "image": "/hazelnut.png",
+  "description": "Rich and flavorful chicken broth, great for soups.",
+  "rating": 4.9,
+  "price": 10478
+}]
