@@ -1,20 +1,25 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStotage";
 import { useNavigate } from "react-router";
 
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
+  const adminAccount = {
+    fullName: "ghifar",
+    email: "admin@mail.com",
+    role: "admin",
+    password: "1234A"
+  };
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useLocalStorage("login", null);
-  const [users, setUsers] = useLocalStorage("users", [
-    {
-      fullName: "ghifar",
-      email: "admin@mail.com",
-      role: "admin",
-    },
-  ]);
+  const [users, setUsers] = useLocalStorage("users", []);
 
+  useEffect(()=>{
+    if(users.length === 0){
+      setUsers([adminAccount])
+    }
+  },[])
   function login(data) {
     const user = users.find(
       (user) => user.email === data.email && user.password === data.password,
@@ -31,17 +36,18 @@ export function AuthProvider({ children }) {
     }
   }
 
-  function register(data) {
+  function registerUser(data) {
     const exists = users.some((user) => user.email === data.email);
     if (exists) return false;
-    setUsers([...users, data]);
+    setUsers((prev) => [...prev, data]);
+    // navigate("/login");
   }
   function logout() {
-    setIsLogin(null)
+    setIsLogin(null);
   }
 
   return (
-    <AuthContext.Provider value={{ isLogin, login, register, logout }}>
+    <AuthContext.Provider value={{ isLogin, login, registerUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
