@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import { Check, Eye, EyeClosed } from "lucide-react";
 
 const Input = forwardRef(
-  ({ size, label, type, id, password,text,  children, ...rest }, ref) => {
+  ({ size, label, type, id, password,text, inputStyle,  children, ...rest }, ref) => {
     const [show, setShow] = useState(false);
     function tooglePWD(e) {
       e.preventDefault();
@@ -37,7 +37,7 @@ const Input = forwardRef(
               </>
             ) : (
               <>
-                <div className="w-full flex justify-center border-2 rounded-sm  border-[#E8E8E8] p-1 group-has-[input:checked]:border-primary">
+                <div className={`${inputStyle ? inputStyle : "border-2  border-[#E8E8E8] group-has-[input:checked]:border-primary"} p-1 rounded-sm w-full flex justify-center`}>
                   <p className="">{children}</p>
                 </div>
               </>

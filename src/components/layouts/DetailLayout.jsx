@@ -1,5 +1,4 @@
-import React from "react";
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import { AuthProvider } from "../../context/AuthContext";
 import Header from "./Header";
 import Footer from "./Footer";

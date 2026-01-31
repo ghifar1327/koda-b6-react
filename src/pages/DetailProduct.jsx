@@ -1,5 +1,5 @@
 import { ArrowRight, Minus, Plus, ShoppingCart, ThumbsUp } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";
@@ -7,22 +7,25 @@ import { Link, useParams } from "react-router-dom";
 import products from "../../products.json";
 
 export default function DetailProduct() {
-  const { id ,name } = useParams();
+  const { id, name } = useParams();
   const [count, setCount] = useState(1);
   const [render, setRender] = useState("");
-  console.log("id param", id);
-  console.log(name)
-  console.log(render);
+  // console.log("id param", id);
+  // console.log(name);
+  // console.log(render);
   useEffect(() => {
     (() => {
-      const product = products.find((p) => p.id === Number(id) && p.name === name);
+      const product = products.find(
+        (p) => p.id === Number(id) && p.name === name,
+      );
       setRender(product);
     })();
-  }, [id,name]);
+  }, [id, name]);
 
   if (!render) return <p>Loading...</p>;
   return (
     <>
+    {console.log("render")}
       <section className="flex flex-col md:flex-row gap-5 w-full">
         <figure className="flex-1/2">
           <div className="w-full">
@@ -109,9 +112,10 @@ export default function DetailProduct() {
             </div>
           </section>
           <section className="flex gap-5 md:gap-3 text-md md:text-xs lg:text-xl mt-10 md:mt-5 lg:mt-10">
-            <Link  to="/payment" className="border-2 border-primary rounded-md bg-primary text-center p-2 md:p-1 lg:p-2 w-full"
-            >
-              Buy
+            <Link to="/payment" className="w-full">
+              <Button orange border={"border-2 border-primary"}>
+                Buy
+              </Button>
             </Link>
             <Button size={"border-2 p-2 md:p-1 lg:p-2 w-full border-primary"}>
               <ShoppingCart color={"#FF8906"} size={18} />

@@ -1,6 +1,5 @@
-import React, { Children } from "react";
 import { AuthProvider } from "../../context/AuthContext";
-import { Outlet, useLocation } from "react-router";
+import { Outlet, useLocation } from "react-router-dom";
 
 export default function AuthLayout() {
   const location = useLocation()

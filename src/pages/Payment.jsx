@@ -2,6 +2,7 @@ import { Mail, MapPin, User, XCircle } from 'lucide-react'
 import React from 'react'
 import { Button } from '../components/common/Button'
 import Input from '../components/common/Input'
+import { Link } from 'react-router'
 
 export default function Payment() {
   return (
@@ -45,7 +46,9 @@ export default function Payment() {
                 <p>Idr. 44.000</p>
             </div>
             <div className='font-normal'>
-                <Button orange>Checkout</Button>
+                <Link to="/history">
+                    <Button orange>Checkout</Button>
+                </Link>
             </div>
             <p className='text-gray-400 font-normal text-lg'>We Accept</p>
             <div className='flex justify-between items-center'>
