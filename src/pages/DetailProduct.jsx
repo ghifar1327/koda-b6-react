@@ -1,5 +1,5 @@
 import { ArrowRight, Minus, Plus, ShoppingCart, ThumbsUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";

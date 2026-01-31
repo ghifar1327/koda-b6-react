@@ -38,7 +38,7 @@ export default function RegisterPage() {
   });
   const { registerUser } = useContext(AuthContext);
   function action(form) {
-    const data = { ...form, role: "user" };
+    const data = { ...form, role: "user" ,history : []};
     console.log(form);
     registerUser(data);
     reset();

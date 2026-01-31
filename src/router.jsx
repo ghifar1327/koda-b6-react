@@ -11,6 +11,7 @@ import DetailLayout from "./components/layouts/DetailLayOut";
 import Payment from "./pages/Payment";
 import History from "./pages/History";
 import Order from "./pages/Order";
+import Profile from "./pages/Profile";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -28,7 +29,8 @@ export default function Router() {
         { path: "detail/:id/:name", element: <DetailProduct /> },
         {path: "payment", element: <Payment/>},
         {path: "history", element : <History/>},
-        {path: "order", element: <Order/>}
+        {path: "order", element: <Order/>},
+        {path:"profile", element: <Profile/>}
       ]
     },
     {
