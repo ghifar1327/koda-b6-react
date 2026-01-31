@@ -9,19 +9,20 @@ import products from "../../products.json";
 export default function DetailProduct() {
   const { id, name } = useParams();
   const [count, setCount] = useState(1);
-  const [render, setRender] = useState("");
+  const render = products.find((item)=>item.id === Number(id) && item.name === name)
+  // const [render, setRender] = useState(null);
   // console.log("id param", id);
   // console.log(name);
   // console.log(render);
-  useEffect(() => {
-    (() => {
-      const product = products.find(
-        (p) => p.id === Number(id) && p.name === name,
-      );
-      setRender(product);
-    })();
-  }, [id, name]);
-
+  // useEffect(() => {
+  //   (() => {
+  //     const product = products.find(
+  //       (p) => p.id === Number(id) && p.name === name,
+  //     );
+  //     setRender(product);
+  //   })();
+  // }, [id, name]);
+  console.log(render)
   if (!render) return <p>Loading...</p>;
   return (
     <>

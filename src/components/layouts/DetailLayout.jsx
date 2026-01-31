@@ -7,7 +7,7 @@ export default function DetailLayout() {
   return (
     <AuthProvider>
       <Header />
-      <main className="p-[5%] md:px-[10%] flex flex-col gap-10">
+      <main className="p-[5%] md:px-[3%] lg:px-[10%] flex flex-col gap-10">
         <Outlet />
       </main>
       <Footer />

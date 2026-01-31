@@ -59,11 +59,11 @@ export default function History() {
                         </div>
                     </section>
                     <div className='flex justify-end flex-col'>
-                        <Link to="" className='text-primary underline decoration-solid'>Views Order Detail</Link>
+                        <Link to="/order" className='text-primary underline decoration-solid'>Views Order Detail</Link>
                     </div>
                 </div>
             </section>
-            <section className="hidden flex justify-center">
+            <section className="hidden md:flex justify-center">
                 <div className="flex gap-5">
                     <Button orange size={"p-2 w-10"} radius={"rounded-full"}> 1 </Button> <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}  radius={"rounded-full"} > 2 </Button>
                     <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"} > 3</Button>
