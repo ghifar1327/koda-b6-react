@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import useLocalStorage from "../hooks/useLocalStotage";
+import { set } from "react-hook-form";
 
 export const InvoiceContext = createContext(null);
 
@@ -37,30 +38,29 @@ export default function InvoiceProvider({ children }) {
       });
       }
     
-      function setHistory(data){
-          setUsers((prev)=>{
-            const index = prev.findIndex((item)=> item.email === isLogin.email)
-            const updated = [...prev]
-            const user = updated[index]
-            updated[index] = {
-                ...user,
-                history: user.history ? [...user.history , data] : [data] 
-            }
-            return updated
-        })
-        setIsLogin(prev=> {
-            const index = users.findIndex((item)=> item.email === prev.email)
-            const updated = {...prev, history: users[index].history} 
-            return updated
-        })
-      }
-    //   setHistory()
+    function setHistory(data) {
+      if (!data || !isLogin) return;
+      let updatedUser = null;
+      setUsers((prev) => {
+        const index = prev.findIndex((item) => item.email === isLogin.email);
+        if (index === -1) return prev;
+        const updated = [...prev];
+        updatedUser = {
+          ...updated[index],
+          history: updated[index].history ? [...updated[index].history, data] : [data],
+        };
+        updated[index] = updatedUser;
+        return updated;
+      });
+      setIsLogin((prev) => updatedUser ? { ...prev, history: updatedUser.history } : prev);
+      setCart([]);
+     }
       function removeCart(id) {
         setCart((prev) => prev.filter((item) => item.id !== id));
       }
 
   return (
-    <InvoiceContext.Provider value={{ cart, addCart, setHistory ,removeCart }}>
+    <InvoiceContext.Provider value={{ cart,setCart, addCart, setHistory ,removeCart  }}>
       {children}
     </InvoiceContext.Provider>
   );

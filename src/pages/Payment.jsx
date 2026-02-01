@@ -9,7 +9,7 @@ export default function Payment() {
     const [delivery, setDelivery] = useState("");
     const {isLogin } = useContext(AuthContext)
     const [form, setForm] = useState({email: isLogin?.email || "",fullName: isLogin?.fullName || "",address: "", delivery: ""});
-    const { cart ,removeCart, setHistory } = useContext(InvoiceContext);
+    const { cart, removeCart, setHistory } = useContext(InvoiceContext);
     const subtotal = cart.reduce(
       (acc, item) => acc + Number(item.total),
       0
@@ -30,10 +30,6 @@ export default function Payment() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // console.log("test")
-        // console.log(!form.email)
-        // console.log(!form.fullName)
-        // console.log(delivery)
         if (!form.email || !form.fullName || !delivery) return
         const data = {
             id : Date.now(),

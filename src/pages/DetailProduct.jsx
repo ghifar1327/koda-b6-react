@@ -35,7 +35,7 @@ export default function DetailProduct() {
     })();
   }, [id,name]);
 
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register ,reset } = useForm();
   function action(form) {
     const product = {
       id: Date.now(),
@@ -49,6 +49,8 @@ export default function DetailProduct() {
     };
     // console.log(product)
     addCart(product);
+    setCount(1)
+    reset()
   }
 
   if (!render) return <p>Loading...</p>;
