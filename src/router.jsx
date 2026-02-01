@@ -29,7 +29,7 @@ export default function Router() {
         { path: "detail/:id/:name", element: <DetailProduct /> },
         {path: "payment", element: <Payment/>},
         {path: "history", element : <History/>},
-        {path: "order", element: <Order/>},
+        {path: "order/:id", element: <Order/>},
         {path:"profile", element: <Profile/>}
       ]
     },

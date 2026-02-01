@@ -1,7 +1,14 @@
 import { IdCard, MapPin, PhoneCall, RefreshCw, Truck, User } from 'lucide-react'
-import React from 'react'
+import { useParams } from 'react-router'
+import { AuthContext } from '../context/AuthContext'
+import { useContext } from 'react'
 
 export default function Order() {
+    const {isLogin } = useContext(AuthContext)
+    const { id } = useParams()
+    console.log(id)
+    const render = isLogin.history.find(item => item.id === Number(id))
+    console.log(render)
   return (
     <>
     <h1 className='text-3xl'>Order <span className='font-bold'>#12354-09893</span></h1>
@@ -15,7 +22,7 @@ export default function Order() {
                         <User color={'#4F5665'}/>
                         <p>Full Name</p>
                     </div>
-                    <p className='font-bold'>Ghaluh Wizard Anggoro</p>
+                    <p className='font-bold'>{render.fullName}</p>
                 </div>
             </article>
             <article className='flex justify-between border-b border-gray-300 py-5'>
@@ -24,7 +31,7 @@ export default function Order() {
                         <MapPin color='#4F5665'/>
                         <p className='text-[#4F5665]'>Adress</p>
                     </div>
-                    <p className='font-bold'>Griya bandung indah</p>
+                    <p className='font-bold'>{render.adress}</p>
                 </div>
             </article>
             <article className='flex justify-between border-b border-gray-300 py-5'>
@@ -51,7 +58,7 @@ export default function Order() {
                         <Truck color='#4F5665'/>
                         <p className='text-[#4F5665]'>Shipping</p>
                     </div>
-                    <p className='font-bold'>Dine In</p>
+                    <p className='font-bold'>{render.delivery}</p>
                 </div>
             </article>
             <article className='flex justify-between border-b border-gray-300 py-5'>
@@ -68,26 +75,29 @@ export default function Order() {
                     <div className='flex gap-3 items-center'>
                         <p className='text-[#4f5665]'>Total Transaction</p>
                     </div>
-                    <p className='font-bold text-primary'>Idr. 40.000</p>
+                    <p className='font-bold text-primary'>Idr. {render.total}</p>
                 </div>
             </article>
         </section>
-        <section className='flex-1/2'>
+        <section className='flex-1/2 flex flex-col gap-3'>
             <h2 className='text-xl font-bold mb-2'>Your Order</h2>
-            <div className='bg-[#E8E8E84D] w-full p-2 pr-5 rounded flex justify-between items-center gap-2'>
-                <div className='flex gap-5'>
-                <img src="/hazelnut.png" alt="" />
-                <div className='flex flex-col justify-between'>
-                    <p className='p-0.5 px-3 bg-red-600 rounded-full text-xs text-white w-fit'>FLASH SALE!</p>
-                    <p className='text-xl xl:text-xl font-semibold'>Hazel Nut</p>
-                    <p className='text-xl xl:text-xl text-gray-400'>2psc | Regular | Ice | Dine in</p>
-                    <div className='flex items-center gap-2'>
-                        <p className='text-xs text-red-600 line-through'>IDR 40.000</p>
-                        <p className='text-xl xl:text-xl text-primary'>IDR 20.000</p>
+            {render.orders.map((item)=>
+                
+                <div key={item.id} className='bg-[#E8E8E84D] w-full p-2 pr-5 rounded flex justify-between items-center gap-2'>
+                    <div className='flex gap-5'>
+                    <img src={item.image} alt={item.productName} className='w-[20%] '/>
+                    <div className='flex flex-col justify-between'>
+                        <p className='p-0.5 px-3 bg-red-600 rounded-full text-xs text-white w-fit'>FLASH SALE!</p>
+                        <p className='text-xl xl:text-xl font-semibold'>{item.productName}</p>
+                        <p className='text-xl xl:text-xl text-gray-400'>{item.quantity}psc | {item.size} | {item.hotIce} | {render.delivery}</p>
+                        <div className='flex items-center gap-2'>
+                            <p className='text-xs text-red-600 line-through'>IDR {item.price}</p>
+                            <p className='text-xl xl:text-xl text-primary'>IDR {item.total}</p>
+                        </div>
+                    </div>
                     </div>
                 </div>
-                </div>
-            </div>
+            )}
         </section>
     </div>
     </>
