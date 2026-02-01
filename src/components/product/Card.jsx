@@ -25,7 +25,7 @@ export default function Card({
         </div>
       </div>
       <section className="md:p-3">
-        <div className=" md:relative p-3 md:-mt-30 bg-white shadow-2xl rounded-md py-4 h-70 md:h-60  flex justify-between gap-2 flex-col">
+        <div className=" md:relative p-3 md:-mt-[30%] bg-white shadow-2xl rounded-md py-4 h-70 md:h-60  flex justify-between gap-2 flex-col">
           <section className="flex flex-col gap-2">
             <p className="text-2xl md:text-sm lg:text-xl xl-2xl font-bold line-clamp-1">
               {name}

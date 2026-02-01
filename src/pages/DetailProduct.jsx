@@ -9,7 +9,7 @@ import products from "../../products.json";
 export default function DetailProduct() {
   const { id, name } = useParams();
   const [count, setCount] = useState(1);
-  const render = products.find((item)=>item.id === Number(id) && item.name === name)
+  const render = products.find((item)=>item.productId === Number(id) && item.productName === name)
   // const [render, setRender] = useState(null);
   // console.log("id param", id);
   // console.log(name);
@@ -30,12 +30,12 @@ export default function DetailProduct() {
       <section className="flex flex-col md:flex-row gap-5 w-full">
         <figure className="flex-1/2">
           <div className="w-full">
-            <img src={render.image} alt={render.name} className="w-full mb-3" />
+            <img src={render.images[0]} alt={render.productName} className="w-full mb-3" />
           </div>
           <div className="grid grid-cols-3 gap-3 w-full">
-            <img src="/hazelnut.png" alt="hazelnut" className="w-full" />
-            <img src="/hazelnut.png" alt="hazelnut" className="w-full" />
-            <img src="/hazelnut.png" alt="hazelnut" className="w-full" />
+            <img src={render.images[1]} alt={render.productName} className="w-full" />
+            <img src={render.images[2]} alt={render.productName} className="w-full" />
+            <img src={render.images[3]} alt={render.productName} className="w-full" />
           </div>
         </figure>
         <figcaption className=" w-full flex-1/2">
@@ -43,7 +43,7 @@ export default function DetailProduct() {
             <p className="p-1 px-2 bg-red-500 text-white md:text-xs w-fit rounded-full font-semibold">
               FLASH SALE!
             </p>
-            <h1 className="text-5xl md:text-2xl lg:text-5xl">{render.name}</h1>
+            <h1 className="text-5xl md:text-2xl lg:text-5xl">{render.productName}</h1>
             <div className="flex gap-5 items-center">
               <p className="text-xl md:text-xs lg:text-xl text-red line-through text-red-500">
                 IDR {render.price}
@@ -132,9 +132,9 @@ export default function DetailProduct() {
         {products.slice(0, 3).map((item) => {
           return (
             <Card
-              id={item.id}
-              name={item.name}
-              image={item.image}
+              id={item.productId}
+              name={item.productName}
+              image={item.images[0]}
               description={item.description}
               rating={item.rating}
               price={item.price}

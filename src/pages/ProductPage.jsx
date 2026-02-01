@@ -5,13 +5,12 @@ import Input from "../components/common/Input";
 import Card from "../components/product/Card";
 import { useState } from "react";
 import Filter from "../components/feature/Filter";
-import products from "../../products.json"
-
+import products from "../../products.json";
 
 export default function ProductPage() {
   const [toggle, setToggle] = useState(false);
 
-
+  console.log(products);
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);
@@ -104,16 +103,47 @@ export default function ProductPage() {
           <Filter />
         </div>
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg-gap5">
-          {products.splice(0, 6).map((item)=>{
-            return <Card id={item.id} image={item.image} name={item.name} price={item.price} description={item.description} discount={"10.000"} rating={item.rating}/>
+          {products.slice(0, 6).map((item) => {
+            return (
+              <Card
+                id={item.productId}
+                image={item.images[0]}
+                name={item.productName}
+                price={item.price}
+                description={item.description}
+                discount={"10.000"}
+                rating={item.rating}
+              />
+            );
           })}
         </div>
       </section>
       <section className="flex justify-center">
         <div className="flex gap-5">
-          <Button orange size={"p-2 w-10"} radius={"rounded-full"}> 1 </Button> <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}  radius={"rounded-full"} > 2 </Button>
-          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"} > 3</Button>
-          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"} >4</Button>
+          <Button orange size={"p-2 w-10"} radius={"rounded-full"}>
+            {" "}
+            1{" "}
+          </Button>{" "}
+          <Button
+            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
+            radius={"rounded-full"}
+          >
+            {" "}
+            2{" "}
+          </Button>
+          <Button
+            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
+            radius={"rounded-full"}
+          >
+            {" "}
+            3
+          </Button>
+          <Button
+            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
+            radius={"rounded-full"}
+          >
+            4
+          </Button>
           <Button orange size={"p-2 w-fit"} radius={"rounded-full"}>
             <ArrowRight color={"#FFFFFF"} />
           </Button>
