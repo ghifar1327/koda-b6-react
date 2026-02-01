@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Input from '../components/common/Input'
 import { ArrowRight, CalendarDays, Coffee, MessageSquareText, RefreshCcw, Repeat } from 'lucide-react'
 import { Link } from 'react-router'
 import { Button } from '../components/common/Button'
+import { AuthContext } from '../context/AuthContext'
 
 export default function History() {
+    const {isLogin} = useContext(AuthContext)
+    console.log(isLogin.history)
   return (
     <>
     <h1 className='text-5xl'>History Order</h1>
@@ -27,42 +30,45 @@ export default function History() {
                     </div>
                 </section>
             </form>
-            <section className='flex p-5 md:p-2 w-full gap-3 h-auto bg-[#E8E8E899]'>
-                <img src="/hazelnut.png" alt="" className='hidden md:block w-[12%]'/>
-                <div className='grid gap-4 md:grid-cols-2 w-full'>
-                    <section className=' flex w-full'>
-                        <div className='flex-1/2 flex flex-col'>
-                            <div className='flex-1/2'>
-                                <p className=' flex items-center gap-2 text-[#4F5665]'><Coffee size={18}/>No. Order</p> 
+            {isLogin.history.slice(0,4).map((item) => (
+                        <section key={item.id} className='flex p-5 md:p-2 w-full gap-3 h-auto bg-[#E8E8E899]'>
+                            <img src={item.orders[0].image} alt={item.orders[0].productName} className='hidden md:block w-[12%]'/>
+                            <div className='grid gap-4 md:grid-cols-2 w-full'>
+                                <section className=' flex w-full'>
+                                    <div className='flex-1/2 flex flex-col'>
+                                        <div className='flex-1/2'>
+                                            <p className=' flex items-center gap-2 text-[#4F5665]'><Coffee size={18}/>No. Order</p> 
+                                        </div>
+                                        <p className='flex-1/2 flex items-center font-semibold'>#{item.id}</p>
+                                    </div>
+                                    <div className='flex-1/2 flex flex-col'>
+                                        <div className='flex-1/2'>
+                                            <p className=' flex items-center gap-2 text-[#4F5665]'><CalendarDays size={18}/> Date</p>
+                                        </div>
+                                        <p className='flex-1/2 flex items-center font-semibold'>24 January 2023</p>
+                                    </div>
+                                </section>
+                                <section className=' flex w-full xl:pl-[8%]'>
+                                    <div className='flex-1/2 flex flex-col'>
+                                        <div className='flex-1/2'>
+                                            <p className=' flex items-center gap-2 text-[#4F5665]'><Repeat size={18}/> Total</p> 
+                                        </div>
+                                        <p className='flex-1/2 flex items-center font-semibold'>Idr {item.total}</p>
+                                    </div>
+                                    <div className='flex-1/2 flex flex-col'>
+                                        <div className='flex-1/2'>
+                                           <p className='flex items-center gap-2 text-[#4F5665]'><RefreshCcw size={18}/> Status</p>
+                                        </div>
+                                        <div className='flex-1/2 flex items-center'><p className='text-primary bg-[#FF890633] w-fit px-4 p-1 md:p-0 md:px-2 rounded-full md:text-xs lg:text-sm text-sm  font-semibold'>On Progress</p></div>
+                                    </div>
+                                </section>
+                                <div className='flex justify-end flex-col'>
+                                    <Link to={`/order/${item.id}`} className='text-primary underline decoration-solid'>Views Order Detail</Link>
+                                </div>
                             </div>
-                            <p className='flex-1/2 flex items-center font-semibold'>#12354-09893</p>
-                        </div>
-                        <div className='flex-1/2 flex flex-col'>
-                            <div className='flex-1/2'>
-                                <p className=' flex items-center gap-2 text-[#4F5665]'><CalendarDays size={18}/> Date</p>
-                            </div>
-                            <p className='flex-1/2 flex items-center font-semibold'>24 January 2023</p>
-                        </div>
-                    </section>
-                    <section className=' flex w-full xl:pl-[8%]'>
-                        <div className='flex-1/2 flex flex-col'>
-                            <div className='flex-1/2'>
-                                <p className=' flex items-center gap-2 text-[#4F5665]'><Repeat size={18}/> Total</p> 
-                            </div>
-                            <p className='flex-1/2 flex items-center font-semibold'>Idr 40.000</p>
-                        </div>
-                        <div className='flex-1/2 flex flex-col'>
-                            <div className='flex-1/2'>
-                               <p className='flex items-center gap-2 text-[#4F5665]'><RefreshCcw size={18}/> Status</p>
-                            </div>
-                            <div className='flex-1/2 flex items-center'><p className='text-primary bg-[#FF890633] w-fit px-4 p-1 md:p-0 md:px-2 rounded-full md:text-xs lg:text-sm text-sm  font-semibold'>On Progress</p></div>
-                        </div>
-                    </section>
-                    <div className='flex justify-end flex-col'>
-                        <Link to="/order" className='text-primary underline decoration-solid'>Views Order Detail</Link>
-                    </div>
-                </div>
-            </section>
+                        </section>
+                        ))}
+
             <section className="hidden md:flex justify-center">
                 <div className="flex gap-5">
                     <Button orange size={"p-2 w-10"} radius={"rounded-full"}> 1 </Button> <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}  radius={"rounded-full"} > 2 </Button>
