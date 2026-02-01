@@ -12,7 +12,7 @@ export default function DetailProduct() {
   const { id, name } = useParams();
   const [count, setCount] = useState(1);
   const [products, setProducts] = useState([]);
-  const {isLogin} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const { addCart } = useContext(InvoiceContext);
   const [render, setRender] = useState(null);
 
@@ -33,13 +33,13 @@ export default function DetailProduct() {
         console.error(err);
       }
     })();
-  }, [id,name]);
+  }, [id, name]);
 
-  const { handleSubmit, register ,reset } = useForm();
+  const { handleSubmit, register, reset } = useForm();
   function action(form) {
     const product = {
       id: Date.now(),
-      image:  render.images[0],
+      image: render.images[0],
       productName: name,
       size: form.size,
       hotIce: form.hotIce,
@@ -49,8 +49,8 @@ export default function DetailProduct() {
     };
     // console.log(product)
     addCart(product);
-    setCount(1)
-    reset()
+    setCount(1);
+    reset();
   }
 
   if (!render) return <p>Loading...</p>;
@@ -201,10 +201,10 @@ export default function DetailProduct() {
             </div>
           </section>
           <section className="flex gap-5 md:gap-3 text-md md:text-xs lg:text-xl mt-10 md:mt-5 lg:mt-10">
-            <Link to={isLogin ? "/payment" : "/login"} className="w-full">
-            <Button orange border={"border-2 border-primary"}>
-              Buy
-            </Button>
+            <Link to={user ? "/payment" : "/login"} className="w-full">
+              <Button orange border={"border-2 border-primary"}>
+                Buy
+              </Button>
             </Link>
             <Button size={"border-2 p-2 md:p-1 lg:p-2 w-full border-primary"}>
               <ShoppingCart color={"#FF8906"} size={18} />

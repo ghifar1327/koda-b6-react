@@ -6,9 +6,9 @@ import { Link, useLocation } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Header() {
-  const {isLogin, logout} = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
-  const location = useLocation()
+  const location = useLocation();
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);
@@ -37,11 +37,33 @@ export default function Header() {
           <MenuIcon size={26} />
         </Button>
         <div className="hidden md:flex gap-5">
-          {isLogin ? <div className="flex items-center gap-5"><Button onClick={logout} border={"border border-red-500"} size={"h-10 w-23 bg-red-500"}>logout</Button> <p>{isLogin.fullName}</p></div>: <>
-          <Link to="/login" className="border rounded h-10 flex justify-center items-center w-23">Sign in</Link>
-          <Link to="/register" className="border border-primary bg-primary flex justify-center items-center rounded h-10 w-23">Sign up</Link>
-          </>
-          }
+          {user ? (
+            <div className="flex items-center gap-5">
+              <Button
+                onClick={logout}
+                border={"border border-red-500"}
+                size={"h-10 w-23 bg-red-500"}
+              >
+                logout
+              </Button>{" "}
+              <p>{user.fullName}</p>
+            </div>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="border rounded h-10 flex justify-center items-center w-23"
+              >
+                Sign in
+              </Link>
+              <Link
+                to="/register"
+                className="border border-primary bg-primary flex justify-center items-center rounded h-10 w-23"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
         </div>
       </section>
       <MobileMenu onClick={toogleButton} toggle={toggle} />

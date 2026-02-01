@@ -9,28 +9,28 @@ export function AuthProvider({ children }) {
     fullName: "ghifar",
     email: "admin@mail.com",
     role: "admin",
-    password: "1234A"
+    password: "1234A",
   };
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useLocalStorage("isLogin", null);
+  const [user, setuser] = useLocalStorage("user", null);
   const [users, setUsers] = useLocalStorage("users", []);
 
-  useEffect(()=>{
-    if(users.length === 0){
-      setUsers([adminAccount])
+  useEffect(() => {
+    if (users.length === 0) {
+      setUsers([adminAccount]);
     }
-  },[])
+  }, []);
   function login(data) {
     const user = users.find(
       (user) => user.email === data.email && user.password === data.password,
     );
     if (user) {
       if (user.role == "admin") {
-        setIsLogin(user);
+        setuser(user);
         navigate("/admin");
         return;
       }
-      setIsLogin(user);
+      setuser(user);
       navigate("/");
       return;
     }
@@ -43,11 +43,11 @@ export function AuthProvider({ children }) {
     navigate("/login");
   }
   function logout() {
-    setIsLogin(null);
+    setuser(null);
   }
 
   return (
-    <AuthContext.Provider value={{ isLogin, login, registerUser, logout }}>
+    <AuthContext.Provider value={{ user, login, registerUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

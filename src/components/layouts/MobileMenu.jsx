@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function MobileMenu({ toggle, onClick }) {
-  const { isLogin, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   return (
     <section
       className={`${!toggle && "hidden"} flex flex-col md:hidden fixed inset-0 bg-black/80 z-200 text-black`}
@@ -33,12 +33,27 @@ export default function MobileMenu({ toggle, onClick }) {
           <div className="bg-[#DEDEDE] h-0.5 w-full"></div>
         </div>
         <div className="flex flex-col gap-3">
-          {isLogin ? (
-            <Button onClick={logout} border={"border bg-red-500 border-red-500"}>Logout</Button>
+          {user ? (
+            <Button
+              onClick={logout}
+              border={"border bg-red-500 border-red-500"}
+            >
+              Logout
+            </Button>
           ) : (
             <>
-              <Link to="/login" className="w-full border p-3 text-center rounded">Signin</Link>
-              <Link to="/register" className="w-full border p-3 text-center rounded bg-primary border-primary">Sign up</Link>
+              <Link
+                to="/login"
+                className="w-full border p-3 text-center rounded"
+              >
+                Signin
+              </Link>
+              <Link
+                to="/register"
+                className="w-full border p-3 text-center rounded bg-primary border-primary"
+              >
+                Sign up
+              </Link>
             </>
           )}
         </div>
