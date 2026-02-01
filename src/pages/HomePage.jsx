@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Message from "../components/feature/Message";
 import Card from "../components/product/Card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import products from "../../products.json";
 
 
 export default function HomePage() {
+  const [products , setProducts] = useState([])
+  useEffect(()=>{
+    (async()=>{
+        const res = await fetch("https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json")
+        try{
+            if(!res) throw new Error("faild to fetch")
+              const data = await res.json()
+              setProducts(data)
+        }catch(err){
+          console.error(err)
+        }
+    })()
+  })
   return (
     <>
       <hero className={"flex flex-col-reverse md:flex-row md:h-auto h-screen"}>

@@ -12,7 +12,7 @@ export function AuthProvider({ children }) {
     password: "1234A"
   };
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useLocalStorage("login", null);
+  const [isLogin, setIsLogin] = useLocalStorage("isLogin", null);
   const [users, setUsers] = useLocalStorage("users", []);
 
   useEffect(()=>{
@@ -26,11 +26,11 @@ export function AuthProvider({ children }) {
     );
     if (user) {
       if (user.role == "admin") {
-        setIsLogin(user.fullName);
+        setIsLogin(user);
         navigate("/admin");
         return;
       }
-      setIsLogin(user.fullName);
+      setIsLogin(user);
       navigate("/");
       return;
     }

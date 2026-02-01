@@ -1,28 +1,30 @@
 import { ArrowRight, Minus, Plus, ShoppingCart, ThumbsUp } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";
 import { Link, useParams } from "react-router-dom";
-import products from "../../products.json";
 
 export default function DetailProduct() {
   const { id, name } = useParams();
   const [count, setCount] = useState(1);
-  const render = products.find((item)=>item.productId === Number(id) && item.productName === name)
-  // const [render, setRender] = useState(null);
-  // console.log("id param", id);
-  // console.log(name);
-  // console.log(render);
-  // useEffect(() => {
-  //   (() => {
-  //     const product = products.find(
-  //       (p) => p.id === Number(id) && p.name === name,
-  //     );
-  //     setRender(product);
-  //   })();
-  // }, [id, name]);
-  console.log(render)
+  const [products , setProducts] = useState([])
+  
+  const [render , setRender] = useState(null)
+   useEffect(()=>{
+     (async()=>{
+         const res = await fetch("https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json")
+         try{
+             if(!res) throw new Error("faild to fetch")
+               const data = await res.json()
+               setProducts(data)
+               const find = data.find((item)=> item.productId === Number(id) && item.productName === name)
+               setRender(find)
+         }catch(err){
+           console.error(err)
+         }
+     })()
+   })
   if (!render) return <p>Loading...</p>;
   return (
     <>
