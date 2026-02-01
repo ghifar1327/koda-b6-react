@@ -9,7 +9,6 @@ export default function Header() {
   const {isLogin, logout} = useContext(AuthContext)
   const [toggle, setToggle] = useState(false);
   const location = useLocation()
-  console.log(isLogin.fullName)
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);

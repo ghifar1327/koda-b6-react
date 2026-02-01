@@ -1,56 +1,115 @@
 import { ArrowRight, Minus, Plus, ShoppingCart, ThumbsUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";
 import { Link, useParams } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { useForm } from "react-hook-form";
+import { InvoiceContext } from "../context/InvoiceContext";
 
 export default function DetailProduct() {
   const { id, name } = useParams();
   const [count, setCount] = useState(1);
-  const [products , setProducts] = useState([])
-  
-  const [render , setRender] = useState(null)
-   useEffect(()=>{
-     (async()=>{
-         const res = await fetch("https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json")
-         try{
-             if(!res) throw new Error("faild to fetch")
-               const data = await res.json()
-               setProducts(data)
-               const find = data.find((item)=> item.productId === Number(id) && item.productName === name)
-               setRender(find)
-         }catch(err){
-           console.error(err)
-         }
-     })()
-   })
+  const [products, setProducts] = useState([]);
+  const {isLogin} = useContext(AuthContext)
+  const { addCart } = useContext(InvoiceContext);
+  const [render, setRender] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        "https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json",
+      );
+      try {
+        if (!res) throw new Error("faild to fetch");
+        const data = await res.json();
+        setProducts(data);
+        const find = data.find(
+          (item) => item.productId === Number(id) && item.productName === name,
+        );
+        setRender(find);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, [id,name]);
+
+  const { handleSubmit, register } = useForm();
+  function action(form) {
+    const product = {
+      id: Date.now(),
+      image:  render.images[0],
+      productName: name,
+      size: form.size,
+      hotIce: form.hotIce,
+      quantity: count,
+      price: Number(render.price) * Number(count),
+      total: Number(price) * Number(count),
+    };
+    // console.log(product)
+    addCart(product);
+  }
+
   if (!render) return <p>Loading...</p>;
+  const price = render.discountPercent
+    ? render.price - (render.price * render.discountPercent) / 100
+    : render.price;
   return (
     <>
-    {console.log("render")}
       <section className="flex flex-col md:flex-row gap-5 w-full">
         <figure className="flex-1/2">
           <div className="w-full">
-            <img src={render.images[0]} alt={render.productName} className="w-full mb-3" />
+            <img
+              src={render.images[0]}
+              alt={render.productName}
+              className="w-full mb-3"
+            />
           </div>
           <div className="grid grid-cols-3 gap-3 w-full">
-            <img src={render.images[1]} alt={render.productName} className="w-full" />
-            <img src={render.images[2]} alt={render.productName} className="w-full" />
-            <img src={render.images[3]} alt={render.productName} className="w-full" />
+            <img
+              src={render.images[1]}
+              alt={render.productName}
+              className="w-full"
+            />
+            <img
+              src={render.images[2]}
+              alt={render.productName}
+              className="w-full"
+            />
+            <img
+              src={render.images[3]}
+              alt={render.productName}
+              className="w-full"
+            />
           </div>
         </figure>
-        <figcaption className=" w-full flex-1/2">
+        <form onSubmit={handleSubmit(action)} className=" w-full flex-1/2">
           <section className=" flex flex-col gap-3 md:gap-1 lg:gap-3 xl:gap-4 mb-5">
             <p className="p-1 px-2 bg-red-500 text-white md:text-xs w-fit rounded-full font-semibold">
               FLASH SALE!
             </p>
-            <h1 className="text-5xl md:text-2xl lg:text-5xl">{render.productName}</h1>
+            <h1 className="text-5xl md:text-2xl lg:text-5xl">
+              {render.productName}
+            </h1>
             <div className="flex gap-5 items-center">
-              <p className="text-xl md:text-xs lg:text-xl text-red line-through text-red-500">
-                IDR {render.price}
-              </p>
-              <p className="text-3xl md:text-xl text-primary">IDR 10.000</p>
+              {render.discountPercent ? (
+                <>
+                  <p className="text-xl md:text-xs lg:text-xl text-red line-through text-red-500">
+                    IDR {render.price}
+                  </p>
+                  <p className="text-3xl md:text-xl text-primary">
+                    IDR {price}{" "}
+                    <span className="text-gray-300">
+                      discout {render.discountPercent}%
+                    </span>
+                  </p>
+                </>
+              ) : (
+                <p className="text-3xl md:text-xl text-primary">
+                  IDR {render.price}
+                </p>
+              )}
             </div>
             <img src="/ratting.png" alt="" className="w-[30%]" />
             <div className="flex items-center text-xl md:text-xs lg:text-lg gap-3 text-gray-500">
@@ -92,13 +151,26 @@ export default function DetailProduct() {
                 id={"regular"}
                 name={"cup"}
                 value={"regular"}
+                {...register("size", { required: true })}
               >
                 Regular
               </Input>
-              <Input type={"radio"} id={"medium"} name={"cup"} value={"medium"}>
+              <Input
+                type={"radio"}
+                id={"medium"}
+                name={"cup"}
+                value={"medium"}
+                {...register("size", { required: true })}
+              >
                 Medium
               </Input>
-              <Input type={"radio"} id={"large"} name={"cup"} value={"large"}>
+              <Input
+                type={"radio"}
+                id={"large"}
+                name={"cup"}
+                value={"large"}
+                {...register("size", { required: true })}
+              >
                 Large
               </Input>
             </div>
@@ -106,26 +178,38 @@ export default function DetailProduct() {
               Hot/ice
             </label>
             <div className="flex gap-3 md:gap-1 text-md md:text-xs lg:text-xl">
-              <Input type={"radio"} id={"hot"} name={"hot/ice"} value={"hot"}>
+              <Input
+                type={"radio"}
+                id={"hot"}
+                name={"hot/ice"}
+                value={"hot"}
+                {...register("hotIce", { required: true })}
+              >
                 Hot
               </Input>
-              <Input type={"radio"} id={"ice"} name={"hot/ice"} value={"ice"}>
+              <Input
+                type={"radio"}
+                id={"ice"}
+                name={"hot/ice"}
+                value={"ice"}
+                {...register("hotIce", { required: true })}
+              >
                 Ice
               </Input>
             </div>
           </section>
           <section className="flex gap-5 md:gap-3 text-md md:text-xs lg:text-xl mt-10 md:mt-5 lg:mt-10">
-            <Link to="/payment" className="w-full">
-              <Button orange border={"border-2 border-primary"}>
-                Buy
-              </Button>
+            <Link to={isLogin ? "/payment" : "/login"} className="w-full">
+            <Button orange border={"border-2 border-primary"}>
+              Buy
+            </Button>
             </Link>
             <Button size={"border-2 p-2 md:p-1 lg:p-2 w-full border-primary"}>
               <ShoppingCart color={"#FF8906"} size={18} />
               <p className="text-primary px-3">add to chart</p>
             </Button>
           </section>
-        </figcaption>
+        </form>
       </section>
       <h1 className="text-4xl md:text-5xl text-semibold">
         Recomendation <span className="text-[#8E6447]">For You</span>
@@ -140,7 +224,7 @@ export default function DetailProduct() {
               description={item.description}
               rating={item.rating}
               price={item.price}
-              discount={"10.000"}
+              discount={item.discountPercent}
             />
           );
         })}
@@ -155,7 +239,7 @@ export default function DetailProduct() {
               description={item.description}
               rating={item.rating}
               price={item.price}
-              discount={"10.000"}
+              discount={item.discount}
             />
           );
         })}

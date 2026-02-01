@@ -46,7 +46,7 @@ export default function Card({
               </p>
               {discount && (
                 <p className="text-lg md:text-sm lg:text-xl xl-2xl font-semibold text-primary">
-                  IDR {discount}
+                  IDR {price -(price *( discount / 100))} <span className="text-gray-300">{discount}%</span>
                 </p>
               )}
             </div>

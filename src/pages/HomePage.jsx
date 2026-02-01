@@ -133,7 +133,7 @@ export default function HomePage() {
         </article>
         <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-5 md:gap-3">
           {products.slice(0,4).map((item)=>{
-            return <Card id={item.productId} name={item.productName} image={item.images[0]} description={item.description} rating={item.rating} price={item.price}/>
+            return <Card id={item.productId} name={item.productName} image={item.images[0]} description={item.description} rating={item.rating} price={item.price} discount={item.discountPercent}/>
           })} 
         </figure>
         <article className="flex-col flex items-center text-center px-[5%] gap-5 lg:gap-8  bg-[#F8F8F8] py-10">

@@ -111,7 +111,7 @@ export default function ProductPage() {
                 name={item.productName}
                 price={item.price}
                 description={item.description}
-                discount={"10.000"}
+                discount={item.discountPercent}
                 rating={item.rating}
               />
             );

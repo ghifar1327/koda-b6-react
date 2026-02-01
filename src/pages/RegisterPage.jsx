@@ -39,7 +39,7 @@ export default function RegisterPage() {
   const { registerUser } = useContext(AuthContext);
   function action(form) {
     const data = { ...form, role: "user" ,history : [], create_at: new Date().toISOString(), update_at:""};
-    console.log(data);
+    // console.log(data);
     registerUser(data);
     reset();
   }
