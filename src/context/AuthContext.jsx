@@ -44,6 +44,7 @@ export function AuthProvider({ children }) {
   }
   function logout() {
     setuser(null);
+    navigate("/")
   }
 
   return (
