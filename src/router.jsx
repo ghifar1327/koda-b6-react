@@ -12,6 +12,8 @@ import Profile from "./pages/Profile";
 import DetailLayout from "./components/layouts/DetailLayout";
 import Product from "./pages/Product";
 import ProductsPage from "./pages/ProductsPage";
+import AdminLayout from "./components/layouts/AdminLayout";
+import Dashboard from "./pages/Dashboard";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -41,6 +43,16 @@ export default function Router() {
         { path: "forgotPassword", element: <ForgotPwd /> },
       ]
     },
+    {
+      path : "/admin",
+      element: <AdminLayout/>,
+      children:[
+        {
+          index : true,
+          element: <Dashboard/>
+        }
+      ]
+    }
   ]);
 
   return <RouterProvider router={router} />;
