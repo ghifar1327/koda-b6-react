@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { KeyRound, Mail, User } from "lucide-react";
+import { KeyRound, Mail, MapPin, PhoneCall, User } from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import AuthLayout from "../components/layouts/AuthLayout";
@@ -16,6 +16,8 @@ const schema = yup.object({
     .string()
     .email("invalid format format")
     .required("Email must be filled in"),
+  address: yup.string().required("Address must be filled in"),
+  phone: yup.number().integer("A phone number can't include a decimal point").positive("A phone number can't start with a minus").min(8).required('A phone number is required'),
   password: yup
     .string()
     .required("Password must be filled in")
@@ -38,7 +40,7 @@ export default function RegisterPage() {
   });
   const { registerUser } = useContext(AuthContext);
   function action(form) {
-    const data = { ...form, role: "user" ,history : [], create_at: new Date().toISOString(), update_at:""};
+    const data = { ...form,id: Date.now(), role: "user" ,history : [], create_at: new Date(), update_at:""};
     // console.log(data);
     registerUser(data);
     reset();
@@ -56,7 +58,7 @@ export default function RegisterPage() {
       </div>
       <form
         action=""
-        className="flex flex-col gap-5"
+        className="flex flex-col gap-5 h-fit"
         onSubmit={handleSubmit(action)}
       >
         <Input
@@ -69,6 +71,10 @@ export default function RegisterPage() {
           <User size={18} />
         </Input>
         <span className="text-red-500">{errors.fullName?.message}</span>
+        <Input label="Phone" type="number" id="phone" placeholder="Enter Your Phone Number" {...register("phone")}><PhoneCall size={18}/></Input>
+        <span className="text-red-500">{errors.phone?.message}</span>
+        <Input label={"Address"} type={"text"} id={"address"} placeholder={"Enter your Address"} {...register("address")}><MapPin size={18} /></Input>
+        <span className="text-red-500">{errors.address?.message}</span>
         <Input
           label={"Email"}
           type={"email"}
