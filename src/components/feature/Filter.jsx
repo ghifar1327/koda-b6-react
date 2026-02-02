@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '../common/Button'
 import Input from '../common/Input'
 
 export default function Filter() {
+  const [priceRange, setPriceRange] = useState([0, 50000]);
   return (
     <div onClick={(e)=> e.stopPropagation()}>
       <form action="" className='bg-black flex flex-col gap-5 w-full h-fit text-white p-5  accent-primary rounded-2xl'>
@@ -27,7 +28,11 @@ export default function Filter() {
           <Input type={"checkbox"} id={"cheap"} size={"w-4 h-4 bg-black"}>Cheap</Input>
           </section>
           <section>
-            <label htmlFor="" className='font-bold'>Range Price</label>
+            <label htmlFor="" className='font-bold'>
+            <p>Range Price</p>
+            <input type="range" min={0} max={50000} step={1000} value={priceRange[1]} onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])} className='w-full'/>
+            <p> Harga: Rp {priceRange[0].toLocaleString()} – Rp {priceRange[1].toLocaleString()}</p>
+            </label>
           </section>
           <Button orange>Apply Filter</Button>
       </form>
