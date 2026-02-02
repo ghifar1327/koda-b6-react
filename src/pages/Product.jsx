@@ -1,5 +1,5 @@
 import { ArrowRight, Minus, Plus, ShoppingCart, ThumbsUp } from "lucide-react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";
@@ -7,31 +7,16 @@ import { Link, useParams } from "react-router-dom";
 import  AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import  InvoiceContext  from "../context/InvoiceContext";
+import FetchContext from "../context/FetchContex";
 
 export default function Product() {
   const { id, name } = useParams();
   const [count, setCount] = useState(1);
-  const [products, setProducts] = useState([]);
   const { user } = useContext(AuthContext);
   const { addCart } = useContext(InvoiceContext);
-  const [render, setRender] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch("https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json");
-      try {
-        if (!res) throw new Error("faild to fetch");
-        const data = await res.json();
-        setProducts(data);
-        const find = data.find(
-          (item) => item.productId === Number(id) && item.productName === name,
-        );
-        setRender(find);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, [id, name]);
+  const [ products ] = useContext(FetchContext)
+  const render = products.find((item) => Number(item.productId) === Number(id)); 
+  console.log(render.images[0])
 
   const { handleSubmit, register, reset } = useForm();
   function action(form) {
@@ -45,7 +30,6 @@ export default function Product() {
       price: Number(render.price) * Number(count),
       total: Number(price) * Number(count),
     };
-    // console.log(product)
     addCart(product);
     setCount(1);
     reset();
