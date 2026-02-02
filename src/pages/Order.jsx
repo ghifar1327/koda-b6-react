@@ -14,8 +14,8 @@ export default function Order() {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   console.log(id);
-  const render = user.history.find((item) => item.id === Number(id));
-  console.log(render);
+  const render = user?.history.find((item) => item.id === Number(id)) || [];
+  // console.log(render);
   return (
     <>
       <h1 className="text-3xl">
@@ -38,9 +38,9 @@ export default function Order() {
             <div className="flex justify-between items-center w-full">
               <div className="flex gap-3 items-center">
                 <MapPin color="#4F5665" />
-                <p className="text-[#4F5665]">Adress</p>
+                <p className="text-[#4F5665]">Address</p>
               </div>
-              <p className="font-bold">{render.adress}</p>
+              <p className="font-bold">{render.address}</p>
             </div>
           </article>
           <article className="flex justify-between border-b border-gray-300 py-5">
@@ -49,7 +49,7 @@ export default function Order() {
                 <PhoneCall color="#4F5665" />
                 <p className="text-[#4F5665]">Phone</p>
               </div>
-              <p className="font-bold">082116304338</p>
+              <p className="font-bold">{user?.phone}</p>
             </div>
           </article>
           <article className="flex justify-between border-b border-gray-300 py-5">
@@ -92,7 +92,7 @@ export default function Order() {
         </section>
         <section className="flex-1/2 flex flex-col gap-3">
           <h2 className="text-xl font-bold mb-2">Your Order</h2>
-          {render.orders.map((item) => (
+          {render.orders?.map((item) => (
             <div
               key={item.id}
               className="bg-[#E8E8E84D] w-full p-2 pr-5 rounded flex justify-between items-center gap-2"
