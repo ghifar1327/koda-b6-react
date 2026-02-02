@@ -120,33 +120,11 @@ export default function ProductsPage() {
       </section>
       <section className="flex justify-center">
         <div className="flex gap-5">
-          <Button orange size={"p-2 w-10"} radius={"rounded-full"}>
-            {" "}
-            1{" "}
-          </Button>{" "}
-          <Button
-            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
-            radius={"rounded-full"}
-          >
-            {" "}
-            2{" "}
-          </Button>
-          <Button
-            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
-            radius={"rounded-full"}
-          >
-            {" "}
-            3
-          </Button>
-          <Button
-            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
-            radius={"rounded-full"}
-          >
-            4
-          </Button>
-          <Button orange size={"p-2 w-fit"} radius={"rounded-full"}>
-            <ArrowRight color={"#FFFFFF"} />
-          </Button>
+          <Button orange size={"p-2 w-10"} radius={"rounded-full"}>1</Button>
+          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"}>2</Button>
+          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"}>3</Button>
+          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"} >4</Button>
+          <Button orange size={"p-2 w-fit"} radius={"rounded-full"}><ArrowRight color={"#FFFFFF"} /></Button>
         </div>
       </section>
       <div
