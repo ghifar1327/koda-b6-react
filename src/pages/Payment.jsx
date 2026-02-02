@@ -11,7 +11,7 @@ export default function Payment() {
   const [form, setForm] = useState({
     email: user?.email || "",
     fullName: user?.fullName || "",
-    address: "",
+    address: user?.address || "",
     delivery: "",
   });
   const { cart, removeCart, setHistory } = useContext(InvoiceContext);
@@ -32,6 +32,7 @@ export default function Payment() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!form.email || !form.fullName || !delivery) return;
+    
     const data = {
       id: Date.now(),
       fullName: form.fullName,
@@ -40,6 +41,7 @@ export default function Payment() {
       delivery: delivery,
       total: subtotal,
       orders: cart,
+      create_at: Date.now()
     };
     // console.log(data)
     setHistory(data);
