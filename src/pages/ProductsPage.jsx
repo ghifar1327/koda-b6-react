@@ -3,14 +3,13 @@ import { Button } from "../components/common/Button";
 import { ArrowLeft, ArrowRight, Search, SlidersHorizontal } from "lucide-react";
 import Input from "../components/common/Input";
 import Card from "../components/product/Card";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Filter from "../components/feature/Filter";
-import products from "../../products.json";
+import FetchContext from "../context/FetchContex";
 
 export default function ProductsPage() {
+  const [products] = useContext(FetchContext)
   const [toggle, setToggle] = useState(false);
-
-  console.log(products);
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);
