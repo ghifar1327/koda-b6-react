@@ -2,13 +2,12 @@
 import { KeyRound, Mail, MapPin, PhoneCall, User } from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
-import AuthLayout from "../components/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import  AuthContext  from "../context/AuthContext";
 
 const schema = yup.object({
   fullName: yup.string().required("Name must be filled in"),

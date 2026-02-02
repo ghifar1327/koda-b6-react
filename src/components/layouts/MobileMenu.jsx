@@ -3,7 +3,7 @@ import { Button } from "../common/Button";
 import { Search, XCircle } from "lucide-react";
 import Input from "../common/Input";
 import { Link } from "react-router";
-import { AuthContext } from "../../context/AuthContext";
+import  AuthContext from "../../context/AuthContext";
 
 export default function MobileMenu({ toggle, onClick }) {
   const { user, logout } = useContext(AuthContext);

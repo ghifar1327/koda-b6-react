@@ -1,7 +1,24 @@
+
 import { forwardRef, useState } from "react";
 import { Button } from "./Button";
 import { Check, Eye, EyeClosed } from "lucide-react";
-
+/**
+ * @component
+ * @param {Object} props - Input props
+ * @param {string} [props.label] - Label text for input (non-checkbox & non-radio)
+ * @param {string} [props.type="text"] - Input type (text, email, password, checkbox, radio)
+ * @param {string} props.id - Input id (also used as name attribute)
+ * @param {boolean} [props.password=false] - Enable password visibility toggle
+ * @param {string} [props.size] - Tailwind classes for input wrapper size & spacing
+ * @param {string} [props.text] - Tailwind classes for input text styling
+ * @param {string} [props.inputStyle] - Tailwind classes for radio input container
+ * @param {React.ReactNode} [props.children] - Icon or label content inside input
+ * @param {Object} rest - Additional native input props (value, onChange, checked, disabled, etc.)
+ *
+ * @param {React.Ref<HTMLInputElement>} ref - Forwarded ref to the input element
+ *
+ * @returns {JSX.Element} 
+ */
 const Input = forwardRef(
   ({ size, label, type, id, password,text, inputStyle,  children, ...rest }, ref) => {
     const [show, setShow] = useState(false);
@@ -49,7 +66,7 @@ const Input = forwardRef(
               {label}
             </label>
             <div
-              className={`${size ? size : "flex items-center gap-3 mt-3 p-2 px-3"} ${type !== "checkbox" && "border border-[#DEDEDE] rounded-md w-full"} `}
+              className={`${size ? size : "flex items-center gap-3 mt-2 p-2 px-3"} ${type !== "checkbox" && "border border-[#DEDEDE] rounded-md w-full"} `}
             >
               <span>{children}</span>
               <span className="w-full">

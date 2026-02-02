@@ -1,5 +1,4 @@
 import React from "react";
-import AuthLayout from "../components/layouts/AuthLayout";
 import Input from "../components/common/Input";
 import { Button } from "../components/common/Button";
 import { Mail } from "lucide-react";

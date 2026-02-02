@@ -1,13 +1,12 @@
 import { KeyRoundIcon, Mail } from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
-import AuthLayout from "../components/layouts/AuthLayout";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import  AuthContext  from "../context/AuthContext";
 
 const scehema = yup.object({
   email: yup.string()

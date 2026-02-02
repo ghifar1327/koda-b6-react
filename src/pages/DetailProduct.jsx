@@ -4,7 +4,7 @@ import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";
 import { Link, useParams } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import  AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import  InvoiceContext  from "../context/InvoiceContext";
 

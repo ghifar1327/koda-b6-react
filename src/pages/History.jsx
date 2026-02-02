@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Input from "../components/common/Input";
 import {
   ArrowRight,
@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { Button } from "../components/common/Button";
-import { AuthContext } from "../context/AuthContext";
+import  AuthContext  from "../context/AuthContext";
 
 export default function History() {
   const { user } = useContext(AuthContext);

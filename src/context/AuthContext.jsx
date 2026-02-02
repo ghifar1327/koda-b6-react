@@ -2,7 +2,7 @@ import React, { createContext, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStotage";
 import { useNavigate } from "react-router";
 
-export const AuthContext = createContext(null);
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const adminAccount = {
@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
     if (users.length === 0) {
       setUsers([adminAccount]);
     }
-  }, []);
+  }, [users]);
   function login(data) {
     const user = users.find(
       (user) => user.email === data.email && user.password === data.password,
@@ -52,3 +52,4 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+export default AuthContext

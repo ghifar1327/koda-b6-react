@@ -7,7 +7,7 @@ import {
   User,
 } from "lucide-react";
 import { useParams } from "react-router";
-import { AuthContext } from "../context/AuthContext";
+import  AuthContext  from "../context/AuthContext";
 import { useContext } from "react";
 
 export default function Order() {

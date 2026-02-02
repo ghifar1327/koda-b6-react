@@ -3,7 +3,7 @@ import { Button } from "../common/Button";
 import MobileMenu from "./MobileMenu";
 import { useContext, useState } from "react";
 import { Link, useLocation } from "react-router";
-import { AuthContext } from "../../context/AuthContext";
+import  AuthContext  from "../../context/AuthContext";
 
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
