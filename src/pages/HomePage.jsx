@@ -1,24 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useContext }from "react";
 import { Button } from "../components/common/Button";
 import Message from "../components/feature/Message";
 import Card from "../components/product/Card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import FetchContext from "../context/FetchContex";
 
 
 export default function HomePage() {
-  const [products , setProducts] = useState([])
-  useEffect(()=>{
-    (async()=>{
-        const res = await fetch("https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json")
-        try{
-            if(!res) throw new Error("faild to fetch")
-              const data = await res.json()
-              setProducts(data)
-        }catch(err){
-          console.error(err)
-        }
-    })()
-  })
+  const [products ] = useContext(FetchContext)
+  // console.log(products)
   return (
     <>
       <hero className={"flex flex-col-reverse md:flex-row md:h-auto h-screen"}>
@@ -133,7 +123,7 @@ export default function HomePage() {
         </article>
         <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-5 md:gap-3">
           {products.slice(0,4).map((item)=>{
-            return <Card id={item.productId} name={item.productName} image={item.images[0]} description={item.description} rating={item.rating} price={item.price} discount={item.discountPercent}/>
+            return <Card id={item.productId} name={item.productName} image={item?.images[0]} description={item.description} rating={item.rating} price={item.price} discount={item.discountPercent}/>
           })} 
         </figure>
         <article className="flex-col flex items-center text-center px-[5%] gap-5 lg:gap-8  bg-[#F8F8F8] py-10">
