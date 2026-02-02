@@ -55,8 +55,13 @@ export default function History() {
               </div>
             </section>
           </form>
-          {user.history.slice(0, 4).map((item) => (
-            <section
+          {user.history.slice(0, 4).map((item) => {
+            const date = item.create_at ? new Date(item.create_at).toLocaleDateString("id-ID", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  }) : "-";
+             return (<section
               key={item.id}
               className="flex p-5 md:p-2 w-full gap-3 h-auto bg-[#E8E8E899]"
             >
@@ -85,9 +90,9 @@ export default function History() {
                       </p>
                     </div>
                     <p className="flex-1/2 flex items-center font-semibold">
-                      24 January 2023
+                      {date}
                     </p>
-                  </div>
+                  </div>  
                 </section>
                 <section className=" flex w-full xl:pl-[8%]">
                   <div className="flex-1/2 flex flex-col">
@@ -123,7 +128,7 @@ export default function History() {
                 </div>
               </div>
             </section>
-          ))}
+            )})}
 
           <section className="hidden md:flex justify-center">
             <div className="flex gap-5">
