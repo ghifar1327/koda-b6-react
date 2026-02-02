@@ -6,7 +6,7 @@ import Input from "../components/common/Input";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
-import { InvoiceContext } from "../context/InvoiceContext";
+import  InvoiceContext  from "../context/InvoiceContext";
 
 export default function DetailProduct() {
   const { id, name } = useParams();

@@ -1,13 +1,12 @@
 import { createContext } from "react";
 import useLocalStorage from "../hooks/useLocalStotage";
-import { set } from "react-hook-form";
 
-export const InvoiceContext = createContext(null);
+ const InvoiceContext = createContext(null);
 
-export default function InvoiceProvider({ children }) {
+export function InvoiceProvider({ children }) {
   // const [history , setHistory]= useState([])
   const [user, setuser] = useLocalStorage("user", null);
-  const [users, setUsers] = useLocalStorage("users", []);
+  const [_ , setUsers] = useLocalStorage("users", []);
   // console.log(user)
   // console.log(users)
   const [cart, setCart] = useLocalStorage("cart", []);
@@ -71,3 +70,4 @@ export default function InvoiceProvider({ children }) {
     </InvoiceContext.Provider>
   );
 }
+export default InvoiceContext
