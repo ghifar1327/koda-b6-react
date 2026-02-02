@@ -13,13 +13,11 @@ import { useContext } from "react";
 export default function Order() {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
-  console.log(id);
   const render = user?.history.find((item) => item.id === Number(id)) || [];
-  // console.log(render);
   return (
     <>
       <h1 className="text-3xl">
-        Order <span className="font-bold">#12354-09893</span>
+        Order <span className="font-bold">#{id}</span>
       </h1>
       <p className="text-[#4F5665]">21 March 2023 at 10:30 AM</p>
       <div className="flex flex-col gap-10 md:gap-10 md:flex-row w-full">
