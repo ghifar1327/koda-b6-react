@@ -35,6 +35,7 @@ export default function Card({
             </div>
           </section>
           <section className="flex flex-col gap-2">
+            <span className="text-xs text-red-600">Discount {discount}%</span>
             <div className="flex gap-1 md-gap-2 lg:gap-5 items-center">
               <p
                 className={`${discount ? "line-through text-red-500 text-sm md:text-xs lg:text-lg xl-xl" : "text-xl md:text-sm lg:text-xl xl-2xl font-semibold text-primary"}`}
@@ -42,8 +43,8 @@ export default function Card({
                 IDR {price}
               </p>
               {discount && (
-                <p className="text-lg md:text-sm lg:text-xl xl-2xl font-semibold text-primary">
-                  IDR {price -(price *( discount / 100))} <span className="text-gray-300">{discount}%</span>
+                <p className="text-lg md:text-sm flex gap-2 lg:text-xl xl-2xl font-semibold text-primary">
+                  IDR {price -(price *( discount / 100))}
                 </p>
               )}
             </div>
