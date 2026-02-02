@@ -152,7 +152,7 @@ export default function DetailProduct() {
                 type={"radio"}
                 id={"regular"}
                 name={"cup"}
-                value={"regular"}
+                value={"Regular"}
                 {...register("size", { required: true })}
               >
                 Regular
@@ -161,7 +161,7 @@ export default function DetailProduct() {
                 type={"radio"}
                 id={"medium"}
                 name={"cup"}
-                value={"medium"}
+                value={"Medium"}
                 {...register("size", { required: true })}
               >
                 Medium
@@ -170,7 +170,7 @@ export default function DetailProduct() {
                 type={"radio"}
                 id={"large"}
                 name={"cup"}
-                value={"large"}
+                value={"Large"}
                 {...register("size", { required: true })}
               >
                 Large
@@ -184,7 +184,7 @@ export default function DetailProduct() {
                 type={"radio"}
                 id={"hot"}
                 name={"hot/ice"}
-                value={"hot"}
+                value={"Hot"}
                 {...register("hotIce", { required: true })}
               >
                 Hot
@@ -193,7 +193,7 @@ export default function DetailProduct() {
                 type={"radio"}
                 id={"ice"}
                 name={"hot/ice"}
-                value={"ice"}
+                value={"Ice"}
                 {...register("hotIce", { required: true })}
               >
                 Ice
