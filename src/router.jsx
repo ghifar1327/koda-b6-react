@@ -1,8 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./components/layouts/MainLayout";
 import HomePage from "./pages/HomePage";
-import ProductPage from "./pages/ProductPage";
-import DetailProduct from "./pages/DetailProduct";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ForgotPwd from "./pages/ForgotPwd";
@@ -12,6 +10,8 @@ import History from "./pages/History";
 import Order from "./pages/Order";
 import Profile from "./pages/Profile";
 import DetailLayout from "./components/layouts/DetailLayout";
+import Product from "./pages/Product";
+import ProductsPage from "./pages/ProductsPage";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -20,13 +20,13 @@ export default function Router() {
       element: <MainLayout />,
       children: [
         { index: true, element: <HomePage /> },
-        { path: "product", element: <ProductPage /> },
+        { path: "product", element: <ProductsPage /> },
       ],
     },
     {
       element: <DetailLayout/>,
       children:[
-        { path: "detail/:id/:name", element: <DetailProduct /> },
+        { path: "detail/:id/:name", element: <Product /> },
         {path: "payment", element: <Payment/>},
         {path: "history", element : <History/>},
         {path: "order/:id", element: <Order/>},

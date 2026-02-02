@@ -8,7 +8,7 @@ import  AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import  InvoiceContext  from "../context/InvoiceContext";
 
-export default function DetailProduct() {
+export default function Product() {
   const { id, name } = useParams();
   const [count, setCount] = useState(1);
   const [products, setProducts] = useState([]);
@@ -18,9 +18,7 @@ export default function DetailProduct() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json",
-      );
+      const res = await fetch("https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json");
       try {
         if (!res) throw new Error("faild to fetch");
         const data = await res.json();

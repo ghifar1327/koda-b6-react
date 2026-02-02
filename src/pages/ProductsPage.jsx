@@ -7,7 +7,7 @@ import { useState } from "react";
 import Filter from "../components/feature/Filter";
 import products from "../../products.json";
 
-export default function ProductPage() {
+export default function ProductsPage() {
   const [toggle, setToggle] = useState(false);
 
   console.log(products);
