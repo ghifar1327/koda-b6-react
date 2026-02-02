@@ -6,7 +6,7 @@
     "description": "Flaky croissant filled with rich melted chocolate.",
     "price": 18000,
     "rating": 4.7,
-    "discountPercent": 30,
+    "discountPercent": 0,
     "images": [
       "https://images.pexels.com/photos/3026806/pexels-photo-3026806.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?w=800&h=800&fit=crop",
