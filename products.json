@@ -2,136 +2,288 @@
   {
     "productId": 1,
     "productName": "Chocolate Croissant",
+    "category": "foods",
+    "description": "Flaky croissant filled with rich melted chocolate.",
+    "price": 18000,
+    "rating": 4.7,
+    "discountPercent": 30,
     "images": [
       "https://images.pexels.com/photos/3026806/pexels-photo-3026806.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?w=800&h=800&fit=crop",
-      "https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?w=800&h=800&fit=crop",
-      "https://images.pexels.com/photos/1860206/pexels-photo-1860206.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Flaky croissant filled with rich melted chocolate.",
-    "category": "foods",
-    "rating": 4.7,
-    "price": 18000,
-    "discountPercent": 30
+      "https://images.pexels.com/photos/1860206/pexels-photo-1860206.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?w=800&h=800&fit=crop"
+    ]
   },
   {
     "productId": 2,
     "productName": "Cheese Toast",
+    "category": "foods",
+    "description": "Crispy toasted bread topped with melted cheese.",
+    "price": 15000,
+    "rating": 4.5,
+    "discountPercent": 25,
     "images": [
       "https://images.pexels.com/photos/4109996/pexels-photo-4109996.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/4552046/pexels-photo-4552046.jpeg?w=800&h=800&fit=crop",
-      "https://images.pexels.com/photos/4552055/pexels-photo-4552055.jpeg?w=800&h=800&fit=crop",
-      "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Crispy toasted bread topped with melted cheese.",
-    "category": "foods",
-    "rating": 4.5,
-    "price": 15000,
-    "discountPercent": 25
+      "https://images.pexels.com/photos/4552055/pexels-photo-4552055.jpeg?w=800&h=800&fit=crop"
+    ]
   },
   {
     "productId": 3,
     "productName": "French Fries",
+    "category": "foods",
+    "description": "Golden crispy fries served hot and fresh.",
+    "price": 17000,
+    "rating": 4.6,
+    "discountPercent": 40,
     "images": [
       "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/1893556/pexels-photo-1893556.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Golden crispy fries served hot and fresh.",
-    "category": "foods",
-    "rating": 4.6,
-    "price": 17000,
-    "discountPercent": 40
+    ]
   },
   {
     "productId": 4,
+    "productName": "Beef Burger",
+    "category": "foods",
+    "description": "Juicy beef burger with cheese and special sauce.",
+    "price": 30000,
+    "rating": 4.8,
+    "discountPercent": 15,
+    "images": [
+      "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/2983099/pexels-photo-2983099.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/750073/pexels-photo-750073.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/2983100/pexels-photo-2983100.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+  {
+    "productId": 5,
+    "productName": "Chicken Sandwich",
+    "category": "foods",
+    "description": "Grilled chicken sandwich with fresh vegetables.",
+    "price": 26000,
+    "rating": 4.6,
+    "discountPercent": 20,
+    "images": [
+      "https://images.pexels.com/photos/1600711/pexels-photo-1600711.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/2983099/pexels-photo-2983099.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+  {
+    "productId": 6,
+    "productName": "Spaghetti Bolognese",
+    "category": "foods",
+    "description": "Italian spaghetti with rich beef bolognese sauce.",
+    "price": 28000,
+    "rating": 4.7,
+    "discountPercent": 18,
+    "images": [
+      "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1487511/pexels-photo-1487511.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1527603/pexels-photo-1527603.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+  {
+    "productId": 7,
+    "productName": "Fried Rice",
+    "category": "foods",
+    "description": "Savory fried rice with vegetables and egg.",
+    "price": 22000,
+    "rating": 4.6,
+    "discountPercent": 20,
+    "images": [
+      "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1109197/pexels-photo-1109197.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1059905/pexels-photo-1059905.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1059874/pexels-photo-1059874.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+  {
+    "productId": 8,
+    "productName": "Caesar Salad",
+    "category": "foods",
+    "description": "Fresh romaine lettuce with creamy Caesar dressing.",
+    "price": 24000,
+    "rating": 4.5,
+    "discountPercent": 10,
+    "images": [
+      "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1213710/pexels-photo-1213710.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1640771/pexels-photo-1640771.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+  {
+    "productId": 9,
+    "productName": "Pancake Honey",
+    "category": "foods",
+    "description": "Soft pancakes served with honey and butter.",
+    "price": 21000,
+    "rating": 4.6,
+    "discountPercent": 15,
+    "images": [
+      "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/3764649/pexels-photo-3764649.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/3764645/pexels-photo-3764645.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+
+  {
+    "productId": 10,
     "productName": "Cappuccino",
+    "category": "coffee",
+    "description": "Classic Italian coffee with espresso and milk foam.",
+    "price": 22000,
+    "rating": 4.8,
+    "discountPercent": 20,
     "images": [
       "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Classic Italian coffee with rich espresso and milk foam.",
-    "category": "coffee",
-    "rating": 4.8,
-    "price": 22000,
-    "discountPercent": 20
+    ]
   },
   {
-    "productId": 5,
+    "productId": 11,
     "productName": "Latte Coffee",
+    "category": "coffee",
+    "description": "Smooth espresso mixed with steamed milk.",
+    "price": 24000,
+    "rating": 4.7,
+    "discountPercent": 35,
     "images": [
       "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/302897/pexels-photo-302897.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/302902/pexels-photo-302902.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Smooth espresso mixed with steamed milk.",
-    "category": "coffee",
-    "rating": 4.7,
-    "price": 24000,
-    "discountPercent": 35
+    ]
   },
   {
-    "productId": 6,
+    "productId": 12,
     "productName": "Americano",
+    "category": "coffee",
+    "description": "Strong espresso diluted with hot water.",
+    "price": 20000,
+    "rating": 4.4,
+    "discountPercent": 50,
     "images": [
       "https://images.pexels.com/photos/585753/pexels-photo-585753.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Strong espresso diluted with hot water.",
-    "category": "coffee",
-    "rating": 4.4,
-    "price": 20000,
-    "discountPercent": 50
+    ]
   },
   {
-    "productId": 7,
+    "productId": 13,
+    "productName": "Espresso",
+    "category": "coffee",
+    "description": "Pure concentrated coffee with bold flavor.",
+    "price": 18000,
+    "rating": 4.6,
+    "discountPercent": 10,
+    "images": [
+      "https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+  {
+    "productId": 14,
+    "productName": "Mocha Coffee",
+    "category": "coffee",
+    "description": "Espresso combined with chocolate and milk.",
+    "price": 26000,
+    "rating": 4.7,
+    "discountPercent": 25,
+    "images": [
+      "https://images.pexels.com/photos/302902/pexels-photo-302902.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/302897/pexels-photo-302897.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+
+  {
+    "productId": 15,
     "productName": "Iced Lemon Tea",
+    "category": "non-coffee",
+    "description": "Refreshing iced tea with fresh lemon flavor.",
+    "price": 18000,
+    "rating": 4.6,
+    "discountPercent": 45,
     "images": [
       "https://images.pexels.com/photos/1417945/pexels-photo-1417945.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/1304540/pexels-photo-1304540.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/109275/pexels-photo-109275.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Refreshing iced tea with fresh lemon flavor.",
-    "category": "non-coffee",
-    "rating": 4.6,
-    "price": 18000,
-    "discountPercent": 45
+    ]
   },
   {
-    "productId": 8,
+    "productId": 16,
     "productName": "Chocolate Milk",
+    "category": "non-coffee",
+    "description": "Cold milk blended with rich chocolate.",
+    "price": 20000,
+    "rating": 4.8,
+    "discountPercent": 30,
     "images": [
       "https://images.pexels.com/photos/6542789/pexels-photo-6542789.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/5946970/pexels-photo-5946970.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/4790063/pexels-photo-4790063.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/6542766/pexels-photo-6542766.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Cold milk blended with rich chocolate.",
-    "category": "non-coffee",
-    "rating": 4.8,
-    "price": 20000,
-    "discountPercent": 30
+    ]
   },
   {
-    "productId": 9,
+    "productId": 17,
     "productName": "Orange Juice",
+    "category": "non-coffee",
+    "description": "Freshly squeezed orange juice rich in vitamin C.",
+    "price": 19000,
+    "rating": 4.9,
+    "discountPercent": 25,
     "images": [
       "https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/1414132/pexels-photo-1414132.jpeg?w=800&h=800&fit=crop",
       "https://images.pexels.com/photos/2090900/pexels-photo-2090900.jpeg?w=800&h=800&fit=crop"
-    ],
-    "description": "Freshly squeezed orange juice, rich in vitamin C.",
+    ]
+  },
+  {
+    "productId": 18,
+    "productName": "Strawberry Smoothie",
     "category": "non-coffee",
-    "rating": 4.9,
-    "price": 19000,
-    "discountPercent": 25
+    "description": "Fresh strawberry smoothie with creamy texture.",
+    "price": 23000,
+    "rating": 4.7,
+    "discountPercent": 20,
+    "images": [
+      "https://images.pexels.com/photos/434295/pexels-photo-434295.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/616833/pexels-photo-616833.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/5946080/pexels-photo-5946080.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/6542877/pexels-photo-6542877.jpeg?w=800&h=800&fit=crop"
+    ]
+  },
+  {
+    "productId": 19,
+    "productName": "Mineral Water",
+    "category": "non-coffee",
+    "description": "Fresh and pure mineral water.",
+    "price": 10000,
+    "rating": 4.5,
+    "discountPercent": 0,
+    "images": [
+      "https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?w=800&h=800&fit=crop",
+      "https://images.pexels.com/photos/136020/pexels-photo-136020.jpeg?w=800&h=800&fit=crop"
+    ]
   }
 ]
