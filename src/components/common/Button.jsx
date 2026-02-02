@@ -1,3 +1,23 @@
+/**
+ * Reusable Button component
+ *
+ * @component
+ * @param {Object} props - Button props
+ * @param {boolean} [props.orange=false] - If true, button will use orange primary background
+ * @param {string} [props.src] - Image source for icon inside button
+ * @param {string} [props.alt] - Alt text for icon image
+ * @param {boolean} [props.shadow=false] - Adds shadow and subtle border to button
+ * @param {React.ReactNode} props.children - Button label or content
+ * @param {string} [props.size] - Tailwind classes for width, padding, and gap
+ * @param {string} [props.border] - Tailwind border classes
+ * @param {string} [props.iconSize] - Tailwind classes for icon size
+ * @param {string} [props.radius] - Tailwind classes for border radius
+ * @param {"button" | "submit" | "reset"} [props.type="button"] - HTML button type
+ * @param {Object} rest - Additional props passed to button element (onClick, disabled, etc.)
+ *
+ * @returns {JSX.Element} Rendered button component
+ */
+
 export function Button({
   orange = false,
   src,
