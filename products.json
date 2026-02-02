@@ -9,7 +9,7 @@
       "https://images.pexels.com/photos/1860206/pexels-photo-1860206.jpeg?w=800&h=800&fit=crop"
     ],
     "description": "Flaky croissant filled with rich melted chocolate.",
-    "category": "snack",
+    "category": "foods",
     "rating": 4.7,
     "price": 18000,
     "discountPercent": 30
@@ -24,7 +24,7 @@
       "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=800&h=800&fit=crop"
     ],
     "description": "Crispy toasted bread topped with melted cheese.",
-    "category": "snack",
+    "category": "foods",
     "rating": 4.5,
     "price": 15000,
     "discountPercent": 25
@@ -39,7 +39,7 @@
       "https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?w=800&h=800&fit=crop"
     ],
     "description": "Golden crispy fries served hot and fresh.",
-    "category": "snack",
+    "category": "foods",
     "rating": 4.6,
     "price": 17000,
     "discountPercent": 40
