@@ -1,6 +1,6 @@
 import { Button } from "../common/Button";
 import { ShoppingCart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Card({
   id,
@@ -11,7 +11,7 @@ export default function Card({
   discount,
   rating,
 }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <figure key={id} className="col-span-1">
@@ -19,9 +19,6 @@ export default function Card({
         <img src={image} alt={name} className="w-full rounded" />
         <div className="absolute inset-0 opacity-0 bg-black/60 group-hover:opacity-100 rounded  transition-all duration-500 ease-in-out">
           <Link to={`/detail/${id}/${name}`} className="w-full h-full flex justify-center items-center "><p className="text-white border border-white p-2 px-5 hover:bg-white hover:text-black rounded-md  transition-all duration-300 ease-in-out">Detail</p></Link>
-          {/* <Button onClick={() => navigate(`/product/detail/${id}${encodeURIComponent(name)}`)}> */}
-            {/* Detail
-          </Button> */}
         </div>
       </div>
       <section className="md:p-3">
@@ -53,6 +50,7 @@ export default function Card({
             <div className="flex flex-col md:flex-row gap-3">
               <Button
                 orange
+                 onClick={() => navigate(`/detail/${id}/${name}`)}
                 size={
                   "p-1 text-xl md:p-0 xl:p-1 md:text-xs xl:text-xl flex-8/3"
                 }
@@ -60,9 +58,9 @@ export default function Card({
                 Buy
               </Button>
               <Button
+                onClick={() => navigate(`/detail/${id}/${name}`)}
                 border={"border border-primary"}
-                size={"p-2 md:p-1 w-full"}
-              >
+                size={"p-2 md:p-1 w-full"}>
                 <ShoppingCart size={20} color={"#FF8906"} />
               </Button>
             </div>

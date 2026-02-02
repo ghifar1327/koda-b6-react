@@ -202,7 +202,7 @@ export default function DetailProduct() {
           </section>
           <section className="flex gap-5 md:gap-3 text-md md:text-xs lg:text-xl mt-10 md:mt-5 lg:mt-10">
             <Link to={user ? "/payment" : "/login"} className="w-full">
-              <Button orange border={"border-2 border-primary"}>
+              <Button onClick={""} orange border={"border-2 border-primary"}>
                 Buy
               </Button>
             </Link>
