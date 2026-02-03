@@ -30,7 +30,7 @@ export default function Header() {
         <Link to="">
           <Search size={26} />
         </Link>
-        <Link to="/payment">
+        <Link to={`${user ? "/payment": "/login"}`}>
           <ShoppingCart size={26} />
         </Link>
         <Button onClick={toogleButton} size={"flex md:hidden"}>
