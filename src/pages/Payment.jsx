@@ -29,8 +29,8 @@ export default function Payment() {
     }));
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
+
     if (!form.email || !form.fullName || !delivery) return;
     
     const data = {
@@ -43,7 +43,7 @@ export default function Payment() {
       orders: cart,
       create_at: Date.now()
     };
-    // console.log(data)
+    console.log(data)
     setHistory(data);
   }
   return (
@@ -111,11 +111,11 @@ export default function Payment() {
           <p>Sub Total</p>
           <p>Idr. {grandTotal}</p>
         </div>
-        <div className="font-normal">
-          <Button onClick={handleSubmit} orange>
+        <form onSubmit={handleSubmit} className="font-normal">
+          <Button type="submit" orange>
             Checkout
           </Button>
-        </div>
+        </form>
         <p className="text-gray-400 font-normal text-lg">We Accept</p>
         <div className="flex justify-between items-center">
           <img src="/eWallet/bri.svg" alt="BRI" className="w-[10%]" />
