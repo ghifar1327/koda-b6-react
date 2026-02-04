@@ -14,12 +14,19 @@ export default function Order() {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const render = user?.history.find((item) => item.id === Number(id)) || [];
+  const date = render.create_at ? new Date(render.create_at).toLocaleDateString("en-ID", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  }) : "-";
   return (
     <>
       <h1 className="text-3xl">
         Order <span className="font-bold">#{id}</span>
       </h1>
-      <p className="text-[#4F5665]">21 March 2023 at 10:30 AM</p>
+      <p className="text-[#4F5665] text-2xl">{date}</p>
       <div className="flex flex-col gap-10 md:gap-10 md:flex-row w-full">
         <section className="flex-1/2">
           <h2 className="text-xl font-bold mb-2">Order Information</h2>
