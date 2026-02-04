@@ -219,11 +219,11 @@ export default function Product() {
             <Card
               id={item.id}
               name={item.name}
-              image={item.image}
+              image={item.images[0]}
               description={item.description}
               rating={item.rating}
               price={item.price}
-              discount={item.discount}
+              discount={item.discountPercent}
             />
           );
         })}
