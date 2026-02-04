@@ -43,7 +43,6 @@ export default function Payment() {
       orders: cart,
       create_at: Date.now()
     };
-    console.log(data)
     setHistory(data);
   }
   return (

@@ -18,7 +18,6 @@ export  function FetchProvider({children}) {
             }
         })()
     },[])
-  
     return (
     <FetchContext.Provider value={[products]}>
         {children}
