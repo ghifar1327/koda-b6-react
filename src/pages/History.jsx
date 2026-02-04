@@ -55,7 +55,7 @@ export default function History() {
               </div>
             </section>
           </form>
-          {user.history.slice(0, 4).map((item) => {
+          {user.history.slice(0, 4).reverse().map((item) => {
             const date = item.create_at ? new Date(item.create_at).toLocaleDateString("id-ID", {
                     day: "numeric",
                     month: "long",
