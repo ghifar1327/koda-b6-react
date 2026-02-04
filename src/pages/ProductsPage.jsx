@@ -8,8 +8,17 @@ import Filter from "../components/feature/Filter";
 import FetchContext from "../context/FetchContex";
 
 export default function ProductsPage() {
-  const [products] = useContext(FetchContext)
+  const [products] = useContext(FetchContext);
   const [toggle, setToggle] = useState(false);
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 6;
+  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentProducts = products.slice(startIndex, endIndex);
+
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);
@@ -23,7 +32,7 @@ export default function ProductsPage() {
         </h1>
       </div>
       <section>
-        <form className="flex items-center border-b-[1px] border-gray-400 md:hidden gap-3 h-fit p-[5%]">
+        <form className="flex items-center border-b border-gray-400 md:hidden gap-3 h-fit p-[5%]">
           <Input size={"p-2 gap-2 flex"} placeholder={"Find Product"}>
             <Search size={24} />
           </Input>
@@ -102,7 +111,7 @@ export default function ProductsPage() {
           <Filter />
         </div>
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg-gap5">
-          {products.slice(0, 6).map((item) => {
+          {currentProducts.map((item) => {
             return (
               <Card
                 id={item.productId}
@@ -117,13 +126,25 @@ export default function ProductsPage() {
           })}
         </div>
       </section>
-      <section className="flex justify-center">
-        <div className="flex gap-5">
-          <Button orange size={"p-2 w-10"} radius={"rounded-full"}>1</Button>
-          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"}>2</Button>
-          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"}>3</Button>
-          <Button size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"} radius={"rounded-full"} >4</Button>
-          <Button orange size={"p-2 w-fit"} radius={"rounded-full"}><ArrowRight color={"#FFFFFF"} /></Button>
+      <section>
+        <div className="flex justify-center mt-10 gap-3 pb-10 pl-30">
+          {Array.from({ length: totalPages }).map((_, index) => {
+            const page = index + 1;
+            return (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`p-2 w-10 rounded-full ${
+                  currentPage === page ? "bg-primary text-white" : "bg-gray-200"
+                }`}
+              >
+                {page}
+              </button>
+            );
+          })}
+          <Button orange size={"p-2 w-fit"} radius={"rounded-full"}>
+            <ArrowRight color={"#FFFFFF"} />
+          </Button>
         </div>
       </section>
       <div
