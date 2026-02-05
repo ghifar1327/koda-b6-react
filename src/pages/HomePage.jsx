@@ -1,13 +1,12 @@
-import { useContext }from "react";
+import { useContext } from "react";
 import { Button } from "../components/common/Button";
 import Message from "../components/feature/Message";
 import Card from "../components/product/Card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import FetchContext from "../context/FetchContex";
 
-
 export default function HomePage() {
-  const [products ] = useContext(FetchContext)
+  const [products] = useContext(FetchContext);
   // console.log(products)
   return (
     <>
@@ -52,7 +51,7 @@ export default function HomePage() {
           <img
             src="/retangle1.png"
             alt="coffie"
-            className="w-full h-[100%] object-cover"
+            className="w-full h-full object-cover"
           />
         </section>
         <Message />
@@ -122,9 +121,19 @@ export default function HomePage() {
           </p>
         </article>
         <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-5 md:gap-3">
-          {products.slice(0,4).map((item)=>{
-            return <Card id={item.productId} name={item.productName} image={item?.images[0]} description={item.description} rating={item.rating} price={item.price} discount={item.discountPercent}/>
-          })} 
+          {products.slice(0, 4).map((item) => {
+            return (
+              <Card
+                id={item.productId}
+                name={item.productName}
+                image={item?.images[0]}
+                description={item.description}
+                rating={item.rating}
+                price={item.price}
+                discount={item.discountPercent}
+              />
+            );
+          })}
         </figure>
         <article className="flex-col flex items-center text-center px-[5%] gap-5 lg:gap-8  bg-[#F8F8F8] py-10">
           <h1 className="text-4xl md:text-3xl lg:text-5xl ">
@@ -148,16 +157,35 @@ export default function HomePage() {
             <p className="text-xl md:text-sm lg:text-xl">TESTIMONIAL</p>
             <div className="flex gap-3">
               <div className="h-full w-[1%] bg-primary "></div>
-              <p className="text-5xl md:text-2xl lg:text-3xl xl:text-5xl text-white">Viezh Robert</p>
+              <p className="text-5xl md:text-2xl lg:text-3xl xl:text-5xl text-white">
+                Viezh Robert
+              </p>
             </div>
-            <p className="text-xl md:text-sm lg:text-xl xl:text-xl text-primary">Manager Coffe Shop</p>
-            <p className="text-xl md:text-sm lg:text-xl xl:text-xl text-white">“Wow... I am very happy to spend my whole day here. the Wi-fi is good, and the coffee and meals tho. I like it here!! Very recommended!</p>
-            <img src="/rating2.png" alt="rating" className="w-[40%]"/>
+            <p className="text-xl md:text-sm lg:text-xl xl:text-xl text-primary">
+              Manager Coffe Shop
+            </p>
+            <p className="text-xl md:text-sm lg:text-xl xl:text-xl text-white">
+              “Wow... I am very happy to spend my whole day here. the Wi-fi is
+              good, and the coffee and meals tho. I like it here!! Very
+              recommended!
+            </p>
+            <img src="/rating2.png" alt="rating" className="w-[40%]" />
             <div className="flex gap-5">
-              <Button size={"w-fit bg-white p-3 md:p-2 xl:p-3"} radius={"rounded-full"}><ArrowLeft size={22} /></Button>
-              <Button orange size={"w-fit p-3 md:p-2 xl:p-3"} radius={"rounded-full"}><ArrowRight size={22}/></Button>
+              <Button
+                size={"w-fit bg-white p-3 md:p-2 xl:p-3"}
+                radius={"rounded-full"}
+              >
+                <ArrowLeft size={22} />
+              </Button>
+              <Button
+                orange
+                size={"w-fit p-3 md:p-2 xl:p-3"}
+                radius={"rounded-full"}
+              >
+                <ArrowRight size={22} />
+              </Button>
             </div>
-            <img src="/slider.png" alt="" className="w-[13%]"/>
+            <img src="/slider.png" alt="" className="w-[13%]" />
           </section>
         </article>
       </main>

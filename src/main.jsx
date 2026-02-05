@@ -1,16 +1,15 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./global.css";
-import Router from "./Router.jsx";
 import { InvoiceProvider } from "./context/InvoiceContext.jsx";
 import { FetchProvider } from "./context/FetchContex.jsx";
+import Router from "./Router.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode>
     <FetchProvider>
       <InvoiceProvider>
-        <Router />
+        <Router/>
       </InvoiceProvider>
     </FetchProvider>
-  </StrictMode>,
+  // </StrictMode>,
 );

@@ -60,20 +60,20 @@ function action(form) {
           <KeyRoundIcon size={18} />
         </Input>
         <span className="text-red-500">{errors.password?.message}</span>
-        <div className="text-[#FF8906] flex justify-end">
+        <div className="text-primary flex justify-end">
           <Link to="/forgotPassword">Forgot Password?</Link>
         </div>
         <Button orange>Login</Button>
       </form>
       <div className="flex justify-center">
         <p>
-          Not Have An Account? <span className="text-[#FF8906]"><Link to="/register">Register</Link></span>
+          Not Have An Account? <span className="text-primary"><Link to="/register">Register</Link></span>
         </p>
       </div>
       <div className="flex justify-between gap-20 items-center text-[#AAAAAA]">
-        <div className="h-[1px] w-full bg-[#DEDEDE]"></div>
+        <div className="h-px w-full bg-[#DEDEDE]"></div>
         <p>Or</p>
-        <div className="h-[1px] w-full bg-[#DEDEDE]"></div>
+        <div className="h-px w-full bg-[#DEDEDE]"></div>
       </div>
       <div className="flex justify-center gap-5">
         <Button src={"/logos/facebook.png"} alt={"facebook"} shadow>

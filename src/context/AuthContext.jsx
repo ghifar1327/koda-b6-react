@@ -35,23 +35,23 @@ export function AuthProvider({ children }) {
       navigate("/");
       return;
     }
-    if(!user){
-      alert("email salah atau belum terdaftar")
+    if (!user) {
+      alert("email salah atau belum terdaftar");
     }
   }
 
   function registerUser(data) {
     const exists = users.some((user) => user.email === data.email);
     if (exists) {
-      alert("email sudah terdaftar")
-      return false
-    };
+      alert("email sudah terdaftar");
+      return false;
+    }
     setUsers((prev) => [...prev, data]);
     navigate("/login");
   }
   function logout() {
     setuser(null);
-    navigate("/")
+    navigate("/");
   }
 
   return (
@@ -60,4 +60,4 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-export default AuthContext
+export default AuthContext;

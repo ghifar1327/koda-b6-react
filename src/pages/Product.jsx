@@ -4,9 +4,9 @@ import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";
 import { Link, useParams } from "react-router-dom";
-import  AuthContext from "../context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
-import  InvoiceContext  from "../context/InvoiceContext";
+import InvoiceContext from "../context/InvoiceContext";
 import FetchContext from "../context/FetchContex";
 
 export default function Product() {
@@ -14,9 +14,16 @@ export default function Product() {
   const [count, setCount] = useState(1);
   const { user } = useContext(AuthContext);
   const { addCart } = useContext(InvoiceContext);
-  const [ products ] = useContext(FetchContext)
-  const render = products.find((item) => Number(item.productId) === Number(id)); 
-  console.log(render.images[0])
+  const [products] = useContext(FetchContext);
+  const render = products.find((item) => Number(item.productId) === Number(id));
+
+  // paginationnnnnnnnnnnnn
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 3;
+  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentProducts = products.slice(startIndex, endIndex);
 
   const { handleSubmit, register, reset } = useForm();
   function action(form) {
@@ -199,16 +206,16 @@ export default function Product() {
         Recomendation <span className="text-[#8E6447]">For You</span>
       </h1>
       <section className="hidden md:grid grid-cols-3 gap-5">
-        {products.slice(0, 3).map((item) => {
+        {currentProducts.map((item) => {
           return (
             <Card
               id={item.productId}
-              name={item.productName}
               image={item.images[0]}
-              description={item.description}
-              rating={item.rating}
+              name={item.productName}
               price={item.price}
+              description={item.description}
               discount={item.discountPercent}
+              rating={item.rating}
             />
           );
         })}
@@ -228,34 +235,27 @@ export default function Product() {
           );
         })}
       </section>
-      <search className="flex justify-center">
-        <div className="flex gap-5">
-          <Button orange size={"p-2 w-10"} radius={"rounded-full"}>
-            1
-          </Button>
-          <Button
-            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
-            radius={"rounded-full"}
-          >
-            2
-          </Button>
-          <Button
-            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
-            radius={"rounded-full"}
-          >
-            3
-          </Button>
-          <Button
-            size={"p-2 w-10 bg-[#E8E8E8] text-[#A0A3BD]"}
-            radius={"rounded-full"}
-          >
-            4
-          </Button>
+      <section>
+        <div className="flex justify-center mt-10 gap-3 pb-10 pl-30">
+          {Array.from({ length: totalPages }).map((_, index) => {
+            const page = index + 1;
+            return (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`p-2 w-10 rounded-full ${
+                  currentPage === page ? "bg-primary text-white" : "bg-gray-200"
+                }`}
+              >
+                {page}
+              </button>
+            );
+          })}
           <Button orange size={"p-2 w-fit"} radius={"rounded-full"}>
             <ArrowRight color={"#FFFFFF"} />
           </Button>
         </div>
-      </search>
+      </section>
     </>
   );
 }
