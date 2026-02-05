@@ -36,7 +36,7 @@ export function Button({
     <button
       type={type}
       {...rest}
-      className={`${orange && "bg-[#FF8906]"} ${shadow && "shadow-md border border-[#DEDEDE]/10"} ${size ? size : "w-full p-2 gap-5"} ${border} ${radius ? radius : "rounded-md" } flex items-center justify-center  cursor-pointer`}
+      className={`${orange && "bg-[#FF8906] border border-primary hover:bg-white"} ${shadow && "shadow-md border border-[#DEDEDE]/10"} ${size ? size : "w-full p-2 gap-5"} ${border} ${radius ? radius : "rounded-md" } flex items-center justify-center  cursor-pointer`}
     >
       {src && <img src={src} alt={alt} className={iconSize} />}
       <p className="flex items-center">{children}</p>
