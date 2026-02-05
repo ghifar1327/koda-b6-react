@@ -1,10 +1,12 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext,  useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStotage";
 import { useNavigate } from "react-router";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
+  const [error, setError] = useState(false)
+  const [IsSuccess, setIsSuccess]= useState(false)
   const adminAccount = {
     fullName: "ghifar",
     email: "admin@mail.com",
@@ -32,22 +34,25 @@ export function AuthProvider({ children }) {
         return;
       }
       setuser(user);
-      navigate("/");
+      setIsSuccess(true)
+      setError(false)
       return;
     }
     if (!user) {
-      alert("email salah atau belum terdaftar");
+      setError(!error)
     }
   }
 
   function registerUser(data) {
     const exists = users.some((user) => user.email === data.email);
     if (exists) {
-      alert("email sudah terdaftar");
-      return false;
+      setError(true)
+      setIsSuccess(false)
+      return
     }
     setUsers((prev) => [...prev, data]);
-    navigate("/login");
+    setIsSuccess(true)
+    setError(false)
   }
   function logout() {
     setuser(null);
@@ -55,7 +60,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, registerUser, logout }}>
+    <AuthContext.Provider value={{ user, login, registerUser, logout ,IsSuccess ,setIsSuccess,error, setError}}>
       {children}
     </AuthContext.Provider>
   );
