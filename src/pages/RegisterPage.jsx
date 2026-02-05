@@ -1,13 +1,14 @@
 // import { useState } from "react";
-import { KeyRound, Mail, MapPin, PhoneCall, User } from "lucide-react";
+import { KeyRound, Mail, MapPin, PhoneCall, User} from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import  AuthContext  from "../context/AuthContext";
+import Modal from "../components/feature/Modal";
 
 const schema = yup.object({
   fullName: yup.string().required("Name must be filled in"),
@@ -29,6 +30,7 @@ const schema = yup.object({
 });
 
 export default function RegisterPage() {
+  const {error ,setError ,IsSuccess} = useContext(AuthContext)
   const {
     handleSubmit,
     register,
@@ -37,12 +39,20 @@ export default function RegisterPage() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  useEffect(()=>{
+    setError(false)
+  },[])
+  useEffect(()=>{
+    if(IsSuccess){
+      setError(false)
+      reset()
+    }
+  },[IsSuccess])
   const { registerUser } = useContext(AuthContext);
   function action(form) {
     const data = { ...form,id: Date.now(), role: "user" ,history : [], create_at: new Date(), update_at:""};
     // console.log(data);
     registerUser(data);
-    reset();
   }
   return (
     <>
@@ -129,6 +139,14 @@ export default function RegisterPage() {
           Google
         </Button>
       </div>
+      <Modal success={IsSuccess} >
+          <p className="text-3xl text-gray-700">Register Successful</p>
+          <Link to="/login" className="bg-primary p-2 rounded-md w-full text-center">Continue to Login</Link>
+      </Modal>
+      <Modal error={error} onClick={()=>setError(!error)}>
+          <p className="text-2xl text-gray-700">Email Is Registered</p>
+          <Button orange onClick={()=> setError(!error)}>Try Again</Button>
+      </Modal>
     </>
   );
 }
