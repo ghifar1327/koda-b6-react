@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Button } from "../common/Button";
-import { Search, XCircle } from "lucide-react";
+import { LogOut, Search, XCircle } from "lucide-react";
 import Input from "../common/Input";
 import { Link } from "react-router";
-import  AuthContext from "../../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 
 export default function MobileMenu({ toggle, onClick }) {
   const { user, logout } = useContext(AuthContext);
@@ -27,19 +27,22 @@ export default function MobileMenu({ toggle, onClick }) {
           >
             <Search size={18} />
           </Input>
-          <p className="mt-3 ">Menu</p>
-          <div className="bg-[#FF8906] h-0.5 w-full"></div>
-          <p>Products</p>
-          <div className="bg-[#DEDEDE] h-0.5 w-full"></div>
+          <div className="w-full flex flex-col">
+            <Link to={"/profile"} className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">Profile</Link>
+            <Link to={"/"} className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">Home</Link>
+            <Link to={"/product"} className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">Product</Link>
+            <Link to="/history" className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">History</Link>
+          </div>
         </div>
         <div className="flex flex-col gap-3">
           {user ? (
-            <Button
+            <button
               onClick={logout}
-              border={"border bg-red-500 border-red-500"}
+              className="text-red-600 text-xl flex items-center gap-4 border-2 rounded-md hover:bg-red-600 hover:text-white p-1 w-full justify-center"
             >
-              Logout
-            </Button>
+              <p>Logout </p>
+              <LogOut size={17} />
+            </button>
           ) : (
             <>
               <Link
