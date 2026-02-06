@@ -2,8 +2,8 @@ import { Mail, MapPin, User, XCircle } from "lucide-react";
 import React, { useContext, useState } from "react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
-import  InvoiceContext  from "../context/InvoiceContext";
-import  AuthContext  from "../context/AuthContext";
+import InvoiceContext from "../context/InvoiceContext";
+import AuthContext from "../context/AuthContext";
 
 export default function Payment() {
   const [delivery, setDelivery] = useState("");
@@ -30,9 +30,8 @@ export default function Payment() {
   }
 
   function handleSubmit() {
-
     if (!form.email || !form.fullName || !delivery) return;
-    
+
     const data = {
       id: Date.now(),
       fullName: form.fullName,
@@ -41,7 +40,7 @@ export default function Payment() {
       delivery: delivery,
       total: subtotal,
       orders: cart,
-      create_at: Date.now()
+      create_at: Date.now(),
     };
     setHistory(data);
   }
@@ -71,7 +70,7 @@ export default function Payment() {
                       {item.productName}
                     </p>
                     <p className="text-xl xl:text-xl text-gray-400">
-                      {item.quantity}pcs | {item.size} | {item.hotIce} |{" "}
+                      {item.quantity}pcs | {item.size} | {item.temperature} |{" "}
                       {delivery}
                     </p>
                     <div className="flex items-center gap-2">

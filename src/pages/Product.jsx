@@ -32,7 +32,7 @@ export default function Product() {
       image: render.images[0],
       productName: name,
       size: form.size,
-      hotIce: form.hotIce,
+      temperature: form.hotIce,
       quantity: count,
       price: Number(render.price) * Number(count),
       total: Number(price) * Number(count),
@@ -87,10 +87,10 @@ export default function Product() {
               {render.discountPercent ? (
                 <>
                   <p className="text-xl md:text-xs lg:text-xl text-red line-through text-red-500">
-                    IDR {render.price}
+                    IDR {render.price.toLocaleString("id-ID")}
                   </p>
                   <p className="text-3xl md:text-xl text-primary">
-                    IDR {price}{" "}
+                    IDR {price.toLocaleString("id-ID")}{" "}
                     <span className="text-gray-300">
                       discout {render.discountPercent}%
                     </span>
@@ -98,7 +98,7 @@ export default function Product() {
                 </>
               ) : (
                 <p className="text-3xl md:text-xl text-primary">
-                  IDR {render.price}
+                  IDR {render.price.toLocaleString("id-ID")}
                 </p>
               )}
             </div>
