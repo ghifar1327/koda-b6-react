@@ -32,7 +32,7 @@ const Input = forwardRef(
         {type === "checkbox" || type === "radio" ? (
           <label
             htmlFor={id}
-            className={`${type === "radio" && "w-full flex-1"} group flex items-center gap-3 cursor-pointer`}
+            className={`${type === "radio" && "w-full flex-1"} group  relative z-10 flex items-center gap-3 cursor-pointer`}
           >
             <input
               ref={ref}
@@ -40,7 +40,7 @@ const Input = forwardRef(
               // name={id}
               id={id}
               {...rest}
-              className="hidden"
+              className="absolute inset-0 w-full h-full opacity-0 peer cursor-pointer"
             />
             {type === "checkbox" ? (
               <>
