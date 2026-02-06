@@ -1,24 +1,21 @@
 import { Check, X } from "lucide-react";
 
-export default function Modal({ success, error, children, ...rest }) {
-    console.log(success)
-    const isOpen = success || error;
+export default function Modal({toggle, success, error, children, ...rest }) {
+    const isOpen = success || error || toggle;
+    console.log("toggel",toggle)
+    // console.log("susess",success)
+    // console.log("error",error)
+
   return (
     <div
       {...rest}
-      className={`fixed w-full min-h-screen inset-0 z-50 flex items-start justify-center
+      className={`fixed w-full min-h-screen inset-0 z-1000 flex items-start justify-center
         bg-black/10
         transition-opacity duration-300
         ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
     >
-        {/* className={`
-        fixed inset-0 z-50 flex items-start justify-center
-        bg-black/30 backdrop-blur-sm
-        transition-opacity duration-300
-        ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}
-      `} */}
       <div
-        onClick={(e) => e.stopPropagation()}className={`
+        onClick={(e) => e.stopPropagation()} className={`
         mt-[15%]
           transform transition-all duration-500 ease-out
           bg-white rounded-xl p-6 shadow-xl
