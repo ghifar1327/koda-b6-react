@@ -5,7 +5,7 @@ import Input from "../common/Input";
 import { Link } from "react-router";
 import AuthContext from "../../context/AuthContext";
 
-export default function MobileMenu({ toggle, onClick }) {
+export default function MobileMenu({ toggle, onClick, showModal}) {
   const { user, logout } = useContext(AuthContext);
   return (
     <section
@@ -30,7 +30,8 @@ export default function MobileMenu({ toggle, onClick }) {
           <div className="w-full flex flex-col">
             <Link to={"/profile"} className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">Profile</Link>
             <Link to={"/"} className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">Home</Link>
-            <Link to={"/product"} className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">Product</Link>
+            <Link to={"/product"} className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">Products</Link>
+            <button onClick={showModal} className="border-b-3 p-2 w-full border-gray-300 text-start text-xl hover:border-primary">Cart</button>
             <Link to="/history" className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary">History</Link>
           </div>
         </div>

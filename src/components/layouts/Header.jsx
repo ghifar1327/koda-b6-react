@@ -4,26 +4,35 @@ import MobileMenu from "./MobileMenu";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from "../../context/AuthContext";
+import Modal from "../feature/Modal";
 
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
+  const [showModal , setShowModal] = useState(false)
   const location = useLocation();
   const navigate = useNavigate()
 
   useEffect(() => {
     (() => {
       setToggle(false);
+      setShowModal(false)
     })();
   }, [location.pathname]);
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);
   }
-  const handleLogout = () => {
+  function handleLogout() {
   logout();
   navigate("/");
   };
+  function buttonCart(e){
+    e.preventDefault()
+    if(user) return navigate("/payment")
+      setShowModal(!showModal)
+    }
+
   return user?.role === "admin" ? (
     <nav
       className={`w-full h-auto border-b-2 border-gray-300  flex justify-between px-[5%] p-3`}
@@ -103,12 +112,12 @@ export default function Header() {
         <Link to="">
           <Search size={26} />
         </Link>
-        <Link to={`${user ? "/payment" : "/login"}`}>
+        <button onClick={buttonCart}>
           <ShoppingCart size={26} />
-        </Link>
-        <Button onClick={toogleButton} size={"flex md:hidden"}>
+        </button>
+        <button onClick={toogleButton} className="block md:hidden">
           <MenuIcon size={26} />
-        </Button>
+        </button>
         <div className="hidden md:flex gap-5">
           {user ? (
             <div className="flex items-center gap-5">
@@ -177,7 +186,13 @@ export default function Header() {
           )}
         </div>
       </section>
-      <MobileMenu onClick={toogleButton} toggle={toggle} />
+      <MobileMenu onClick={toogleButton} toggle={toggle} showModal={buttonCart}/>
+      <Modal onClick={buttonCart} error={showModal} >
+        <div className="text-black">
+          <p className="text-xl font-semibold text-gray-600">You haven't signed in</p>
+        </div>
+        <Button orange onClick={()=> navigate("/login")}>Sign In</Button>
+      </Modal>
     </nav>
   );
 }
