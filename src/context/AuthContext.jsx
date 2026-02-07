@@ -63,6 +63,7 @@ export function AuthProvider({ children }) {
   setUser(null);
   setIsSuccess(false);
   setError(false);
+  return true
   }
 
   return (

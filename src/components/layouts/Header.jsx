@@ -19,13 +19,17 @@ export default function Header() {
       setShowModal(false)
     })();
   }, [location.pathname]);
+
+
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);
   }
-  function handleLogout() {
-  logout();
-  navigate("/");
+  async function handleLogout() {
+    const result = await logout();
+  if (result) {
+    navigate("/");
+  }
   };
   function buttonCart(e){
     e.preventDefault()

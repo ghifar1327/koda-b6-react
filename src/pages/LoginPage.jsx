@@ -57,9 +57,9 @@ export default function LoginPage() {
 
   function handleSuccess(){
     if (user.role === "admin") {
-                navigate("/admin");
-              } else {
-                navigate("/");
+        navigate("/admin");
+      } else {
+        navigate("/");
       }
   }
   return (
