@@ -1,10 +1,8 @@
-import { AuthProvider } from "../../context/AuthContext";
 import { Outlet, useLocation } from "react-router-dom";
 
 export default function AuthLayout() {
   const location = useLocation()
   return (
-    <AuthProvider>
       <main className="grid md:grid-cols-3 h-fit">
         <section className=" hidden md:flex md:col-span-1">
           <img src={`${location.pathname === "/login" ? "/auth1.png" : location.pathname === "/register"? "/auth2.png": location.pathname === "/forgotPassword" ? "/auth3.png": ""}`} alt={"Coffie Shop"} className="w-full" />
@@ -13,6 +11,5 @@ export default function AuthLayout() {
           <Outlet/>
         </section>
       </main>
-    </AuthProvider>
   );
 }

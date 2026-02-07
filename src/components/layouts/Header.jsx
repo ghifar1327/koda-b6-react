@@ -2,13 +2,14 @@ import { Icon, LogOut, MenuIcon, Search, ShoppingCart } from "lucide-react";
 import { Button } from "../common/Button";
 import MobileMenu from "./MobileMenu";
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from "../../context/AuthContext";
 
 export default function Header() {
   const { user, logout } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate()
 
   useEffect(() => {
     (() => {
@@ -19,6 +20,10 @@ export default function Header() {
     e.preventDefault();
     setToggle((prev) => !prev);
   }
+  const handleLogout = () => {
+  logout();
+  navigate("/");
+  };
   return user?.role === "admin" ? (
     <nav
       className={`w-full h-auto border-b-2 border-gray-300  flex justify-between px-[5%] p-3`}
@@ -70,7 +75,7 @@ export default function Header() {
                 </div>
               </section>
               <button
-                onClick={logout}
+                onClick={handleLogout}
                 className=" text-red-600 text-xl flex items-center gap-4 border-2 rounded-md hover:bg-red-600 hover:text-white p-1 w-full justify-center"
               >
                 <p>Logout </p>
@@ -145,7 +150,7 @@ export default function Header() {
                     </div>
                   </section>
                   <button
-                    onClick={logout}
+                    onClick={handleLogout}
                     className=" text-red-600 text-xl flex items-center gap-4 border-2 rounded-md hover:bg-red-600 hover:text-white p-1 w-full justify-center"
                   >
                     <p>Logout </p>

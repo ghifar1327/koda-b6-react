@@ -28,7 +28,13 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(scehema) });
   function action(form) {
-    login(form);
+    const result = login(form);
+    if (!result.success) return;
+    if (result.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/");
+    }
   }
   useEffect(() => {
     setIsSuccess(false);
