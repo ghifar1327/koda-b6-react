@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { KeyRound, Mail, MapPin, PhoneCall, User} from "lucide-react";
+import { KeyRound, Mail, MapPin, PhoneCall, User } from "lucide-react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import { useForm } from "react-hook-form";
@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router";
 import { useContext, useEffect } from "react";
-import  AuthContext  from "../context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import Modal from "../components/feature/Modal";
 
 const schema = yup.object({
@@ -17,7 +17,12 @@ const schema = yup.object({
     .email("invalid format format")
     .required("Email must be filled in"),
   address: yup.string().required("Address must be filled in"),
-  phone: yup.number().integer("A phone number can't include a decimal point").positive("A phone number can't start with a minus").min(8).required('A phone number is required'),
+  phone: yup
+    .number()
+    .integer("A phone number can't include a decimal point")
+    .positive("A phone number can't start with a minus")
+    .min(8)
+    .required("A phone number is required"),
   password: yup
     .string()
     .required("Password must be filled in")
@@ -30,7 +35,10 @@ const schema = yup.object({
 });
 
 export default function RegisterPage() {
-  const {error ,setError ,IsSuccess} = useContext(AuthContext)
+  // const navigate = useNavigate();
+  const { error, setError, isSuccess, setIsSuccess } = useContext(AuthContext);
+  const { registerUser } = useContext(AuthContext);
+  console.log(isSuccess);
   const {
     handleSubmit,
     register,
@@ -39,20 +47,22 @@ export default function RegisterPage() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  useEffect(()=>{
-    setError(false)
-  },[])
-  useEffect(()=>{
-    if(IsSuccess){
-      setError(false)
-      reset()
-    }
-  },[IsSuccess])
-  const { registerUser } = useContext(AuthContext);
+  useEffect(() => {
+    setError(false);
+    setIsSuccess(false)
+  }, []);
+
   function action(form) {
-    const data = { ...form,id: Date.now(), role: "user" ,history : [], create_at: new Date(), update_at:""};
-    // console.log(data);
+    const data = {
+      ...form,
+      id: Date.now(),
+      role: "user",
+      history: [],
+      create_at: new Date(),
+      update_at: "",
+    };
     registerUser(data);
+    if (isSuccess) reset()
   }
   return (
     <>
@@ -80,9 +90,25 @@ export default function RegisterPage() {
           <User size={18} />
         </Input>
         <span className="text-red-500">{errors.fullName?.message}</span>
-        <Input label="Phone" type="number" id="phone" placeholder="Enter Your Phone Number" {...register("phone")}><PhoneCall size={18}/></Input>
+        <Input
+          label="Phone"
+          type="number"
+          id="phone"
+          placeholder="Enter Your Phone Number"
+          {...register("phone")}
+        >
+          <PhoneCall size={18} />
+        </Input>
         <span className="text-red-500">{errors.phone?.message}</span>
-        <Input label={"Address"} type={"text"} id={"address"} placeholder={"Enter your Address"} {...register("address")}><MapPin size={18} /></Input>
+        <Input
+          label={"Address"}
+          type={"text"}
+          id={"address"}
+          placeholder={"Enter your Address"}
+          {...register("address")}
+        >
+          <MapPin size={18} />
+        </Input>
         <span className="text-red-500">{errors.address?.message}</span>
         <Input
           label={"Email"}
@@ -139,13 +165,21 @@ export default function RegisterPage() {
           Google
         </Button>
       </div>
-      <Modal success={IsSuccess} >
-          <p className="text-3xl text-gray-700">Register Successful</p>
-          <Link to="/login" className="bg-primary p-2 rounded-md w-full text-center">Continue to Login</Link>
+      <Modal success={isSuccess} onClick={()=> setIsSuccess(!isSuccess)}>
+        <p className="text-3xl text-gray-700">Register Successful</p>
+        <Link
+          to="/login"
+          onClick={()=> setIsSuccess(!isSuccess)}
+          className="bg-primary p-2 rounded-md w-full text-center"
+        >
+          Continue to Login
+        </Link>
       </Modal>
-      <Modal error={error} onClick={()=>setError(!error)}>
-          <p className="text-2xl text-gray-700">Email Is Registered</p>
-          <Button orange onClick={()=> setError(!error)}>Try Again</Button>
+      <Modal error={error} onClick={() => setError(!error)}>
+        <p className="text-2xl text-gray-700">Email Is Registered</p>
+        <Button orange onClick={() => setError(!error)}>
+          Try Again
+        </Button>
       </Modal>
     </>
   );

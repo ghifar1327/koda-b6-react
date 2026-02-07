@@ -120,7 +120,7 @@ export default function HomePage() {
             yours too!
           </p>
         </article>
-        <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-5 md:gap-3">
+        <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-2 md:gap-3">
           {products.slice(0, 4).map((item) => {
             return (
               <Card

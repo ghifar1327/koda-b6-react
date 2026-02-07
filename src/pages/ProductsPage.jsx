@@ -110,7 +110,7 @@ export default function ProductsPage() {
         <div className="hidden md:block w-[50%]">
           <Filter />
         </div>
-        <div className="grid grid-cols-2 gap-2 md:gap-3 lg-gap5">
+        <div className="grid grid-cols-2 gap-1 md:gap-3 lg:gap-5">
           {currentProducts.map((item) => {
             return (
               <Card

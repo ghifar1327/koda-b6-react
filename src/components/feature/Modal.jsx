@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 
 export default function Modal({toggle, success, error, children, ...rest }) {
     const isOpen = success || error || toggle;
-    console.log("toggel",toggle)
+    // console.log("toggel",toggle)
     // console.log("susess",success)
     // console.log("error",error)
 
@@ -22,12 +22,14 @@ export default function Modal({toggle, success, error, children, ...rest }) {
           ${isOpen ? "translate-y-0 opacity-100" : "-translate-y-100 opacity-0"}
         `}
       >
+        {!success &&
         <button
-          {...rest}
-          className="absolute cursor-pointer -right-2 -top-2 p-2 bg-gray-100 rounded-full"
+        {...rest}
+        className="absolute cursor-pointer -right-2 -top-2 p-2 bg-gray-100 rounded-full"
         >
           <X size={12} className="text-gray-500" />
         </button>
+        }
         <div className="w-full flex flex-col items-center gap-10">
           {error && (
             <div className="p-5 bg-red-200 rounded-full">

@@ -19,42 +19,49 @@ const scehema = yup.object({
 export default function LoginPage() {
   const navigate = useNavigate();
   const [count, setCount] = useState(5);
-  const { login, IsSuccess, setIsSuccess, error, setError } =
-    useContext(AuthContext);
+  const { user, login, isSuccess, setIsSuccess, error, setError } = useContext(AuthContext);
+  console.log(isSuccess)
   const {
     handleSubmit,
     register,
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(scehema) });
-  function action(form) {
-    const result = login(form);
-    if (!result.success) return;
-    if (result.role === "admin") {
-      navigate("/admin");
-    } else {
-      navigate("/");
-    }
-  }
   useEffect(() => {
     setIsSuccess(false);
   }, []);
   useEffect(() => {
-    if (IsSuccess) {
+    if (isSuccess) {
       setError(false);
       reset();
       const timer = setInterval(() => {
         setCount((prev) => {
           if (prev <= 1) {
             clearInterval(timer);
-            navigate("/");
-            return 0;
-          }
+            if (user.role === "admin") {
+              navigate("/admin");
+            } else {
+                navigate("/");
+              }
+              return 0;
+            }
           return prev - 1;
         });
       }, 1000);
     }
-  }, [IsSuccess]);
+  }, [isSuccess]);
+  
+  function action(form) {
+    login(form);
+  }
+
+  function handleSuccess(){
+    if (user.role === "admin") {
+                navigate("/admin");
+              } else {
+                navigate("/");
+      }
+  }
   return (
     <>
       <div>
@@ -122,10 +129,12 @@ export default function LoginPage() {
           Google
         </Button>
       </div>
-      <Modal onClick={() => navigate("/")} success={IsSuccess}>
+      <Modal onClick={handleSuccess} success={isSuccess}>
         <p className="text-3xl text-gray-700">Login Successful</p>
         <div className="flex flex-col w-full gap-2">
-          <Button orange onClick={()=> setCount(0)}>Enter</Button>
+          <Button orange onClick={() => setCount(0)}>
+            Enter
+          </Button>
           <p className="text-gray-500 text-center">Redirect in {count}s</p>
         </div>
       </Modal>
