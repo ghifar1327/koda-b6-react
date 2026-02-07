@@ -1,4 +1,7 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import MainLayout from "./components/layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -14,26 +17,35 @@ import Product from "./pages/Product";
 import ProductsPage from "./pages/ProductsPage";
 import AdminLayout from "./components/layouts/AdminLayout";
 import Dashboard from "./pages/Dashboard";
+import NotFoundPage from "./pages/NotfoundPage";
+import { ProtectedRoute, PublicRoute } from "./components/layouts/ProtectedRoute";
+
 
 export default function Router() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: 
+      <PublicRoute>
+        <MainLayout />
+      </PublicRoute>,
       children: [
         { index: true, element: <HomePage /> },
         { path: "product", element: <ProductsPage /> },
       ],
     },
     {
-      element: <DetailLayout/>,
-      children:[
+      element: (
+        <ProtectedRoute role="user">
+          <DetailLayout />
+        </ProtectedRoute>
+      ),
+      children: [
         { path: "detail/:id/:name", element: <Product /> },
-        {path: "payment", element: <Payment/>},
-        {path: "history", element : <History/>},
-        {path: "order/:id", element: <Order/>},
-        {path:"profile", element: <Profile/>}
-      ]
+        { path: "payment", element: <Payment /> },
+        { path: "history", element: <History /> },
+        { path: "order/:id", element: <Order /> },
+      ],
     },
     {
       element: <AuthLayout />,
@@ -41,18 +53,27 @@ export default function Router() {
         { path: "login", element: <LoginPage /> },
         { path: "register", element: <RegisterPage /> },
         { path: "forgotPassword", element: <ForgotPwd /> },
-      ]
+      ],
     },
     {
-      path : "/admin",
-      element: <AdminLayout/>,
-      children:[
+      path: "/admin",
+      element: (
+        <ProtectedRoute role="admin">
+          <AdminLayout />
+        </ProtectedRoute>
+      ),
+      children: [
         {
-          index : true,
-          element: <Dashboard/>
-        }
-      ]
-    }
+          index: true,
+          element: <Dashboard />,
+        },
+      ],
+    },
+    { path: "profile", element: <Profile /> },
+    {
+      path: "*",
+      element: <NotFoundPage />,
+    },
   ]);
 
   return <RouterProvider router={router} />;
