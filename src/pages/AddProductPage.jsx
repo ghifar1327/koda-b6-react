@@ -1,0 +1,58 @@
+import { useContext } from "react"
+import FetchContext from "../context/FetchContex"
+import { PenLine, Trash2 } from "lucide-react"
+
+export default function AddProductPage() {
+    const [product ] = useContext(FetchContext)
+    console.log(product)
+  return (
+    <section className="w-full mt-5 border rounded-xl border-gray-500 p-5">
+      <table className="w-full mt-5 table-fixed">
+        <thead>
+            <tr className="text-gray-500 font-normal">
+            <th className="w-[5%] py-5">No</th>
+            <th className="w-[10%] py-5">Image</th>
+            <th className="w-[15%] py-5">Product Name</th>
+            <th className="w-[10%] py-5">Price</th>
+            <th className="w-[20%] py-5">Desc</th>
+            <th className="w-[10%] py-5">Product Size</th>
+            <th className="w-[10%] py-5">Methode</th>
+            <th className="w-[5%] py-5">Stock</th>
+            <th className="w-[15%] py-5">Action</th>
+            </tr>
+        </thead>
+        <tbody className="text-center">
+          {product.map((item, index) => (
+            <tr key={item.productId} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
+              <td className="py-4">{index + 1}</td>
+              <td className="py-4">
+                <img
+                  src={item.images[0]}
+                  alt={item.productName}
+                  className="w-12 h-12 mx-auto object-cover rounded"
+                />
+              </td>
+              <td className="py-4">{item.productName}</td>
+              <td className="py-4">IDR {item.price}</td>
+              <td className="py-4 text-sm line-clamp-2">{item.description}
+              </td>
+              <td className="py-4">-</td>
+              <td className="py-4">-</td>
+              <td className="py-4">-</td>
+              <td className="py-4">
+                <div className="flex justify-center gap-2">
+                  <button className="w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
+                    <PenLine size={18} />
+                  </button>
+                  <button className="w-8 h-8 bg-red-600/30 text-red-600 flex items-center justify-center rounded-full">
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )
+}
