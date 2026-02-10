@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./components/layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -18,20 +15,25 @@ import ProductsPage from "./pages/ProductsPage";
 import AdminLayout from "./components/layouts/AdminLayout";
 import Dashboard from "./pages/Dashboard";
 import NotFoundPage from "./pages/NotfoundPage";
-import { ProtectedRoute, PublicRoute } from "./components/layouts/ProtectedRoute";
-
+import {
+  ProtectedRoute,
+  PublicRoute,
+} from "./components/layouts/ProtectedRoute";
+import AddProductPage from "./pages/AddProductPage";
 
 export default function Router() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: 
-      <PublicRoute>
-        <MainLayout />
-      </PublicRoute>,
+      element: (
+        <PublicRoute>
+          <MainLayout />
+        </PublicRoute>
+      ),
       children: [
         { index: true, element: <HomePage /> },
         { path: "product", element: <ProductsPage /> },
+        { path: "detail/:id/:name", element: <Product /> },
       ],
     },
     {
@@ -41,7 +43,6 @@ export default function Router() {
         </ProtectedRoute>
       ),
       children: [
-        { path: "detail/:id/:name", element: <Product /> },
         { path: "payment", element: <Payment /> },
         { path: "history", element: <History /> },
         { path: "order/:id", element: <Order /> },
@@ -56,7 +57,7 @@ export default function Router() {
       ],
     },
     {
-      path: "/admin",
+      path: "admin",
       element: (
         <ProtectedRoute role="admin">
           <AdminLayout />
@@ -66,6 +67,10 @@ export default function Router() {
         {
           index: true,
           element: <Dashboard />,
+        },
+        {
+          path: "products",
+          element: <AddProductPage />,
         },
       ],
     },

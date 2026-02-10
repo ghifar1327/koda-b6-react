@@ -47,7 +47,7 @@ export default function Product() {
     ? render.price - (render.price * render.discountPercent) / 100
     : render.price;
   return (
-    <>
+    <main className="p-[5%] md:px-[3%] lg:px-[10%] flex flex-col gap-10">
       <section className="flex flex-col md:flex-row gap-5 w-full">
         <figure className="flex-1/2">
           <div className="w-full">
@@ -256,6 +256,6 @@ export default function Product() {
           </Button>
         </div>
       </section>
-    </>
+    </main>
   );
 }
