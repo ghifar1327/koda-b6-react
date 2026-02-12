@@ -3,17 +3,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 
 export function ProtectedRoute({ children, role }) {
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-  // optional tapi SANGAT disarankan
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
+  
   if (role && user.role !== role) {
     return <Navigate to="/404" replace />;
   }

@@ -6,9 +6,9 @@ export default function AdminLayout() {
   return (
     <>
         <Header />
-        <main className="flex w-full px-[5%]">
+        <main className="flex w-full px-[5%] relative">
           <SideBar/>
-          <div className="p-[5%] w-full">
+          <div className="relative flex-1">
            <Outlet />
           </div>
         </main>

@@ -1,17 +1,20 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import FetchContext from "../context/FetchContex"
 import { Funnel, PenLine, Search, Trash2 } from "lucide-react"
 import { Button } from "../components/common/Button"
 import Input from "../components/common/Input"
+import AddProduct from "../components/feature/AddProduct"
 
 export default function AddProductPage() {
     const [product ] = useContext(FetchContext)
+    const [showAddProduct, setShowAddProduct] = useState(false)
     console.log(product)
   return (
     <>
+    <section className="p-[5%]">
       <h1 className="text-5xl">Product List</h1>
       <div className="flex justify-between items-end">
-        <Button size="w-fit p-2 h-fit px-3" orange>+ Add Product</Button>
+        <Button onClick={(e)=> {e.preventDefault(); setShowAddProduct(!showAddProduct)}} size="w-fit p-2 h-fit px-3" orange>+ Add Product</Button>
         <div className="flex gap-2 ">
             
             <label htmlFor="" className="flex items-end gap-3">
@@ -41,7 +44,7 @@ export default function AddProductPage() {
               </tr>
           </thead>
           <tbody className="text-center">
-            {product.map((item, index) => (
+            {product.slice(0,5).map((item, index) => (
               <tr key={item.productId} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
                 <td className="py-4">{index + 1}</td>
                 <td className="py-4">
@@ -73,6 +76,8 @@ export default function AddProductPage() {
           </tbody>
         </table>
       </section>
+    </section>
+    <AddProduct show={showAddProduct} setShow={(e)=> {e.preventDefault(); setShowAddProduct(!showAddProduct)}}/>
     </>
   )
 }
