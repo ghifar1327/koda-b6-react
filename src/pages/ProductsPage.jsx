@@ -3,21 +3,55 @@ import { Button } from "../components/common/Button";
 import { ArrowLeft, ArrowRight, Search, SlidersHorizontal } from "lucide-react";
 import Input from "../components/common/Input";
 import Card from "../components/product/Card";
-import { useContext, useState } from "react";
 import Filter from "../components/feature/Filter";
-import FetchContext from "../context/FetchContex";
+import { useSelector } from "react-redux";
+import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router";
 
 export default function ProductsPage() {
-  const [products] = useContext(FetchContext);
   const [toggle, setToggle] = useState(false);
+  const [searchParams] = useSearchParams();
+  const products = useSelector((state) => state.products.products);
+  // console.log(products)
+// ========== filter =========
+
+const filtered = useMemo(() => {
+  let result = [...products];
+
+  const name = searchParams.get("name");
+  const categories = searchParams.getAll("category");
+  const maxPrice = searchParams.get("maxPrice");
+
+  if (name) {
+    result = result.filter((item) =>
+      item.productName.toLowerCase().includes(name.toLowerCase())
+    );
+  }
+
+  if (categories.length > 0) {
+    result = result.filter((item) =>
+      categories.includes(item.category)
+    );
+  }
+
+  if (maxPrice) {
+    result = result.filter((item) =>
+      item.price <= Number(maxPrice)
+    );
+  }
+
+  return result;
+}, [products, searchParams]);
+
+// ================================
 
 
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
-  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentProducts = products.slice(startIndex, endIndex);
+  const currentProducts = filtered.slice(startIndex, endIndex);
 
   function toogleButton(e) {
     e.preventDefault();
