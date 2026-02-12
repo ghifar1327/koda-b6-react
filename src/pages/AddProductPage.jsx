@@ -2,13 +2,15 @@ import { useContext, useState } from "react"
 import FetchContext from "../context/FetchContex"
 import { Funnel, PenLine, Search, Trash2 } from "lucide-react"
 import { Button } from "../components/common/Button"
-import Input from "../components/common/Input"
-import AddProduct from "../components/feature/AddProduct"
+import EditProduct from "../components/feature/EditProduct"
+import ProductActions from "../components/feature/ProductActions"
 
 export default function AddProductPage() {
     const [product ] = useContext(FetchContext)
-    const [showAddProduct, setShowAddProduct] = useState(false)
-    console.log(product)
+    const [showAddProduct, setShowAddProduct] = useState(true)
+    const [showEditProduct, setShowEditProduct] = useState(true)
+
+    // console.log(product)
   return (
     <>
     <section className="p-[5%]">
@@ -63,10 +65,10 @@ export default function AddProductPage() {
                 <td className="py-4">-</td>
                 <td className="py-4">
                   <div className="flex justify-center gap-2">
-                    <button className="w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
+                    <button onClick={(e)=> {e.preventDefault(); setShowEditProduct(!showAddProduct)}} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
                       <PenLine size={18} />
                     </button>
-                    <button className="w-8 h-8 bg-red-600/30 text-red-600 flex items-center justify-center rounded-full">
+                    <button className="cursor-pointer w-8 h-8 bg-red-600/30 text-red-600 flex items-center justify-center rounded-full">
                       <Trash2 size={18} />
                     </button>
                   </div>
@@ -77,7 +79,8 @@ export default function AddProductPage() {
         </table>
       </section>
     </section>
-    <AddProduct show={showAddProduct} setShow={(e)=> {e.preventDefault(); setShowAddProduct(!showAddProduct)}}/>
+    <ProductActions add show={showAddProduct} setShow={(e)=> {e.preventDefault(); setShowAddProduct(!showAddProduct)}}/>
+    <ProductActions edit show={showEditProduct} setShow={(e)=> {e.preventDefault(); setShowEditProduct(!showEditProduct)}}/>
     </>
   )
 }
