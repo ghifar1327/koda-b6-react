@@ -7,14 +7,16 @@ import { Link, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import InvoiceContext from "../context/InvoiceContext";
-import FetchContext from "../context/FetchContex";
+import { useSelector } from "react-redux";
 
 export default function Product() {
   const { id, name } = useParams();
   const [count, setCount] = useState(1);
   const { user } = useContext(AuthContext);
   const { addCart } = useContext(InvoiceContext);
-  const [products] = useContext(FetchContext);
+  const products = useSelector(state=> state.products.products)
+  // console.log(products)
+  
   const render = products.find((item) => Number(item.productId) === Number(id));
 
   // paginationnnnnnnnnnnnn
