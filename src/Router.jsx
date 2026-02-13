@@ -19,7 +19,7 @@ import {
   ProtectedRoute,
   PublicRoute,
 } from "./components/layouts/ProtectedRoute";
-import AddProductPage from "./pages/AddProductPage";
+import ProductAdmin from "./pages/ProductsAdmin";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -70,7 +70,7 @@ export default function Router() {
         },
         {
           path: "products",
-          element: <AddProductPage />,
+          element: <ProductAdmin />,
         },
       ],
     },
