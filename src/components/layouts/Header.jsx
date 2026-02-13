@@ -50,7 +50,7 @@ export default function Header() {
           <ShoppingCart size={26} className="text-gray-400" />
         </Link>
         <div className="flex items-center gap-5">
-          <section className="relative">
+          <section className="relative z-1000">
             <button
               onClick={() => setToggle(!toggle)}
               className="cursor-pointer h-10 w-10 flex justify-center border-2 text-xl bg-purple-600 rounded-full"
@@ -78,12 +78,6 @@ export default function Header() {
                     className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary"
                   >
                     Profile
-                  </Link>
-                  <Link
-                    to="/history"
-                    className="border-b-3 p-2 w-full border-gray-300 text-xl hover:border-primary"
-                  >
-                    History
                   </Link>
                 </div>
               </section>
