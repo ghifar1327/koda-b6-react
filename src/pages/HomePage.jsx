@@ -1,13 +1,23 @@
-import { useContext } from "react";
+import { useEffect } from "react";
 import { Button } from "../components/common/Button";
 import Message from "../components/feature/Message";
 import Card from "../components/product/Card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import FetchContext from "../context/FetchContex";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../redux/reduser/products.slice";
 
 export default function HomePage() {
-  const [products] = useContext(FetchContext);
-  // console.log(products)
+  // const [products] = useContext(FetchContext);
+  const {products ,loading } = useSelector(state => state.products)
+  console.log(loading)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    if (products.length === 0) {
+      dispatch(fetchProducts())
+    }
+  },[dispatch])
+
+  console.log(products)
   return (
     <>
       <hero className={"flex flex-col-reverse md:flex-row md:h-auto h-screen"}>
@@ -120,6 +130,7 @@ export default function HomePage() {
             yours too!
           </p>
         </article>
+        {loading && <p>Loading... </p>}
         <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-2 md:gap-3">
           {products.slice(0, 4).map((item) => {
             return (
