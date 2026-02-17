@@ -1,8 +1,11 @@
 import React from 'react'
 import { Button } from '../../components/common/Button';
-import { Funnel, Search } from 'lucide-react';
+import { Funnel, PenLine, Search, Trash2 } from 'lucide-react';
+import useLocalStorage from '../../hooks/useLocalStotage';
 
 export default function UsersAdmin() {
+  const [ users , _] = useLocalStorage("users", null)
+  console.log(users)
   return (
     <section className="p-[5%]">
       <h1 className="text-5xl">User list</h1>
@@ -25,36 +28,33 @@ export default function UsersAdmin() {
         <table className="w-full table-fixed">
           <thead>
               <tr className="text-gray-500 font-normal">
-              <th className="w-[5%] py-5">No</th>
-              <th className="w-[10%] py-5">Image</th>
-              <th className="w-[15%] py-5">Full Name</th>
-              <th className="w-[20%] py-5">Phone</th>
-              <th className="w-[10%] py-5">Address</th>
-              <th className="w-[10%] py-5">Email</th>
-              <th className="w-[5%] py-5">Action</th>
+              <th className="py-5">ID</th>
+              <th className="py-5">Image</th>
+              <th className="py-5">Full Name</th>
+              <th className="py-5">Phone</th>
+              <th className="py-5">Address</th>
+              <th className="py-5">Email</th>
+              <th className="py-5">Action</th>
               </tr>
           </thead>
           <tbody className="text-center">
-            {/* {product.map((item, index) => (
-              <tr key={item.productId} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
-                <td className="py-4">{index + 1}</td>
+            {users.map((item, index) => (
+              <tr key={item.id} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
+                <td className="py-4">#{item.id}</td>
                 <td className="py-4">
                   <img
-                    src={item.images[0]}
-                    alt={item.name}
+                    src={item.image}
+                    alt={item.FullName}
                     className="w-12 h-12 mx-auto object-cover rounded"
                   />
                 </td>
-                <td className="py-4">{item.name}</td>
-                <td className="py-4">IDR {item.price}</td>
-                <td className="py-4 text-sm line-clamp-2">{item.description}
-                </td>
-                <td className="py-4">-</td>
-                <td className="py-4">-</td>
-                <td className="py-4">-</td>
+                <td className="py-4">{item.fullName}</td>
+                <td className="py-4">{item.phone}</td>
+                <td className="py-4">{item.address}</td>
+                <td className="py-4">{item.email}</td>
                 <td className="py-4">
                   <div className="flex justify-center gap-2">
-                    <button onClick={(e)=> {e.preventDefault(); setShowEditProduct(!showAddProduct)}} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
+                    <button onClick={""} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
                       <PenLine size={18} />
                     </button>
                     <button className="cursor-pointer w-8 h-8 bg-red-600/30 text-red-600 flex items-center justify-center rounded-full">
@@ -63,7 +63,7 @@ export default function UsersAdmin() {
                   </div>
                 </td>
               </tr>
-            ))} */}
+            ))}
           </tbody>
         </table>
       </section>
