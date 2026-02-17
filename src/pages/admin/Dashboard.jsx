@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Dashboard() {
   return (
-    <>
+    <section className="p-[5%]">
     <div className=" text-white flex-1 flex gap-5">
       <section className="flex-1 justify-between flex flex-col rounded-xl bg-[#6FC276] h-30 p-5">
         <div className="flex items-center gap-3">
@@ -70,6 +70,6 @@ export default function Dashboard() {
         </tbody>
       </table>
     </section>
-  </>
+  </section>
   );
 }
