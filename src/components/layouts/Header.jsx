@@ -7,11 +7,12 @@ import AuthContext from "../../context/AuthContext";
 import Modal from "../feature/Modal";
 
 export default function Header() {
-  const { user, logout } = useContext(AuthContext);
+  const { user,logout } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
   const [showModal , setShowModal] = useState(false)
   const location = useLocation();
   const navigate = useNavigate()
+  console.log(user)
 
   useEffect(() => {
     (() => {
@@ -26,10 +27,10 @@ export default function Header() {
     setToggle((prev) => !prev);
   }
   async function handleLogout() {
-    const result = await logout();
-  if (result) {
-    navigate("/");
-  }
+    let result = await logout();
+    if (result) {
+      navigate("/");
+    }
   };
   function buttonCart(e){
     e.preventDefault()

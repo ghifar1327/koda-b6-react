@@ -4,10 +4,10 @@ import AuthContext from "../../context/AuthContext";
 
 export function ProtectedRoute({ children, role }) {
   const { user } = useContext(AuthContext);
-
+  // console.log(user)
 
   if(!user){
-    return <Naviget to="/" replace/>
+    return <Navigate to="/" replace/>
   }
   
   if (role && user.role !== role) {
