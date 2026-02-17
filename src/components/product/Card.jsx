@@ -1,11 +1,12 @@
 import { Button } from "../common/Button";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "../feature/Modal";
 import Input from "../common/Input";
 import { useForm } from "react-hook-form";
 import InvoiceContext from "../../context/InvoiceContext";
+import { nanoid } from "nanoid";
 
 export default function Card({
   id,
@@ -16,13 +17,13 @@ export default function Card({
   discount,
   rating,
 }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   const { handleSubmit, register, reset } = useForm();
   const {addCart} = useContext(InvoiceContext)
   function submit(form) {
     const product = {
-      id: Date.now(),
+      id: nanoid(10),
       image: image,
       name: name,
       size: form.modal_size,
@@ -53,7 +54,7 @@ export default function Card({
           </div>
         </div>
         <section className="md:p-3">
-          <div className=" md:relative p-3 md:-mt-[30%] bg-white shadow-2xl rounded-md py-4 h-75 md:h-60  flex justify-between gap-2 flex-col">
+          <div className=" md:relative p-3 md:-mt-[30%] bg-white shadow-2xl rounded-md py-4 h-75 md:h-65  flex justify-between gap-2 flex-col">
             <section className="flex flex-col gap-2">
               <p className=" md:text-sm lg:text-xl xl-2xl font-bold line-clamp-1">
                 {name}
@@ -66,27 +67,29 @@ export default function Card({
               </div>
             </section>
             <section className="flex flex-col gap-2">
+              <div>
               {discount !== 0 && (
                 <span className="text-xs text-red-600">
                   Discount {discount}%
                 </span>
               )}
-              <div className="flex gap-1 md-gap-2 lg:gap-5 items-center">
-                <p
-                  className={`${discount !== 0 ? "line-through text-red-500 text-sm md:text-xs lg:text-lg xl-xl" : "text-xl md:text-sm lg:text-xl xl-2xl font-semibold text-primary"}`}
-                >
-                  IDR {price.toLocaleString("id-ID")}
-                </p>
-                {discount !== 0 && (
-                  <p className="text-lg md:text-sm flex gap-2 lg:text-xl xl-2xl font-semibold text-primary">
-                    IDR {(price - price * (discount / 100)).toLocaleString("id-ID")}
-                  </p>
-                )}
-              </div>
+                 <div className="flex gap-1 md-gap-2 lg:gap-5 items-center">
+                   <p
+                     className={`${discount !== 0 ? "line-through text-red-500 text-sm md:text-xs lg:text-lg xl-xl" : "text-xl md:text-sm lg:text-xl xl-2xl font-semibold text-primary"}`}
+                     >
+                     IDR {price.toLocaleString("id-ID")}
+                   </p>
+                   {discount !== 0 && (
+                     <p className="text-lg md:text-sm flex gap-2 lg:text-xl xl-2xl font-semibold text-primary">
+                       IDR {(price - price * (discount / 100)).toLocaleString("id-ID")}
+                     </p>
+                   )}
+                 </div>
+                </div>
               <div className="flex flex-col md:flex-row gap-3">
                 <Button
                   orange
-                  // onClick={() => navigate(`/detail/${id}/${name}`)}
+                  onClick={() => navigate(`/detail/${id}/${name}`)}
                   size={
                     "p-1 text-xl md:p-0 xl:p-1 md:text-xs xl:text-xl flex-8/3"
                   }
