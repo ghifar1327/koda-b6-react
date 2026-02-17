@@ -19,7 +19,7 @@ import {
   PublicRoute,
 } from "./components/layouts/ProtectedRoute";
 import Dashboard from "./pages/admin/Dashboard";
-import OrderAdmin from "./pages/admin/Dashboard";
+import OrderAdmin from "./pages/admin/OrderAdmin";
 import ProductAdmin from "./pages/admin/ProductsAdmin";
 import UsersAdmin from "./pages/admin/UsersAdmin";
 
