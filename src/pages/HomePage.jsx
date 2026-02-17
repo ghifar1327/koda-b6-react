@@ -9,7 +9,7 @@ import { fetchProducts } from "../redux/reduser/products.slice";
 export default function HomePage() {
   // const [products] = useContext(FetchContext);
   const {products ,loading } = useSelector(state => state.products)
-  console.log(loading)
+  // console.log(loading)
   const dispatch = useDispatch()
   useEffect(()=>{
     if (products.length === 0) {
@@ -17,10 +17,10 @@ export default function HomePage() {
     }
   },[dispatch])
 
-  console.log(products)
+  // console.log(products)
   return (
     <>
-      <hero className={"flex flex-col-reverse md:flex-row md:h-auto h-screen"}>
+      <main className={"flex flex-col-reverse md:flex-row md:h-auto h-screen"}>
         <section className="flex-1/2 h-full w-full md:h-auto bg-linear-to-br from-[#777C82] to-[#0B0909] px-[5%] md:px-[10%] text-white flex flex-col justify-center gap-5 md:gap-5 lg:gap-7">
           <h1 className="text-3xl lg:text-5xl">
             Start Your Day with Coffee and Good Meals
@@ -65,7 +65,7 @@ export default function HomePage() {
           />
         </section>
         <Message />
-      </hero>
+      </main>
       <main className="flex flex-col gap-10">
         <article className="flex flex-col-reverse md:flex-row text-gray-500">
           <section className="flex-1/2 lg:pl-[10%] p-[5%] md:p-[4%] flex flex-col justify-center gap-3 md:gap-1 lg:gap-3 xl:gap-6">
@@ -135,7 +135,7 @@ export default function HomePage() {
           {products.slice(0, 4).map((item) => {
             return (
               <Card
-                id={item.productId}
+                id={item.id}
                 name={item.name}
                 image={item?.images[0]}
                 description={item.description}
