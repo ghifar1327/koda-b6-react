@@ -148,7 +148,7 @@ const filtered = useMemo(() => {
           {currentProducts.map((item) => {
             return (
               <Card
-                id={item.productId}
+                id={item.id}
                 image={item.images[0]}
                 name={item.name}
                 price={item.price}

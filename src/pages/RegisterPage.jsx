@@ -9,6 +9,7 @@ import { Link } from "react-router";
 import { useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import Modal from "../components/feature/Modal";
+import { nanoid } from "nanoid/non-secure";
 
 const schema = yup.object({
   fullName: yup.string().required("Name must be filled in"),
@@ -38,7 +39,7 @@ export default function RegisterPage() {
   // const navigate = useNavigate();
   const { error, setError, isSuccess, setIsSuccess } = useContext(AuthContext);
   const { registerUser } = useContext(AuthContext);
-  console.log(isSuccess);
+  // console.log(isSuccess);
   const {
     handleSubmit,
     register,
@@ -51,11 +52,11 @@ export default function RegisterPage() {
     setError(false);
     setIsSuccess(false)
   }, []);
-
   function action(form) {
     const data = {
       ...form,
-      id: Date.now(),
+      id: nanoid(10),
+      image: "",
       role: "user",
       history: [],
       create_at: new Date(),
@@ -147,15 +148,15 @@ export default function RegisterPage() {
       <div className="flex justify-center">
         <p>
           Have An Account?{" "}
-          <span className="text-[#FF8906]">
+          <span className="text-primary">
             <Link to="/login">Login</Link>
           </span>
         </p>
       </div>
       <div className="flex justify-between gap-20 items-center text-[#AAAAAA]">
-        <div className="h-[1px] w-full bg-[#DEDEDE]"></div>
+        <div className="w-full bg-[#DEDEDE]"></div>
         <p>Or</p>
-        <div className="h-[1px] w-full bg-[#DEDEDE]"></div>
+        <div className="w-full bg-[#DEDEDE]"></div>
       </div>
       <div className="flex justify-center gap-5">
         <Button src={"/logos/facebook.png"} alt={"facebook"} shadow>
