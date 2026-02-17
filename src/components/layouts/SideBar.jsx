@@ -24,12 +24,14 @@
           <Beaker /> <p>Product</p>
         </Link>
         <Link
-          className={`${location.pathname == "" ? "bg-primary text-black" : "text-gray-600"} p-2  flex gap-5 items-center text-xl rounded-xl`}
+          to={"/admin/orders"}
+          className={`${location.pathname == "/admin/orders" ? "bg-primary text-black" : "text-gray-600"} p-2  flex gap-5 items-center text-xl rounded-xl`}
         >
           <ShoppingBasket /> <p>Order</p>
         </Link>
         <Link
-          className={`${location.pathname == "" ? "bg-primary text-black" : "text-gray-600"} p-2  flex gap-5 items-center text-xl rounded-xl`}
+        to={"/admin/users"}
+          className={`${location.pathname == "/admin/users" ? "bg-primary text-black" : "text-gray-600"} p-2  flex gap-5 items-center text-xl rounded-xl`}
         >
           <Users /> <p>User</p>
         </Link>
