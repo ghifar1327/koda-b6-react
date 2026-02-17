@@ -20,7 +20,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [count, setCount] = useState(5);
   const { user, login, isSuccess, setIsSuccess, error, setError } = useContext(AuthContext);
-  console.log(isSuccess)
+  // console.log(isSuccess)
   const {
     handleSubmit,
     register,
