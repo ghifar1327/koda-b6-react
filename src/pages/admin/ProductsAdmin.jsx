@@ -59,7 +59,7 @@ export default function ProductAdmin() {
           </thead>
           <tbody className="text-center">
             {product.map((item, index) => (
-              <tr key={item.productId} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
+              <tr key={item.id} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
                 <td className="py-4">{index + 1}</td>
                 <td className="py-4">
                   <img
