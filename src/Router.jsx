@@ -13,13 +13,15 @@ import DetailLayout from "./components/layouts/DetailLayout";
 import Product from "./pages/Product";
 import ProductsPage from "./pages/ProductsPage";
 import AdminLayout from "./components/layouts/AdminLayout";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Admin/Dashboard";
 import NotFoundPage from "./pages/NotfoundPage";
 import {
   ProtectedRoute,
   PublicRoute,
 } from "./components/layouts/ProtectedRoute";
-import ProductAdmin from "./pages/ProductsAdmin";
+import OrderAdmin from "./pages/Admin/OrderAdmin";
+import ProductAdmin from "./pages/Admin/ProductsAdmin";
+import UsersAdmin from "./pages/Admin/UsersAdmin";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -72,6 +74,14 @@ export default function Router() {
           path: "products",
           element: <ProductAdmin />,
         },
+        {
+          path: "orders",
+          element: <OrderAdmin/>
+        },
+        {
+          path: "users",
+          element: <UsersAdmin/>
+        }
       ],
     },
     { path: "profile", element: <Profile /> },
