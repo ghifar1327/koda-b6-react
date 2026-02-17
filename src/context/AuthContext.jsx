@@ -1,12 +1,17 @@
 import { createContext, useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStotage";
+import { nanoid } from "nanoid";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const adminAccount = {
-    fullName: "ghifar",
+    id: nanoid(10),
+    image: "",
+    fullName: "koda",
     email: "admin@mail.com",
+    phone: "085591710309",
+    address: "Depok",
     role: "admin",
     password: "1234A",
   };
@@ -26,7 +31,6 @@ export function AuthProvider({ children }) {
     const foundUser = users.find(
       (u) => u.email === data.email && u.password === data.password
     );
-
     if (!foundUser) {
       setError(true);
       setIsSuccess(false);
@@ -60,10 +64,11 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-  setUser(null);
-  setIsSuccess(false);
-  setError(false);
-  return true
+    localStorage.removeItem("user");
+    setUser(null);
+    setIsSuccess(false);
+    setError(false);
+    return true
   }
 
   return (
