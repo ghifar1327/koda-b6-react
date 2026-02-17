@@ -8,6 +8,7 @@ import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import InvoiceContext from "../context/InvoiceContext";
 import { useSelector } from "react-redux";
+import { nanoid } from "nanoid";
 
 export default function Product() {
   const { id, name } = useParams();
@@ -17,7 +18,7 @@ export default function Product() {
   const products = useSelector(state=> state.products.products)
   // console.log(products)
   
-  const render = products.find((item) => Number(item.productId) === Number(id));
+  const render = products.find((item) => Number(item.id) === Number(id));
 
   // paginationnnnnnnnnnnnn
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,11 +27,10 @@ export default function Product() {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentProducts = products.slice(startIndex, endIndex);
-
   const { handleSubmit, register, reset } = useForm();
   function action(form) {
     const product = {
-      id: Date.now(),
+      id: nanoid(10),
       image: render.images[0],
       name: name,
       size: form.size,
@@ -211,7 +211,7 @@ export default function Product() {
         {currentProducts.map((item) => {
           return (
             <Card
-              id={item.productId}
+              id={item.id}
               image={item.images[0]}
               name={item.name}
               price={item.price}
