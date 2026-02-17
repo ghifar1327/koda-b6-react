@@ -24,7 +24,7 @@ export default function Card({
     const product = {
       id: Date.now(),
       image: image,
-      productName: name,
+      name: name,
       size: form.modal_size,
       temperature: form.modal_temperature,
       quantity: form.modal_qty,

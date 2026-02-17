@@ -58,7 +58,7 @@ export default function Payment() {
                   <div className="w-[20%]">
                     <img
                       src={item.image}
-                      alt={item.productName}
+                      alt={item.name}
                       className="object-center"
                     />
                   </div>
@@ -67,7 +67,7 @@ export default function Payment() {
                       FLASH SALE!
                     </p>
                     <p className="text-xl xl:text-xl font-semibold">
-                      {item.productName}
+                      {item.name}
                     </p>
                     <p className="text-xl xl:text-xl text-gray-400">
                       {item.quantity}pcs | {item.size} | {item.temperature} |{" "}

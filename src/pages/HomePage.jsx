@@ -136,7 +136,7 @@ export default function HomePage() {
             return (
               <Card
                 id={item.productId}
-                name={item.productName}
+                name={item.name}
                 image={item?.images[0]}
                 description={item.description}
                 rating={item.rating}

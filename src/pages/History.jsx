@@ -67,7 +67,7 @@ export default function History() {
             >
               <img
                 src={item.orders[0].image}
-                alt={item.orders[0].productName}
+                alt={item.orders[0].name}
                 className="hidden md:block w-[12%]"
               />
               <div className="grid gap-4 md:grid-cols-2 w-full">

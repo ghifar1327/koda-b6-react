@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "./global.css";
 import { InvoiceProvider } from "./context/InvoiceContext.jsx";
-import { FetchProvider } from "./context/FetchContex.jsx";
+// import { FetchProvider } from "./context/FetchContex.jsx";
 import Router from "./Router.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { Provider } from "react-redux";
@@ -13,11 +13,11 @@ createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
       <AuthProvider>
-        <FetchProvider>
+        {/* <FetchProvider> */}
           <InvoiceProvider>
             <Router/>
           </InvoiceProvider>
-        </FetchProvider>
+        {/* </FetchProvider> */}
       </AuthProvider>
     </PersistGate>
   </Provider>

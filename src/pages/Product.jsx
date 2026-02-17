@@ -32,7 +32,7 @@ export default function Product() {
     const product = {
       id: Date.now(),
       image: render.images[0],
-      productName: name,
+      name: name,
       size: form.size,
       temperature: form.hotIce,
       quantity: count,
@@ -55,24 +55,24 @@ export default function Product() {
           <div className="w-full">
             <img
               src={render.images[0]}
-              alt={render.productName}
+              alt={render.name}
               className="w-full mb-3"
             />
           </div>
           <div className="grid grid-cols-3 gap-3 w-full">
             <img
               src={render.images[1]}
-              alt={render.productName}
+              alt={render.name}
               className="w-full"
             />
             <img
               src={render.images[2]}
-              alt={render.productName}
+              alt={render.name}
               className="w-full"
             />
             <img
               src={render.images[3]}
-              alt={render.productName}
+              alt={render.name}
               className="w-full"
             />
           </div>
@@ -83,7 +83,7 @@ export default function Product() {
               FLASH SALE!
             </p>
             <h1 className="text-5xl md:text-2xl lg:text-5xl">
-              {render.productName}
+              {render.name}
             </h1>
             <div className="flex gap-5 items-center">
               {render.discountPercent ? (
@@ -213,7 +213,7 @@ export default function Product() {
             <Card
               id={item.productId}
               image={item.images[0]}
-              name={item.productName}
+              name={item.name}
               price={item.price}
               description={item.description}
               discount={item.discountPercent}

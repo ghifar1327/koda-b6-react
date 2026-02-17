@@ -14,7 +14,7 @@ export function InvoiceProvider({ children }) {
     setCart((prev) => {
       const index = prev.findIndex(
         (item) =>
-          item.productName === data.productName &&
+          item.name === data.name &&
           item.size === data.size &&
           item.temperature === data.temperature,
       );

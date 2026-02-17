@@ -24,7 +24,7 @@ const filtered = useMemo(() => {
 
   if (name) {
     result = result.filter((item) =>
-      item.productName.toLowerCase().includes(name.toLowerCase())
+      item.name.toLowerCase().includes(name.toLowerCase())
     );
   }
 
@@ -150,7 +150,7 @@ const filtered = useMemo(() => {
               <Card
                 id={item.productId}
                 image={item.images[0]}
-                name={item.productName}
+                name={item.name}
                 price={item.price}
                 description={item.description}
                 discount={item.discountPercent}

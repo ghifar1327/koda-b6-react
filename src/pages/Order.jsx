@@ -107,7 +107,7 @@ export default function Order() {
               <div className="flex gap-5">
                 <img
                   src={item.image}
-                  alt={item.productName}
+                  alt={item.name}
                   className="w-[20%] "
                 />
                 <div className="flex flex-col justify-between">
@@ -115,7 +115,7 @@ export default function Order() {
                     FLASH SALE!
                   </p>
                   <p className="text-xl xl:text-xl font-semibold">
-                    {item.productName}
+                    {item.name}
                   </p>
                   <p className="text-xl xl:text-xl text-gray-400">
                     {item.quantity}psc | {item.size} | {item.temperature} |{" "}

@@ -13,15 +13,15 @@ import DetailLayout from "./components/layouts/DetailLayout";
 import Product from "./pages/Product";
 import ProductsPage from "./pages/ProductsPage";
 import AdminLayout from "./components/layouts/AdminLayout";
-import Dashboard from "./pages/Admin/Dashboard";
 import NotFoundPage from "./pages/NotfoundPage";
 import {
   ProtectedRoute,
   PublicRoute,
 } from "./components/layouts/ProtectedRoute";
-import OrderAdmin from "./pages/Admin/OrderAdmin";
-import ProductAdmin from "./pages/Admin/ProductsAdmin";
-import UsersAdmin from "./pages/Admin/UsersAdmin";
+import Dashboard from "./pages/admin/Dashboard";
+import OrderAdmin from "./pages/admin/Dashboard";
+import ProductAdmin from "./pages/admin/ProductsAdmin";
+import UsersAdmin from "./pages/admin/UsersAdmin";
 
 export default function Router() {
   const router = createBrowserRouter([

@@ -64,11 +64,11 @@ export default function ProductAdmin() {
                 <td className="py-4">
                   <img
                     src={item.images[0]}
-                    alt={item.productName}
+                    alt={item.name}
                     className="w-12 h-12 mx-auto object-cover rounded"
                   />
                 </td>
-                <td className="py-4">{item.productName}</td>
+                <td className="py-4">{item.name}</td>
                 <td className="py-4">IDR {item.price}</td>
                 <td className="py-4 text-sm line-clamp-2">{item.description}
                 </td>

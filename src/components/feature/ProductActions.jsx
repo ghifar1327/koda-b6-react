@@ -42,7 +42,7 @@ export default function ProductActions({show, setShow, add, edit}) {
                 <Button size='p-1 px-4 w-fit' orange>Upload</Button>
               </div>            
             }
-            <Input type='text' id="ProductName" label="Product Name" placeholder="Enter Product Name" {...register("productName" , {required : true})}/>
+            <Input type='text' id="name" label="Product Name" placeholder="Enter Product Name" {...register("name" , {required : true})}/>
             <Input type="number" id="ProductPrice" label="Product Price" placeholder="Enter Product Price"{...register("price", {required: true})}/>
             <section className='flex flex-col gap-3'>
               <label htmlFor="description" className='font-bold'>Description</label>
