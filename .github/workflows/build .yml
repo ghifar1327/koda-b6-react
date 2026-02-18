@@ -40,18 +40,17 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-    #   - name: "[SERVER] pull image from ghcr.io"
-    #     uses: appleboy/ssh-action@v1
-    #     with:
-    #       host: ${{ secrets.HOST }}
-    #       username: ${{ secrets.USERNAME }}
-    #       key: ${{ secrets.KEY }}
-    #       port: ${{ secrets.PORT }}
-    #       script: |
-    #         docker pull ghcr.io/fulsep/koda-b6-cicd-frontend:latest
-    #         docker rm -f web-ghifar
-    #         docker run -d -p 208001:80 --name web-ghifar ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
+      - name: "[SERVER] pull image from ghcr.io"
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker pull ghcr.io/fulsep/koda-b6-cicd-frontend:latest
+            docker rm -f web-ghifar
+            docker run -d -p 208001:80 --name web-ghifar ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
