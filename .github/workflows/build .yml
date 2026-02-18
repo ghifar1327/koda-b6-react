@@ -52,5 +52,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             docker pull ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
-            docker rm -f web-ghifar
+            # docker rm -f web-ghifar
             docker run -d -p 208001:80 --name web-ghifar ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
