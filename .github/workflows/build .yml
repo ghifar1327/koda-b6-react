@@ -28,7 +28,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner}}
-          password: ${{ secrets.GH_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "[DOCKER] Set up QEMU"
         uses: docker/setup-qemu-action@v3
@@ -51,6 +51,6 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            docker pull ghcr.io/koda-b6-coffee-shop-frontend:latest
+            docker pull ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
             docker rm -f web-ghifar
             docker run -d -p 208001:80 --name web-ghifar ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
