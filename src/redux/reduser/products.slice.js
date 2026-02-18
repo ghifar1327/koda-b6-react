@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const fetchProducts = createAsyncThunk(
     "fetchProducts",
     async () =>{
-        const res = await fetch("https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/products.json")
+        const res = await fetch("https://raw.githubusercontent.com/ghifar1327/koda-b6-react/refs/heads/main/src/data/products.json")
     
         if(!res.ok) throw new Error("Failed to fetch products")
         
@@ -23,10 +23,19 @@ const productSlice = createSlice({
     reducers : {
         addProduct: (state, action) => {
             state.products.push({
-            productId: Date.now(),
+            id: Date.now(),
             ...action.payload
             });
         },
+        editProduct : (state , action)=>{
+            const {id , updateData} = action.payload
+            const index = state.products.findIndex( item => item.id === id)
+            if (index !== -1){
+                state.products[index] = {...state.products[index], ...updateData}
+            }
+        },
+        
+    
     },
     extraReducers: (builder)=>{
         builder
@@ -45,5 +54,5 @@ const productSlice = createSlice({
     }
 })
 
-export const {addProduct} = productSlice.actions
+export const {addProduct, editProduct, deleteProduct} = productSlice.actions
 export default productSlice.reducer
