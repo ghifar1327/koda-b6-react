@@ -11,6 +11,8 @@ export default function ProductAdmin() {
     const [showEditProduct, setShowEditProduct] = useState(true)
     const product = useSelector(state => state.products.products)
     const {products } = useSelector(state => state.products)
+    const [selectedProduct, setSelectedProduct] = useState(null)
+
     // console.log(product)
     // console.log(loading)
 
@@ -77,7 +79,7 @@ export default function ProductAdmin() {
                 <td className="py-4">-</td>
                 <td className="py-4">
                   <div className="flex justify-center gap-2">
-                    <button onClick={(e)=> {e.preventDefault(); setShowEditProduct(!showAddProduct)}} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
+                    <button onClick={()=> {setSelectedProduct(item); setShowEditProduct(!showAddProduct)}} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
                       <PenLine size={18} />
                     </button>
                     <button className="cursor-pointer w-8 h-8 bg-red-600/30 text-red-600 flex items-center justify-center rounded-full">
@@ -92,7 +94,7 @@ export default function ProductAdmin() {
       </section>
     </section>
     <ProductActions add show={showAddProduct} setShow={(e)=> {e.preventDefault(); setShowAddProduct(!showAddProduct)}}/>
-    <ProductActions edit show={showEditProduct} setShow={(e)=> {e.preventDefault(); setShowEditProduct(!showEditProduct)}}/>
+    <ProductActions edit show={showEditProduct} product={selectedProduct} setShow={(e)=> {e.preventDefault(); setShowEditProduct(!showEditProduct)}}/>
     </>
   )
 }
