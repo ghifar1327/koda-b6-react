@@ -3,20 +3,31 @@ import { Button } from '../common/Button'
 import Input from '../common/Input'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { addProduct } from '../../redux/reduser/products.slice'
+import { addProduct, editProduct } from '../../redux/reduser/products.slice'
+import { useEffect } from 'react'
 
-export default function ProductActions({show, setShow, add, edit}) {
+export default function ProductActions({show, setShow, add, edit, product}) {
   const {handleSubmit, register, reset} = useForm()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+  if (edit && product) {
+    reset(product);
+  }
+}, [product]);
 
   function action(data){
     console.log(data)
     if(add){
       dispatch(addProduct(data))
     }
-    // if(edit){
-    reset()
-    // }
+    if(edit){
+       dispatch(editProduct({
+       id: product.id,
+       updateData: data
+     }));
+    }
+      reset()
   }
 
   return (
