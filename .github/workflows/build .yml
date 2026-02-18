@@ -15,8 +15,9 @@ jobs:
         run: node -v
       - name: Gathering source code
         uses: actions/checkout@v6
-    #   - name: Build app
-    #     run: npm install && npm run build
+      - name: Build app
+        run: npm install && npm run build
+        
     #   - name: "[DOCKER] Setup metadata"
     #     id: meta
     #     uses: docker/metadata-action@v5
