@@ -34,7 +34,10 @@ const productSlice = createSlice({
                 state.products[index] = {...state.products[index], ...updateData}
             }
         },
-        
+        deleteProduct : (state, action)=>{
+            const id = action.payload
+            state.products = state.products.filter(item => item.id !== id)
+        }
     
     },
     extraReducers: (builder)=>{
