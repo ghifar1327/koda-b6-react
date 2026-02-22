@@ -1,16 +1,26 @@
+import { CgNotes } from "react-icons/cg"; 
 import { Button } from '../../components/common/Button'
 import { Funnel, PenLine, Search, Trash2 } from 'lucide-react'
-import useLocalStorage from '../../hooks/useLocalStotage'
+import { useContext, useState } from 'react'
+import OrderAction from '../../components/feature/OrderAction'
+import InvoiceContext from "../../context/InvoiceContext";
 
 export default function OrderAdmin() {
-  const [users] =  useLocalStorage('users', null)
+  const { users } = useContext(InvoiceContext)
+  const [showDetailOrder, setShowDetailOrder] = useState(false)
+  const [showEditOrder, setShowEditOrder] = useState(false)
+  const [selectOrder, setSelectOrder] = useState(null)
+  
   const historyOreder =users.filter(item => item.role === "user").flatMap(item => item.history)
-  console.log(historyOreder)
+  
+
+  // console.log(historyOreder)
   return (
+        <>
         <section className="p-[5%]">
             <h1 className="text-5xl">Order List</h1>
             <div className="flex justify-between items-end">
-              <Button onClick={(e)=> {e.preventDefault()}} size="w-fit p-2 h-fit px-3" orange>+ Add Order</Button>
+              <Button onClick={(e)=> {e.preventDefault(); setShowDetailOrder(!showDetailOrder)}} size="w-fit p-2 h-fit px-3" orange>+ Add Order</Button>
               <div className="flex gap-2 ">
                   <div className='w-fit'>
                       <p className="mb-2 text-gray-400">Status</p>
@@ -52,10 +62,10 @@ export default function OrderAdmin() {
                          #{item.id}
                        </td>
                        <td className="py-4">{
-                       new Date(item.create_at).toLocaleDateString("id-ID", {
-                            day: "2-digit",
-                            month: "long",
-                            year: "numeric"
+                         new Date(item.create_at).toLocaleDateString("id-ID", {
+                           day: "2-digit",
+                           month: "long",
+                           year: "numeric"
                           })}</td>
                        <td>
                           <ul className='w-full flex flex-col items-center'>
@@ -64,11 +74,14 @@ export default function OrderAdmin() {
                             })}
                           </ul>
                         </td>
-                       <td className={`py-4 text-sm `}><p className={`${item.status == "On Progress" ? "bg-orange-200 text-orange-600" : item.status == "Pending"? "bg-red-200 text-red-600" : item.status == "Done"? "bg-green-200 text-green-600": "bg-gray-200 text-gray-600"} px-1 rounded-full`}></p>{item.status? item.status : "-" }</td>
+                       <td className={`py-4 text-sm flex justify-center`}><p className={`${item.status == "On Progress" ? "bg-orange-200 text-orange-600" : item.status == "Pending"? "bg-red-200 text-red-600" : item.status == "Done"? "bg-green-200 text-green-600": "bg-gray-200 text-gray-600"} w-fit px-3 p-0.5 rounded-full`}>{item.status}</p></td>
                        <td className="py-4">IDR {item.total}</td>
                        <td className="py-4">
                          <div className="flex justify-center gap-2">
-                           <button onClick={""} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
+                           <button onClick={()=>{setSelectOrder(item); setShowDetailOrder(true)}} className="cursor-pointer w-8 h-8 bg-primary/10 text-amber-900 flex items-center justify-center rounded-full">
+                             <CgNotes size={18} />
+                           </button>
+                           <button onClick={()=>{setSelectOrder(item); setShowEditOrder(true)}} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
                              <PenLine size={18} />
                            </button>
                            <button className="cursor-pointer w-8 h-8 bg-red-600/30 text-red-600 flex items-center justify-center rounded-full">
@@ -82,5 +95,9 @@ export default function OrderAdmin() {
                 </table>
               </section>
         </section>
+        <OrderAction order={selectOrder} show={showDetailOrder} setShow={()=>{ setShowDetailOrder(!showDetailOrder)}}/>
+        <OrderAction edit order={selectOrder} show={showEditOrder} setShow={()=>{ setShowEditOrder(!showEditOrder)}}/>
+      </>
+        
   )
 }
