@@ -12,7 +12,7 @@ export default function Header() {
   const [showModal , setShowModal] = useState(false)
   const location = useLocation();
   const navigate = useNavigate()
-  console.log(user)
+  // console.log(user)
 
   useEffect(() => {
     (() => {
