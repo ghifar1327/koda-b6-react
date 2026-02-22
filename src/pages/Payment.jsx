@@ -46,6 +46,7 @@ export default function Payment() {
       id: nanoid(10),
       fullName: form.fullName,
       email: form.email,
+      phone: user.phone,
       address: form.address,
       delivery: delivery,
       status : "On Progress",
