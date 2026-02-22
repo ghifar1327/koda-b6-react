@@ -5,7 +5,7 @@ const InvoiceContext = createContext(null);
 
 export function InvoiceProvider({ children }) {
   const [user, setuser] = useLocalStorage("user", null);
-  const [_, setUsers] = useLocalStorage("users", []);
+  const [users, setUsers] = useLocalStorage("users", []);
   const [cart, setCart] = useLocalStorage("cart", []);
 
   function addCart(data) {
@@ -69,13 +69,33 @@ export function InvoiceProvider({ children }) {
 
     setCart([]);
   }
+
+  // edit historyyyyyyyyyyy 
+  function editHistory(orderId, newStatus) {
+    const updatedUsers = users.map(user => {
+      if (user.role !== "user") return user;
+
+      return {
+        ...user,
+        history: user.history.map(historyItem =>
+          historyItem.id === orderId
+            ? { ...historyItem, status: newStatus }
+            : historyItem
+        )
+      };
+    });
+
+    setUsers(updatedUsers);
+}
+
+
   function removeCart(id) {
     setCart((prev) => prev.filter((item) => item.id !== id));
   }
 
   return (
     <InvoiceContext.Provider
-      value={{ cart, setCart, addCart, setHistory, removeCart }}
+      value={{ cart,users, setCart, addCart, setHistory, editHistory,removeCart }}
     >
       {children}
     </InvoiceContext.Provider>
