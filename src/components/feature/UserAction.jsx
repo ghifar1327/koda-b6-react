@@ -1,22 +1,48 @@
 import { CircleX, Image, KeyRound, Mail, MapPin, PhoneCall, User } from 'lucide-react'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from '../common/Button'
 import Input from '../common/Input'
+import AuthContext from '../../context/AuthContext'
+import { nanoid } from 'nanoid'
 
 export default function UserAction({show, setShow, add, edit, user}) {
+    const { registerUser, updateProfile } = useContext(AuthContext);
     const {handleSubmit, register, reset} = useForm()
     useEffect(() => {
-        if (edit && user) {
-            reset(user);
-        }
-    }, [user]);
-    console.log(user)
+     if (edit && user) {
+      reset(user);
+      }
+     }, [edit, user, reset]);
+
     if (!show) return null;
+
+
+    function action(data) {
+       if (add) {
+       const result = registerUser({
+         ...data,
+         id: nanoid(),
+         image: "",
+       });
+
+       if (result?.success !== false) {
+           setShow();
+           reset();
+           }
+       }
+
+      if (edit) {
+        const result = updateProfile(data);
+        if (result?.success) {
+          setShow();
+        }
+       }
+    }
     
     return (
       <div className={`absolute flex justify-end w-full  top-0 bg-black/30`}>
-          <form onSubmit={handleSubmit("")} className='relative flex  flex-col gap-10 bg-white w-[50%] h-auto pl-[3%] py-[3%]  -right-[5%]'>
+          <form onSubmit={handleSubmit(action)} className='relative flex  flex-col gap-10 bg-white w-[50%] h-auto pl-[3%] py-[3%]  -right-[5%]'>
               <section className='flex  justify-between'>
                 <h1 className='text-4xl'>{`${add ?  "Insert User" : edit && user?.fullName}`}</h1>
                 <button type="button" onClick={setShow}>
@@ -29,7 +55,6 @@ export default function UserAction({show, setShow, add, edit, user}) {
                   <div className='p-5 rounded-xl bg-gray-200 w-fit' ><Image size={36}/></div>
                   <p className='p-1 bg-primary rounded-md px-4 w-fit' orange>Upload</p>
               </label>
-
             <Input label="Full Name" type="text" id="fullName" {...register("fullName", {require: true})}><User size={18}/></Input>
             <Input label="Email" type="email" id="email" {...register("email", {require: true})}><Mail size={18}/></Input>
             <Input label="Phone" type="number" id="phone" {...register("phone", {require: true})}><PhoneCall size={18}/></Input>
@@ -39,8 +64,14 @@ export default function UserAction({show, setShow, add, edit, user}) {
             </label>
             <Input label="" type="password" id="password" password  {...register("password", {require: true})}><KeyRound size={18}/></Input>
             <Input label="Adress" type="text" id="adress" {...register("address", {require: true})}><MapPin size={18}/></Input>
-
-              <Button orange>{`${add ?  "Add Product" : edit && "Edit Product"}`}</Button>
+            <label htmlFor="user" className='flex flex-col gap-3'>
+                <p className='font-bold'>Type of User</p>
+                <div className='flex gap-3'>
+                   <Input type="radio" id="user" value="user" name="role" {...register("role", {required: true})}>User</Input>
+                   <Input type="radio" id="admin" value="admin" name="role" {...register("role", {required: true})}>Admim</Input>
+                </div>
+            </label>
+              <Button orange>{`${add ?  "Add User" : edit && "update"}`}</Button>
           </form>
       </div>
     )
