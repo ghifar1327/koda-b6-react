@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button } from '../../components/common/Button';
 import { Funnel, PenLine, Search, Trash2 } from 'lucide-react';
-import useLocalStorage from '../../hooks/useLocalStotage';
 import UserAction from '../../components/feature/UserAction';
+import AuthContext from '../../context/AuthContext';
 
 export default function UsersAdmin() {
-  const [ users , _] = useLocalStorage("users", [])
+  const { users } = useContext(AuthContext);
 
   const [showAddUser, setShowAddUser] = useState(false)
   const [showEditUser, setShowEditUser] = useState(false)
