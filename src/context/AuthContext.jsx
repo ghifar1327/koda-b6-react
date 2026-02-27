@@ -62,6 +62,25 @@ export function AuthProvider({ children }) {
 
     return
   }
+  function updateProfile(updatedData) {
+  if (!user) return { success: false, message: "User not logged in" };
+
+  // update list users
+  const updatedUsers = users.map((u) =>
+    u.id === user.id ? { ...u, ...updatedData } : u
+  );
+
+  setUsers(updatedUsers);
+
+  // update user yang sedang login
+  const newUserData = { ...user, ...updatedData };
+  setUser(newUserData);
+
+  setIsSuccess(true);
+  setError(false);
+
+  return { success: true };
+}
 
   function logout() {
     localStorage.removeItem("user");
@@ -75,9 +94,11 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user,
+        users,
         login,
         registerUser,
         logout,
+        updateProfile,
         error,
         setError,
         isSuccess,
