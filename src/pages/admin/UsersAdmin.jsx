@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '../../components/common/Button';
 import { Funnel, PenLine, Search, Trash2 } from 'lucide-react';
 import useLocalStorage from '../../hooks/useLocalStotage';
+import UserAction from '../../components/feature/UserAction';
 
 export default function UsersAdmin() {
-  const [ users , _] = useLocalStorage("users", null)
-  console.log(users)
+  const [ users , _] = useLocalStorage("users", [])
+
+  const [showAddUser, setShowAddUser] = useState(false)
+  const [showEditUser, setShowEditUser] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null)
+
   return (
+    <>
     <section className="p-[5%]">
       <h1 className="text-5xl">User list</h1>
       <div className="flex justify-between items-end">
-        <Button  size="w-fit p-2 h-fit px-3" orange>+ Add User</Button>
+        <Button onClick={()=> setShowAddUser(true)} size="w-fit p-2 h-fit px-3" orange>+ Add User</Button>
         <div className="flex gap-2 ">
             
             <label htmlFor="" className="flex items-end gap-3">
@@ -46,7 +52,7 @@ export default function UsersAdmin() {
                     src={item.image}
                     alt={item.FullName}
                     className="w-12 h-12 mx-auto object-cover rounded"
-                  />
+                    />
                 </td>
                 <td className="py-4">{item.fullName}</td>
                 <td className="py-4">{item.phone}</td>
@@ -54,7 +60,7 @@ export default function UsersAdmin() {
                 <td className="py-4">{item.email}</td>
                 <td className="py-4">
                   <div className="flex justify-center gap-2">
-                    <button onClick={""} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
+                    <button onClick={()=>{setSelectedUser(item); setShowEditUser(!showEditUser)}} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
                       <PenLine size={18} />
                     </button>
                     <button className="cursor-pointer w-8 h-8 bg-red-600/30 text-red-600 flex items-center justify-center rounded-full">
@@ -68,5 +74,8 @@ export default function UsersAdmin() {
         </table>
       </section>
     </section>
+    <UserAction add show={showAddUser} setShow={()=> {setShowAddUser(!showAddUser)}}/>
+    <UserAction edit user={selectedUser} show={showEditUser} setShow={()=> {setShowEditUser(!showEditUser)}}/>    
+    </>
   )
 }

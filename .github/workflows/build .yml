@@ -53,4 +53,4 @@ jobs:
           script: |
             docker pull ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
             docker rm -f web-ghifar
-            docker run -d -p 20801:80 --name --network pman_web web-ghifar ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
+            docker run -d -p 20801:80 --name web-ghifar --network pman_web ghcr.io/ghifar1327/koda-b6-coffee-shop-frontend:latest
