@@ -1,12 +1,14 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL 
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
-function http(url , opts={}){
-    const header = {}
+function http(url, body ,opts={}){
+    const headers = {}
     if(opts.token){
-        header.Authorezation = "Baerer " + opts.token 
+        headers.Authorization = "Bearer "+opts.token
     }
-    return fetch(BASE_URL + url,{
-        method: opts.method || "GET"
+    return fetch(BASE_URL + url, {
+        method: opts.method || "GET",
+        body,
+        headers
     })
 }
 
