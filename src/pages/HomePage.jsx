@@ -1,23 +1,45 @@
-import { useEffect } from "react";
+import {  useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Message from "../components/feature/Message";
 import Card from "../components/product/Card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../redux/reduser/products.slice";
+import http from "../lib/http";
+
 
 export default function HomePage() {
-  // const [products] = useContext(FetchContext);
-  const {products ,loading } = useSelector(state => state.products)
-  // console.log(loading)
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    if (products.length === 0) {
-      dispatch(fetchProducts())
-    }
-  },[dispatch])
+  // // const [products] = useContext(FetchContext);
+  // const {products ,loading } = useSelector(state => state.products)
+  // // console.log(loading)
+  // const dispatch = useDispatch()
+  // useEffect(()=>{
+  //   if (products.length === 0) {
+  //     dispatch(fetchProducts())
+  //   }
+  // },[dispatch])
 
-  // console.log(products)
+
+const [products, setProducts] = useState([]);
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await http("/landing/recommended-product");
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch products");
+      }
+
+      const data = await res.json();
+      setProducts(data);
+    } catch (err) {
+      console.error("Error fetching products:", err);
+    }
+  };
+
+  fetchData();
+}, []);
+
+console.log(products);
   return (
     <>
       <main className={"flex flex-col-reverse md:flex-row md:h-auto h-screen"}>
@@ -130,7 +152,7 @@ export default function HomePage() {
             yours too!
           </p>
         </article>
-        {loading && <p>Loading... </p>}
+        {/* {loading && <p>Loading... </p>} */}
         <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-2 md:gap-3">
           {products.slice(0, 4).map((item) => {
             return (
