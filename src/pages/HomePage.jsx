@@ -161,7 +161,7 @@ console.log(products);
                 name={item.name}
                 image={item?.image}
                 description={item.description}
-                rating={item.rating}
+                rating={item.avg_rating}
                 price={item.price}
               />
             );

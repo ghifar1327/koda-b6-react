@@ -100,7 +100,7 @@ export default function Card({
               <p
                 className={`${discount !== 0 ? "line-through text-red-500 text-sm md:text-xs lg:text-lg xl-xl" : "text-xl md:text-sm lg:text-xl xl-2xl font-semibold text-primary"}`}
               >
-                IDR {price.toLocaleString("id-ID")}
+                IDR {price ? price.toLocaleString("id-ID") : "0"}
               </p>
               {discount !== 0 && (
                 <p className="text-lg md:text-sm flex gap-2 lg:text-xl xl-2xl font-semibold text-primary">
