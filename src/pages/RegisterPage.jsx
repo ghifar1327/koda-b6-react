@@ -9,7 +9,6 @@ import { Link } from "react-router";
 import { useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import Modal from "../components/feature/Modal";
-import { nanoid } from "nanoid/non-secure";
 
 const schema = yup.object({
   fullName: yup.string().required("Name must be filled in"),
@@ -37,7 +36,7 @@ const schema = yup.object({
 
 export default function RegisterPage() {
   // const navigate = useNavigate();
-  const { error, setError, isSuccess, setIsSuccess } = useContext(AuthContext);
+  const { error, setError, isSuccess, setIsSuccess, message } = useContext(AuthContext);
   const { registerUser } = useContext(AuthContext);
   // console.log(isSuccess);
   const {
@@ -53,16 +52,7 @@ export default function RegisterPage() {
     setIsSuccess(false)
   }, []);
   function action(form) {
-    const data = {
-      ...form,
-      id: nanoid(10),
-      image: "",
-      role: "user",
-      history: [],
-      create_at: new Date(),
-      update_at: "",
-    };
-    registerUser(data);
+    registerUser(form);
     if (isSuccess) reset()
   }
   return (
@@ -167,7 +157,7 @@ export default function RegisterPage() {
         </Button>
       </div>
       <Modal success={isSuccess} onClick={()=> setIsSuccess(!isSuccess)}>
-        <p className="text-3xl text-gray-700">Register Successful</p>
+        <p className="text-3xl text-gray-700">{message}</p>
         <Link
           to="/login"
           onClick={()=> setIsSuccess(!isSuccess)}
@@ -177,7 +167,7 @@ export default function RegisterPage() {
         </Link>
       </Modal>
       <Modal error={error} onClick={() => setError(!error)}>
-        <p className="text-2xl text-gray-700">Email Is Registered</p>
+        <p className="text-2xl text-gray-700">{message}</p>
         <Button orange onClick={() => setError(!error)}>
           Try Again
         </Button>

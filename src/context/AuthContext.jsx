@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStotage";
 import { nanoid } from "nanoid";
+import http from "../lib/http";
 
 const AuthContext = createContext(null);
 
@@ -20,6 +21,7 @@ export function AuthProvider({ children }) {
   const [users, setUsers] = useLocalStorage("users", []);
   const [error, setError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [message, setMessage] = useState("")
 
   useEffect(() => {
     if (users.length === 0) {
@@ -47,21 +49,34 @@ export function AuthProvider({ children }) {
     };
   }
 
-  function registerUser(data) {
-    const exists = users.some((u) => u.email === data.email);
+async function registerUser(form) {
+  const data = {
+    address: form.address,
+    email: form.email,
+    full_name: form.fullName,
+    password: form.password,
+    phone: String(form.phone)
+  }
+  
+  try {
+    const res = await http("/auth/register", JSON.stringify(data),{method: "POST"})
 
-    if (exists) {
-      setError(true);
-      setIsSuccess(false);
-      return
+    if (!res.success) {
+      throw new Error(res.message)
     }
 
-    setUsers((prev) => [...prev, data]);
-    setError(false);
-    setIsSuccess(true);
+    setError(false)
+    setIsSuccess(true)
+    setMessage(res.message)
 
-    return
+  } catch (err) {
+    setError(true)
+    setIsSuccess(false)
+    setMessage(err.message || "Someting is Wrong")
   }
+}
+
+
   function updateProfile(updatedData) {
   if (!user) return { success: false, message: "User not logged in" };
 
@@ -103,6 +118,7 @@ export function AuthProvider({ children }) {
         setError,
         isSuccess,
         setIsSuccess,
+        message
       }}
     >
       {children}
