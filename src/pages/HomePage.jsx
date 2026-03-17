@@ -158,12 +158,11 @@ console.log(products);
             return (
               <Card
                 id={item.id}
-                name={item.Name}
-                image={item?.Images}
-                description={item.Description}
-                rating={item.Rating}
-                price={item.Price}
-                // discount={item.discountPercent}
+                name={item.name}
+                image={item?.image}
+                description={item.description}
+                rating={item.rating}
+                price={item.price}
               />
             );
           })}

@@ -68,24 +68,10 @@ export default function Card({
             </section>
             <section className="flex flex-col gap-2">
               <div>
-              {discount !== 0 && (
-                <span className="text-xs text-red-600">
-                  Discount {discount}%
-                </span>
-              )}
-                 <div className="flex gap-1 md-gap-2 lg:gap-5 items-center">
-                   <p
-                     className={`${discount !== 0 ? "line-through text-red-500 text-sm md:text-xs lg:text-lg xl-xl" : "text-xl md:text-sm lg:text-xl xl-2xl font-semibold text-primary"}`}
-                     >
-                     IDR {price.toLocaleString("id-ID")}
-                   </p>
-                   {discount !== 0 && (
-                     <p className="text-lg md:text-sm flex gap-2 lg:text-xl xl-2xl font-semibold text-primary">
-                       IDR {(price - price * (discount / 100)).toLocaleString("id-ID")}
-                     </p>
-                   )}
-                 </div>
-                </div>
+                <p className="text-lg md:text-sm flex gap-2 lg:text-xl xl-2xl font-semibold text-primary">
+                  IDR {price.toLocaleString("id-ID")}
+                </p> 
+              </div>
               <div className="flex flex-col md:flex-row gap-3">
                 <Button
                   orange
