@@ -19,7 +19,7 @@ const scehema = yup.object({
 export default function LoginPage() {
   const navigate = useNavigate();
   const [count, setCount] = useState(5);
-  const { user, login, isSuccess, setIsSuccess, error, setError } = useContext(AuthContext);
+  const { user, login ,isSuccess, setIsSuccess, error, setError } = useContext(AuthContext);
   // console.log(isSuccess)
   const {
     handleSubmit,
@@ -38,11 +38,11 @@ export default function LoginPage() {
         setCount((prev) => {
           if (prev <= 1) {
             clearInterval(timer);
-            if (user.role === "admin") {
-              navigate("/admin");
-            } else {
+            // if (user.role === "admin") {
+              // navigate("/admin");
+            // } else {
                 navigate("/");
-              }
+              // }
               return 0;
             }
           return prev - 1;
@@ -52,28 +52,15 @@ export default function LoginPage() {
   }, [isSuccess]);
   
   async function action(form) {
-    // login(form);
-    try{
-      const data = await fetch("http://localhost:8888/login",{
-        method: "POST",
-        headers: {
-                 "Content-Type": "application/json"
-                },
-        body : JSON.stringify(form)
-      })
-      console.log(data)
-    }catch(err){
-      console.log(err)
-    }
-
+    login(form);
   }
 
   function handleSuccess(){
-    if (user.role === "admin") {
-        navigate("/admin");
-      } else {
+    // if (user.role === "admin") {
+        // navigate("/admin");
+      // } else {
         navigate("/");
-      }
+      // }
   }
   return (
     <>

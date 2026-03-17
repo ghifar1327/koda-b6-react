@@ -29,24 +29,49 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  function login(data) {
-    const foundUser = users.find(
-      (u) => u.email === data.email && u.password === data.password
-    );
-    if (!foundUser) {
-      setError(true);
-      setIsSuccess(false);
-      return { success: false };
+async function login(form) {
+// const foundUser = users.find(
+//       (u) => u.email === data.email && u.password === data.password
+//     );
+//     if (!foundUser) {
+//       setError(true);
+//       setIsSuccess(false);
+//       return { success: false };
+//     }
+
+//     setUser(foundUser);
+//     setError(false);
+//     setIsSuccess(true);
+
+//     return {
+//       success: true,
+//       role: foundUser.role,
+//     };
+
+    const data = {
+    address: form.address,
+    email: form.email,
+    full_name: form.fullName,
+    password: form.password,
+    phone: String(form.phone)
+  }
+  
+  try {
+    const res = await http("/auth/login", JSON.stringify(data),{method: "POST"})
+
+    if (!res.success) {
+      throw new Error(res.message)
     }
+    console.log(res)
+    setError(false)
+    setIsSuccess(true)
+    setMessage(res.message)
 
-    setUser(foundUser);
-    setError(false);
-    setIsSuccess(true);
-
-    return {
-      success: true,
-      role: foundUser.role,
-    };
+  } catch (err) {
+    setError(true)
+    setIsSuccess(false)
+    setMessage(err.message || "Someting is Wrong")
+  }
   }
 
 async function registerUser(form) {
