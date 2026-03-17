@@ -51,8 +51,21 @@ export default function LoginPage() {
     }
   }, [isSuccess]);
   
-  function action(form) {
-    login(form);
+  async function action(form) {
+    // login(form);
+    try{
+      const data = await fetch("http://localhost:8888/login",{
+        method: "POST",
+        headers: {
+                 "Content-Type": "application/json"
+                },
+        body : JSON.stringify(form)
+      })
+      console.log(data)
+    }catch(err){
+      console.log(err)
+    }
+
   }
 
   function handleSuccess(){
