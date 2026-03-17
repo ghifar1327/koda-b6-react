@@ -41,7 +41,13 @@ export default function Card({
     <>
       <figure key={id} className="col-span-1">
         <div className="relative group w-full:">
-          <img src={image} alt={name} className="w-full aspect-square object-cover rounded" />
+         <div className="relative w-full aspect-square overflow-hidden rounded">
+           <img
+             src={image}
+             alt={name}
+             className="w-full h-full object-cover"
+           />
+         </div>
           <div className="absolute inset-0 opacity-0 bg-black/60 group-hover:opacity-100 rounded  transition-all duration-500 ease-in-out">
             <Link
               to={`/detail/${id}/${name}`}
