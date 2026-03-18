@@ -24,13 +24,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const res = await http("/landing/recommended-product");
-
-      if (!res.ok) {
-        throw new Error("Failed to fetch products");
-      }
-
-      const data = await res.json();
-      setProducts(data);
+      setProducts(res);
     } catch (err) {
       console.error("Error fetching products:", err);
     }
