@@ -30,24 +30,6 @@ export function AuthProvider({ children }) {
   }, []);
 
 async function login(form) {
-// const foundUser = users.find(
-//       (u) => u.email === data.email && u.password === data.password
-//     );
-//     if (!foundUser) {
-//       setError(true);
-//       setIsSuccess(false);
-//       return { success: false };
-//     }
-
-//     setUser(foundUser);
-//     setError(false);
-//     setIsSuccess(true);
-
-//     return {
-//       success: true,
-//       role: foundUser.role,
-//     };
-
     const data = {
     address: form.address,
     email: form.email,
@@ -62,7 +44,8 @@ async function login(form) {
     if (!res.success) {
       throw new Error(res.message)
     }
-    console.log(res)
+    // console.log(res.user)
+    setUser(res.user)
     setError(false)
     setIsSuccess(true)
     setMessage(res.message)
@@ -101,8 +84,50 @@ async function registerUser(form) {
   }
 }
 
+// =============================================================================== reqeust FG
 
-  function updateProfile(updatedData) {
+async function forgotPassword(email){
+  try{
+    const res = await http("/auth/forgot-password", JSON.stringify(email),{method: "POST"})
+    if (!res.success) {
+      throw new Error(res.message)
+    }
+
+    setError(false)
+    setIsSuccess(true)
+    setMessage(res.message)
+  }catch(err){
+    setError(true)
+    setIsSuccess(false)
+    setMessage(err.message || "Someting is Wrong")
+  }
+}
+
+
+async function resetPassword(data) {
+  const req = {
+  code: Number(data.otp),
+  email: data.email,
+  new_password: data.password
+}
+console.log(req)
+  try{
+    const res = await http("/auth/reset-password", JSON.stringify(req),{method: "PATCH"})
+    if (!res.success) {
+      throw new Error(res.message)
+    }
+
+    setError(false)
+    setIsSuccess(true)
+    setMessage(res.message)
+  }catch(err){
+    setError(true)
+    setIsSuccess(false)
+    setMessage(err.message || "Someting is Wrong")
+  }  
+}
+
+function updateProfile(updatedData) {
   if (!user) return { success: false, message: "User not logged in" };
 
   // update list users
@@ -138,6 +163,8 @@ async function registerUser(form) {
         login,
         registerUser,
         logout,
+        forgotPassword,
+        resetPassword,
         updateProfile,
         error,
         setError,
