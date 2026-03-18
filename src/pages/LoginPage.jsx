@@ -38,11 +38,11 @@ export default function LoginPage() {
         setCount((prev) => {
           if (prev <= 1) {
             clearInterval(timer);
-            // if (user.role === "admin") {
-              // navigate("/admin");
-            // } else {
+            if (user.role === 1) {
+              navigate("/admin");
+            } else {
                 navigate("/");
-              // }
+              }
               return 0;
             }
           return prev - 1;
@@ -56,11 +56,11 @@ export default function LoginPage() {
   }
 
   function handleSuccess(){
-    // if (user.role === "admin") {
-        // navigate("/admin");
-      // } else {
+    if (user.role === 1) {
+        navigate("/admin");
+      } else {
         navigate("/");
-      // }
+      }
   }
   return (
     <>

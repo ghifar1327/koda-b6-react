@@ -38,7 +38,7 @@ export default function Header() {
       setShowModal(!showModal)
     }
 
-  return user?.role === "admin" ? (
+  return user?.role === 1 ? (
     <nav
       className={`w-full h-auto border-b-2 border-gray-300  flex justify-between px-[5%] p-3`}
     >
@@ -125,7 +125,7 @@ export default function Header() {
                   onClick={() => setToggle(!toggle)}
                   className="cursor-pointer h-10 w-10 flex justify-center border-2 text-xl bg-purple-600 rounded-full"
                 >
-                  <p>{user.fullName.charAt(0)}</p>
+                  <p>{user.full_name.charAt(0)}</p>
                 </button>
                 <div
                   className={`absolute ${!toggle && "hidden"} w-70 p-2 shadow flex flex-col gap-10 py-5 bg-white text-black rounded-lg right-0 mt-5`}
