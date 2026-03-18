@@ -8,12 +8,16 @@ async function http(url, body ,opts={}){
         headers.Authorization = "Bearer "+opts.token
     }
     const res = await fetch(BASE_URL + url, {
-        method: opts.method || "GET",
-        body,
-        headers
+    method: opts.method || "GET",
+    body,
+    headers
     })
-    const data = await res.json()
-    return data
+  
+    if (!res.ok) {
+      throw new Error("Failed to fetch")
+    }
+  
+    return res.json()
 }
 
 export default http;
