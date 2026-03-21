@@ -1,12 +1,13 @@
 import { Button } from "../common/Button";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../feature/Modal";
 import Input from "../common/Input";
 import { useForm } from "react-hook-form";
 import InvoiceContext from "../../context/InvoiceContext";
 import { nanoid } from "nanoid";
+import http from "../../lib/http";
 
 export default function Card({
   id,
@@ -14,10 +15,13 @@ export default function Card({
   name,
   description,
   price,
-  discount,
   rating,
 }) {
   const navigate = useNavigate();
+
+  const [sizes , setSizes] = useState([])
+  const [variants, setVariants] = useState([])
+
   const [toggle, setToggle] = useState(false);
   const { handleSubmit, register, reset } = useForm();
   const {addCart} = useContext(InvoiceContext)
@@ -37,6 +41,36 @@ export default function Card({
     reset();
     setToggle(false)
   }
+useEffect(() => {
+  let isMounted = true
+
+  const fetchData = async () => {
+    try {
+      const [resVariants, resSizes] = await Promise.all([
+        http(`/products/${id}/variants`),
+        http(`/products/${id}/sizes`)
+      ])
+
+      if (!resSizes.success || !resVariants.success) {
+        throw new Error(resSizes.message || resVariants.message)
+      }
+
+      if (isMounted) {
+        setSizes(resSizes.results)
+        setVariants(resVariants.results)
+      }
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  if (id) fetchData()
+
+  return () => {
+    isMounted = false
+  }
+}, [id])
   return (
     <>
       <figure key={id} className="col-span-1">
@@ -99,20 +133,92 @@ export default function Card({
             </section>
           </div>
         </section>
+        {/* MODALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL */}
+        
         <Modal toggle={toggle} onClick={() => setToggle(!toggle)}>
-          <form className="flex flex-col gap-2" onSubmit={handleSubmit(submit)}>
-            <p className="text-5xl mb-10 text-primary">{name}</p>
+         <form
+           className="w-[320px] md:w-105 flex flex-col gap-4"
+           onSubmit={handleSubmit(submit)}
+         >
+           {/* HEADER */}
+           <div className="flex flex-col items-center gap-2">
+             <img
+               src={image}
+               alt={name}
+               className="w-40 h-40 object-cover rounded-xl shadow"
+             />
+             <p className="text-2xl font-bold text-center">{name}</p>
+             <p className="text-xl font-semibold text-primary">
+               IDR {price ? price.toLocaleString("id-ID") : "0"}
+             </p>
+           </div>
+                        
+           {/* QUANTITY */}
+           <div className="flex flex-col gap-1">
+             <label className="font-semibold">Quantity</label>
+             <Input
+               type="number"
+               min={1}
+               defaultValue={1}
+               {...register("modal_qty", { required: true })}
+             />
+           </div>
+                        
+           {/* SIZE */}
+           <div className="flex flex-col gap-2">
+             <label className="font-semibold">Choose Size</label>
+             <div className="grid grid-cols-3 gap-2">
+               {sizes.map((size)=>{
+                return(
+                <Input
+                key={size.id}
+                type="radio"
+                id={`size-${size.id}`}
+                value={size.id}
+                {...register("size_id", {required:true})}>
+                {size.name}
+                </Input>
+                )
+               })}
+             </div>
+           </div>
+              
+           {/* VARIANT */}
+           <div className="flex flex-col gap-2">
+             <label className="font-semibold">Choose Variant</label>
+             <div className="grid grid-cols-2 gap-2">
+               {variants.map((variant) => {
+                 return (
+                   <Input
+                     key={variant.id}
+                     type="radio"
+                     id={`variant-${variant.id}`}
+                     value={variant.id}
+                     {...register("variant_id", { required: true })}
+                   >
+                     {variant.name}
+                   </Input>
+                 )
+               })}
+             </div>
+           </div>
+              
+           {/* BUTTON */}
+           <Button
+             orange
+           >
+             Add to Cart
+           </Button>
+         </form>
+        </Modal>
+        {/* <Modal toggle={toggle} onClick={() => setToggle(!toggle)}>
+          <form className="flex w-80 md:w-100 flex-col gap-2" onSubmit={handleSubmit(submit)}>
+            <p className="text-5xl mb- text-primary">{name}</p>
+            <img src={image} alt={name} className="w-[80%]"/>
             <div className="flex gap-1 md-gap-2 lg:gap-5 items-center">
-              <p
-                className={`${discount !== 0 ? "line-through text-red-500 text-sm md:text-xs lg:text-lg xl-xl" : "text-xl md:text-sm lg:text-xl xl-2xl font-semibold text-primary"}`}
-              >
+              <p className="font-bold text-5xl">
                 IDR {price ? price.toLocaleString("id-ID") : "0"}
               </p>
-              {discount !== 0 && (
-                <p className="text-lg md:text-sm flex gap-2 lg:text-xl xl-2xl font-semibold text-primary">
-                  IDR {(price - price * (discount / 100)).toLocaleString("id-ID")}
-                </p>
-              )}
             </div>
             <div>
               <label htmlFor="" className="text-xl font-semibold">
@@ -123,59 +229,41 @@ export default function Card({
             <label htmlFor="medium" className="text-xl font-semibold">
               Choose Size
             </label>
-            <div className="flex gap-3 md:gap-1 ">
-              <Input
+            <div className="flex flex-wrap gap-3 md:gap-1 ">
+               {sizes.map((size)=>{
+                return(
+                <Input
+                key={size.id}
                 type="radio"
-                id="regularM"
-                value="Regular"
-                {...register("modal_size", { required: true })}
-              >
-                Regular
-              </Input>
-
-              <Input
-                type="radio"
-                id="mediumM"
-                value="Medium"
-                {...register("modal_size", { required: true })}
-              >
-                Medium
-              </Input>
-
-              <Input
-                type="radio"
-                id="largeM"
-                value="Large"
-                {...register("modal_size", { required: true })}
-              >
-                Large
-              </Input>
+                id={`size-${size.id}`}
+                value={size.id}
+                {...register("size_id", {required:true})}>
+                {size.name}
+                </Input>
+                )
+               })}
             </div>
             <label htmlFor="hot" className="text-xl font-semibold">
               Hot/ice
             </label>
-            <div className="flex gap-3 md:gap-1 ">
-              <Input
-                type="radio"
-                id="hotM"
-                value="Hot"
-                {...register("modal_temperature", { required: true })}
-              >
-                Hot
-              </Input>
-
-              <Input
-                type="radio"
-                id="iceM"
-                value="Ice"
-                {...register("modal_temperature", { required: true })}
-              >
-                Ice
-              </Input>
+            <div className="flex flex-wrap gap-3 md:gap-1 ">
+              {variants.map((variant) => {
+                 return (
+                   <Input
+                     key={variant.id}
+                     type="radio"
+                     id={`variant-${variant.id}`}
+                     value={variant.id}
+                     {...register("variant_id", { required: true })}
+                   >
+                     {variant.name}
+                   </Input>
+                 )
+               })}
             </div>
             <Button orange>Add Cart</Button>
           </form>
-        </Modal>
+        </Modal> */}
       </figure>
     </>
   );
