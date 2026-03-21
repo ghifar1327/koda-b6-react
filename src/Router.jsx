@@ -22,15 +22,16 @@ import Dashboard from "./pages/admin/Dashboard";
 import OrderAdmin from "./pages/admin/OrderAdmin";
 import ProductAdmin from "./pages/admin/ProductsAdmin";
 import UsersAdmin from "./pages/admin/UsersAdmin";
+import ResetPasswoed from "./pages/ResetPasswoed";
 
 export default function Router() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        <PublicRoute>
+        // <PublicRoute>
           <MainLayout />
-        </PublicRoute>
+        // </PublicRoute>
       ),
       children: [
         { index: true, element: <HomePage /> },
@@ -40,9 +41,9 @@ export default function Router() {
     },
     {
       element: (
-        <ProtectedRoute role="user">
+        // <ProtectedRoute role="user">
           <DetailLayout />
-        </ProtectedRoute>
+        // </ProtectedRoute>
       ),
       children: [
         { path: "payment", element: <Payment /> },
@@ -56,14 +57,15 @@ export default function Router() {
         { path: "login", element: <LoginPage /> },
         { path: "register", element: <RegisterPage /> },
         { path: "forgotPassword", element: <ForgotPwd /> },
+        {path:"reset-password", element:<ResetPasswoed/>}
       ],
     },
     {
       path: "admin",
       element: (
-        <ProtectedRoute role="admin">
+        // <ProtectedRoute role="admin">
           <AdminLayout />
-        </ProtectedRoute>
+        // </ProtectedRoute>
       ),
       children: [
         {
