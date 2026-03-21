@@ -4,24 +4,46 @@ import { ArrowLeft, ArrowRight, Search, SlidersHorizontal } from "lucide-react";
 import Input from "../components/common/Input";
 import Card from "../components/product/Card";
 import Filter from "../components/feature/Filter";
-import { useSelector } from "react-redux";
-import { useMemo, useState } from "react";
+// import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
+import http from "../lib/http";
 
 export default function ProductsPage() {
   const [toggle, setToggle] = useState(false);
   const [searchParams] = useSearchParams();
-  const products = useSelector((state) => state.products.products);
+  // const products = useSelector((state) => state.products.products);
   // console.log(products)
 // ========== filter =========
 
+const [products, setProducts] = useState([])
+
+useEffect(()=>{
+  const fetchProducts = async () => {
+    try{
+      const res = await http("/products")
+      // console.log("RESPONSE:", res.results)
+      // console.log(res.result)
+      
+      if (!res.success){
+        throw new Error(res.message)
+      }
+      setProducts(res.results)
+    }catch(err){
+      console.error("ERROR:", err)
+    }
+  }
+  
+  fetchProducts()
+},[])
+
 const filtered = useMemo(() => {
   let result = [...products];
-
+  
   const name = searchParams.get("name");
   const categories = searchParams.getAll("category");
   const maxPrice = searchParams.get("maxPrice");
-
+  
   if (name) {
     result = result.filter((item) =>
       item.name.toLowerCase().includes(name.toLowerCase())
@@ -33,16 +55,17 @@ const filtered = useMemo(() => {
       categories.includes(item.category)
     );
   }
-
+  
   if (maxPrice) {
     result = result.filter((item) =>
       item.price <= Number(maxPrice)
-    );
-  }
+  );
+}
 
-  return result;
+return result;
 }, [products, searchParams]);
 
+// console.log(products)
 // ================================
 
 
@@ -52,7 +75,7 @@ const filtered = useMemo(() => {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentProducts = filtered.slice(startIndex, endIndex);
-
+  
   function toogleButton(e) {
     e.preventDefault();
     setToggle((prev) => !prev);
@@ -141,19 +164,18 @@ const filtered = useMemo(() => {
         Our <span className="text-[#8E6447]">Product</span>
       </h1>
       <section className="flex w-full gap-5 px-[3%] md:px-[10%]">
-        <div className="hidden md:block w-[50%]">
+        <div className="hidden md:block w-[30%]">
           <Filter />
         </div>
-        <div className="grid grid-cols-2 gap-1 md:gap-3 lg:gap-5">
+        <div className="grid grid-cols-2 flex-1 gap-1 md:gap-3 lg:gap-5">
           {currentProducts.map((item) => {
             return (
               <Card
                 id={item.id}
-                image={item.images[0]}
+                image={item.image}
                 name={item.name}
                 price={item.price}
                 description={item.description}
-                discount={item.discountPercent}
                 rating={item.rating}
               />
             );
