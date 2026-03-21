@@ -1,5 +1,5 @@
 import { ArrowRight, Minus, Plus, ShoppingCart, ThumbsUp } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Card from "../components/product/Card";
 import Input from "../components/common/Input";
@@ -7,18 +7,53 @@ import { Link, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import InvoiceContext from "../context/InvoiceContext";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { nanoid } from "nanoid";
+import http from "../lib/http";
 
-export default function Product() {
-  const { id, name } = useParams();
+export default function DetailProduct() {
+  const { id } = useParams();
   const [count, setCount] = useState(1);
   const { user } = useContext(AuthContext);
   const { addCart } = useContext(InvoiceContext);
-  const products = useSelector(state=> state.products.products)
+  const [products, setProducts ] = useState([])
+  const [render, setRender] = useState({})
+  const [sizes, setSizes] = useState([])
+  const [variants, setVariants] = useState([])
   // console.log(products)
-  
-  const render = products.find((item) => Number(item.id) === Number(id));
+
+  useEffect(()=>{
+    let isMounted = true
+    const fetchdata = async ()=>{
+      try{
+        const [resProductByID, resAllProducts, resVariants, resSizes] = await Promise.all([
+          http(`/products/${id}`),
+          http("/products"),
+          http(`/products/${id}/variants`),
+          http(`/products/${id}/sizes`)
+        ])
+        if (!resProductByID.success || !resAllProducts.success || !resSizes.success || !resVariants.success) {
+          throw new Error(resProductByID.message || resAllProducts.message || resSizes.message || resVariants.message)
+        }
+        // console.log(resAllProducts)
+        console.log(resProductByID)
+        if (isMounted){
+          setRender(resProductByID.results)
+          setProducts(resAllProducts.results)
+          setSizes(resSizes.results)
+          setVariants(resVariants.results)
+        }
+      }catch(err){
+        return err
+      }
+
+    }
+    if(id) fetchdata()
+        return ()=>{
+      isMounted = false
+    }
+  },[id])
+  // const render = products.find((item) => Number(item.id) === Number(id));
 
   // paginationnnnnnnnnnnnn
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,7 +66,7 @@ export default function Product() {
   function action(form) {
     const product = {
       id: nanoid(10),
-      image: render.images[0],
+      image: render.images,
       name: name,
       size: form.size,
       temperature: form.hotIce,
@@ -54,24 +89,24 @@ export default function Product() {
         <figure className="flex-1/2">
           <div className="w-full">
             <img
-              src={render.images[0]}
+              src={render.image}
               alt={render.name}
               className="w-full mb-3"
             />
           </div>
           <div className="grid grid-cols-3 gap-3 w-full">
             <img
-              src={render.images[1]}
+              src={render.image}
               alt={render.name}
               className="w-full"
             />
             <img
-              src={render.images[2]}
+              src={render.image}
               alt={render.name}
               className="w-full"
             />
             <img
-              src={render.images[3]}
+              src={render.image}
               alt={render.name}
               className="w-full"
             />
@@ -86,25 +121,11 @@ export default function Product() {
               {render.name}
             </h1>
             <div className="flex gap-5 items-center">
-              {render.discountPercent ? (
-                <>
-                  <p className="text-xl md:text-xs lg:text-xl text-red line-through text-red-500">
-                    IDR {render.price.toLocaleString("id-ID")}
-                  </p>
-                  <p className="text-3xl md:text-xl text-primary">
-                    IDR {price.toLocaleString("id-ID")}{" "}
-                    <span className="text-gray-300">
-                      discout {render.discountPercent}%
-                    </span>
-                  </p>
-                </>
-              ) : (
-                <p className="text-3xl md:text-xl text-primary">
-                  IDR {render.price.toLocaleString("id-ID")}
-                </p>
-              )}
+              <p className="text-3xl md:text-xl text-primary">
+                IDR {render?.price?.toLocaleString("id-ID")}
+              </p>
             </div>
-            <img src="/ratting.png" alt="" className="w-[30%]" />
+            <p>{render.rating}</p>
             <div className="flex items-center text-xl md:text-xs lg:text-lg gap-3 text-gray-500">
               <p>200+ Review</p>
               <p>|</p>
@@ -139,56 +160,37 @@ export default function Product() {
               Choose Size
             </label>
             <div className="flex gap-3 md:gap-1 text-md md:text-xs lg:text-xl">
-              <Input
-                type={"radio"}
-                id={"regular"}
-                name={"cup"}
-                value={"Regular"}
-                {...register("size", { required: true })}
-              >
-                Regular
-              </Input>
-              <Input
-                type={"radio"}
-                id={"medium"}
-                name={"cup"}
-                value={"Medium"}
-                {...register("size", { required: true })}
-              >
-                Medium
-              </Input>
-              <Input
-                type={"radio"}
-                id={"large"}
-                name={"cup"}
-                value={"Large"}
-                {...register("size", { required: true })}
-              >
-                Large
-              </Input>
+              {/* SIZE */}
+              {sizes.map((size)=>{
+                return(
+                <Input
+                key={size.id}
+                type="radio"
+                id={`size-${size.id}`}
+                value={size.id}
+                {...register("size_id", {required:true})}>
+                {size.name}
+                </Input>
+                )
+               })}
             </div>
             <label htmlFor="hot" className="text-2xl md:text-xl font-semibold">
-              Hot/ice
+              Choose Variant
             </label>
             <div className="flex gap-3 md:gap-1 text-md md:text-xs lg:text-xl">
-              <Input
-                type={"radio"}
-                id={"hot"}
-                name={"hot/ice"}
-                value={"Hot"}
-                {...register("hotIce", { required: true })}
-              >
-                Hot
-              </Input>
-              <Input
-                type={"radio"}
-                id={"ice"}
-                name={"hot/ice"}
-                value={"Ice"}
-                {...register("hotIce", { required: true })}
-              >
-                Ice
-              </Input>
+              {variants.map((variant) => {
+                 return (
+                   <Input
+                     key={variant.id}
+                     type="radio"
+                     id={`variant-${variant.id}`}
+                     value={variant.id}
+                     {...register("variant_id", { required: true })}
+                   >
+                     {variant.name}
+                   </Input>
+                 )
+               })}
             </div>
           </section>
           <section className="flex gap-5 md:gap-3 text-md md:text-xs lg:text-xl mt-10 md:mt-5 lg:mt-10">
@@ -212,11 +214,11 @@ export default function Product() {
           return (
             <Card
               id={item.id}
-              image={item.images[0]}
+              image={item.image}
               name={item.name}
               price={item.price}
               description={item.description}
-              discount={item.discountPercent}
+              
               rating={item.rating}
             />
           );
@@ -228,11 +230,11 @@ export default function Product() {
             <Card
               id={item.id}
               name={item.name}
-              image={item.images[0]}
+              image={item.image}
               description={item.description}
               rating={item.rating}
               price={item.price}
-              discount={item.discountPercent}
+              
             />
           );
         })}
