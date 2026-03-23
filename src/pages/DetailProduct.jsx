@@ -8,8 +8,8 @@ import AuthContext from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import InvoiceContext from "../context/InvoiceContext";
 // import { useSelector } from "react-redux";
-import { nanoid } from "nanoid";
 import http from "../lib/http";
+import { nanoid } from "nanoid";
 
 export default function DetailProduct() {
   const { id } = useParams();
@@ -36,7 +36,6 @@ export default function DetailProduct() {
           throw new Error(resProductByID.message || resAllProducts.message || resSizes.message || resVariants.message)
         }
         // console.log(resAllProducts)
-        console.log(resProductByID)
         if (isMounted){
           setRender(resProductByID.results)
           setProducts(resAllProducts.results)
@@ -64,34 +63,49 @@ export default function DetailProduct() {
   const currentProducts = products.slice(startIndex, endIndex);
   const { handleSubmit, register, reset } = useForm();
   function action(form) {
-    const product = {
-      id: nanoid(10),
-      image: render.images,
-      name: name,
-      size: form.size,
-      temperature: form.hotIce,
-      quantity: count,
-      price: Number(render.price) * Number(count),
-      total: Number(price) * Number(count),
-    };
+  const selectedSize = sizes.find(s => s.id === Number(form.size));
+  const selectedVariant = variants.find(v => v.id === Number(form.variant));
+
+  const basePrice = render.price;
+  const sizePrice = selectedSize?.add_price || 0;
+  const variantPrice = selectedVariant?.add_price || 0;
+  const quantity = count;
+
+  const subtotal = (basePrice + sizePrice + variantPrice) * quantity;
+
+  const product = {
+    ...form,
+    id: nanoid(),
+    product_id: id,
+    name: render.name,
+    image: render.image,
+    price:render.price,
+    quantity,
+    size: selectedSize,
+    variant: selectedVariant,
+    subtotal
+  };
+
+  // addCart(product);
+  console.log(product);
     addCart(product);
     setCount(1);
     reset();
   }
 
   if (!render) return <p>Loading...</p>;
-  const price = render.discountPercent
-    ? render.price - (render.price * render.discountPercent) / 100
-    : render.price;
+  // const price = render.discountPercent
+  //   ? render.price - (render.price * render.discountPercent) / 100
+  //   : render.price;
   return (
     <main className="p-[5%] md:px-[3%] lg:px-[10%] flex flex-col gap-10">
       <section className="flex flex-col md:flex-row gap-5 w-full">
         <figure className="flex-1/2">
-          <div className="w-full">
+          <div className="w-full aspect-square overflow-hidden mb-3">
             <img
               src={render.image}
               alt={render.name}
-              className="w-full mb-3"
+              className="w-full object-cover"
             />
           </div>
           <div className="grid grid-cols-3 gap-3 w-full">
@@ -168,7 +182,7 @@ export default function DetailProduct() {
                 type="radio"
                 id={`size-${size.id}`}
                 value={size.id}
-                {...register("size_id", {required:true})}>
+                {...register("size", {required:true})}>
                 {size.name}
                 </Input>
                 )
@@ -185,7 +199,7 @@ export default function DetailProduct() {
                      type="radio"
                      id={`variant-${variant.id}`}
                      value={variant.id}
-                     {...register("variant_id", { required: true })}
+                     {...register("variant", { required: true })}
                    >
                      {variant.name}
                    </Input>
@@ -199,9 +213,9 @@ export default function DetailProduct() {
                 Buy
               </Button>
             </Link>
-            <Button size={"border-2 p-2 md:p-1 lg:p-2 w-full border-primary"}>
-              <ShoppingCart color={"#FF8906"} size={18} />
-              <p className="text-primary px-3">add to chart</p>
+            <Button size={"border-2 p-2 md:p-1 lg:p-2 w-full hover:bg-primary hover:text-white text-primary border-primary"}>
+              <ShoppingCart size={18} />
+              <p className="ml-3">add to chart</p>
             </Button>
           </section>
         </form>
