@@ -8,31 +8,38 @@ export function InvoiceProvider({ children }) {
   const [users, setUsers] = useLocalStorage("users", []);
   const [cart, setCart] = useLocalStorage("cart", []);
 
-  function addCart(data) {
+  const addCart = (data) => {
     if (!data) return;
 
     setCart((prev) => {
       const index = prev.findIndex(
         (item) =>
-          item.name === data.name &&
-          item.size === data.size &&
-          item.temperature === data.temperature,
+          item.product_id === data.product_id &&
+          item.size?.id === data.size?.id &&
+          item.variant?.id === data.variant?.id
       );
+
       if (index !== -1) {
         const updated = [...prev];
         const existing = updated[index];
 
         const newQty = existing.quantity + data.quantity;
-        updated[index] = {
-          ...existing,
-          quantity: newQty,
-          total: newQty * existing.price,
-        };
+
+        const pricePerItem =
+           data.subtotal / data.quantity;
+         
+         updated[index] = {
+           ...existing,
+           quantity: newQty,
+           subtotal: pricePerItem * newQty,
+         };
+
         return updated;
       }
+
       return [...prev, data];
     });
-  }
+  };
 
   function setHistory(data) {
     // validasi data kosong atau user belum login
