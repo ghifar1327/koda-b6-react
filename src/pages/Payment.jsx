@@ -5,14 +5,22 @@ import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import InvoiceContext from "../context/InvoiceContext";
 import AuthContext from "../context/AuthContext";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import http from "../lib/http";
+import { useNavigate } from "react-router";
+import Modal from "../components/feature/Modal";
+import { Link } from "react-router";
 
 export default function Payment() {
-const [methods, setMethods] = useState([]); // dari API
-const [selectedDelivery, setSelectedDelivery] = useState(0);
+const navigate = useNavigate()
+const [methods, setMethods] = useState([]);
+const [selectedDelivery, setSelectedDelivery] = useState(null);
   const { user } = useContext(AuthContext);
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+  email: "",
+  fullName: "",
+  address: "",
+});
   useEffect(() => {
     (()=>{
       if (user) {
@@ -31,17 +39,16 @@ useEffect(()=>{
     try{
       const res = await http("/master/methods");
       setMethods(res.results);
-      console.loq(res.results)
+      // console.log(res.results)
     }catch(err){
       return err
     }
   })()
 },[])
   const submitRef = useRef(null)
-  const { cart, removeCart, setHistory } = useContext(InvoiceContext);
+  const { cart, removeCart, checkout, isError, isSuccess ,setIsSuccess, setIsError ,message } = useContext(InvoiceContext);
   const subtotal = cart.reduce((acc, item) => acc + Number(item.subtotal), 0);
-  const selectedMethod = methods.find(item => item.id === selectedDelivery);
-  
+  const selectedMethod = methods.find(item => item.id === Number(selectedDelivery));
   const deliveryFee = selectedMethod?.add_price || 0;
   const tax = (subtotal + deliveryFee) * 0.05;
 
@@ -53,33 +60,41 @@ useEffect(()=>{
       [e.target.name]: e.target.value,
     }));
   }
-  console.log(cart.length)
-  function handleSubmit() {
-    // e.preventDefault()
-    if (!form.email || !form.fullName || !selectedDelivery) return;
-
-    const data = {
-      id: nanoid(10),
-      fullName: form.fullName,
-      email: form.email,
-      phone: user.phone,
+    // console.log(cart)
+  function handleSubmit(e) {
+    e.preventDefault();
+  
+    const trxDetail = cart.map((item) => ({
+      product_id: item.product_id,
+      size_id: item.size.id,
+      variant_id: item.variant.id,
+      quantity: item.quantity,
+    }));
+  
+    if (!form.email || !form.fullName || !selectedDelivery) {
+      alert("Please complete all required fields");
+      return;
+    }
+  
+    const trx = {
+      user_id: user.user.id,
       address: form.address,
-      delivery: selectedDelivery,
-      status : "On Progress",
-      total: subtotal,
-      orders: cart,
-      create_at: Date.now(),
+      id_method: selectedDelivery,
+      items: trxDetail,
     };
-    setHistory(data);
+  
+    // console.log(trx);
+    checkout(trx)
   }
-
-  console.log(selectedMethod?.name)
+  
+  // console.log(user)
   return (
+    <>
     <div className="grid md:grid-cols-5 gap-10">
       <section className="order-1 md:order-1 flex flex-col gap-5 md:col-span-3 w-full">
         <div className="flex items-center justify-between">
           <p className="text-4xl">Your order</p>
-          <Button orange size="w-fitt p-2 px-5">+ Add menu</Button>
+          <Link to="/product" className="w-fitt p-2 px-5 bg-primary border border-primary rounded-md hover:bg-white">+ Add menu</Link>
         </div>
         {cart.length === 0 ? 
             <div className="flex flex-col items-center justify-center gap-5 h-full   py-10 rounded">
@@ -220,41 +235,27 @@ useEffect(()=>{
               {item.name}
             </Input>
           ))}
-            
-            {/* <Input
-              type="radio"
-              name="delivery"
-              value="Dine In"
-              id="dineIn"
-              checked={delivery === "Dine In"}
-              onChange={(e) => setDelivery(e.target.value)}
-            >
-              Dine In
-            </Input>
-            <Input
-              type="radio"
-              name="delivery"
-              value="Door Delivery"
-              id="doorDelivery"
-              checked={delivery === "Door Delivery"}
-              onChange={(e) => setDelivery(e.target.value)}
-            >
-              Door Delivery
-            </Input>
-            <Input
-              type="radio"
-              name="delivery"
-              value="Pick Up"
-              id="pickUp"
-              checked={delivery === "Pick Up"}
-              onChange={(e) => setDelivery(e.target.value)}
-            >
-              Pick Up
-            </Input> */}
           </div>
         </div>
         <button ref={submitRef} type="submit" className="hidden"></button>
       </form>
     </div>
+    <Modal success={isSuccess} onClick={()=> setIsSuccess(!isSuccess)}>
+      <p className="text-3xl text-gray-700">{message}</p>
+      <Link
+        to="/"
+        onClick={()=> setIsSuccess(!isSuccess)}
+        className="bg-primary p-2 rounded-md w-full text-center"
+      >
+        Back to Home
+      </Link>
+    </Modal>
+    <Modal error={isError} onClick={() => setIsError(!isError)}>
+      <p className="text-2xl text-gray-700">{message}</p>
+      <Button orange onClick={() => {setIsError(!isError); navigate("/product");}}>
+        Add Product
+      </Button>
+    </Modal>
+    </>
   );
 }
