@@ -76,7 +76,7 @@ export default function DetailProduct() {
   const product = {
     ...form,
     id: nanoid(),
-    product_id: id,
+    product_id: Number(id),
     name: render.name,
     image: render.image,
     price:render.price,
@@ -87,7 +87,7 @@ export default function DetailProduct() {
   };
 
   // addCart(product);
-  console.log(product);
+  // console.log(product);
     addCart(product);
     setCount(1);
     reset();
