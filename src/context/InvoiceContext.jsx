@@ -1,12 +1,14 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStotage";
+import http from "../lib/http";
 
 const InvoiceContext = createContext(null);
 
 export function InvoiceProvider({ children }) {
-  const [user, setuser] = useLocalStorage("user", null);
-  const [users, setUsers] = useLocalStorage("users", []);
   const [cart, setCart] = useLocalStorage("cart", []);
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [message, setMessage] = useState("")
 
   const addCart = (data) => {
     if (!data) return;
@@ -14,7 +16,7 @@ export function InvoiceProvider({ children }) {
     setCart((prev) => {
       const index = prev.findIndex(
         (item) =>
-          item.product_id === data.product_id &&
+          item.product_id === Number(data.product_id) &&
           item.size?.id === data.size?.id &&
           item.variant?.id === data.variant?.id
       );
@@ -41,58 +43,30 @@ export function InvoiceProvider({ children }) {
     });
   };
 
-  function setHistory(data) {
-    // validasi data kosong atau user belum login
-    if (!data || !user) return;
-
-    // deklarasi variabel sebagai gelas kosong untuk membarui data
-    let updatedUser = null;
-
-    setUsers((prev) => {
-      // cari indeks pengguna saat ini
-      const index = prev.findIndex((item) => item.id === user.id);
-      if (index === -1) return prev;
-
-      // variable salinan/copy dari state users
-      const updated = [...prev];
-
-      updatedUser = {
-        // salin semua properti user berdasarkan index / masukan air kedalam gelas kosong
-        ...updated[index],
-        // Perbarui properti 'history'.
-        history: [...updated[index].history, data],
-      };
-
-      // ganti properti lama dangan property baru
-      updated[index] = updatedUser;
-
-      // kembalikan data ke state users
-      return updated;
-    });
-
-    setuser((prev) =>
-      updatedUser ? { ...prev, history: updatedUser.history } : prev,
-    );
-
-    setCart([]);
-  }
-
-  // edit historyyyyyyyyyyy 
-  function editHistory(orderId, newStatus) {
-    const updatedUsers = users.map(user => {
-      if (user.role !== "user") return user;
-
-      return {
-        ...user,
-        history: user.history.map(historyItem =>
-          historyItem.id === orderId
-            ? { ...historyItem, status: newStatus }
-            : historyItem
-        )
-      };
-    });
-
-    setUsers(updatedUsers);
+  async function checkout(data) {
+    const req = {...data, id_vocher : null, payment_method: "cash", }
+    if (req.items.length === 0 ){
+      setMessage("Cart Is Empty")
+      setIsSuccess(false)
+      setIsError(true)
+      return
+    }
+    console.log(req)
+    try{
+      const res = await http("/transactions",JSON.stringify(req), {method : "POST"})
+      if (!res.success){
+        throw new Error(res.message)
+      }
+      setMessage(res.message)
+      setIsSuccess(true)
+      setIsError(false)
+      setCart([])
+    }catch (err){
+      console.log(err)
+      setMessage(err.message || "Someting is Wrong")
+      setIsSuccess(false)
+      setIsError(true)
+    }
 }
 
 
@@ -102,7 +76,7 @@ export function InvoiceProvider({ children }) {
 
   return (
     <InvoiceContext.Provider
-      value={{ cart,users, setCart, addCart, setHistory, editHistory,removeCart }}
+      value={{ cart, setCart, addCart, checkout,removeCart ,isError, isSuccess ,setIsSuccess, setIsError ,message}}
     >
       {children}
     </InvoiceContext.Provider>
