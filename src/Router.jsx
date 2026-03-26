@@ -10,7 +10,6 @@ import History from "./pages/History";
 import Order from "./pages/Order";
 import Profile from "./pages/Profile";
 import DetailLayout from "./components/layouts/DetailLayout";
-import Product from "./pages/Product";
 import ProductsPage from "./pages/ProductsPage";
 import AdminLayout from "./components/layouts/AdminLayout";
 import NotFoundPage from "./pages/NotfoundPage";
@@ -23,27 +22,28 @@ import OrderAdmin from "./pages/admin/OrderAdmin";
 import ProductAdmin from "./pages/admin/ProductsAdmin";
 import UsersAdmin from "./pages/admin/UsersAdmin";
 import ResetPasswoed from "./pages/ResetPasswoed";
+import DetailProduct from "./pages/DetailProduct";
 
 export default function Router() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        // <PublicRoute>
+        <PublicRoute>
           <MainLayout />
-        // </PublicRoute>
+        </PublicRoute>
       ),
       children: [
         { index: true, element: <HomePage /> },
         { path: "product", element: <ProductsPage /> },
-        { path: "detail/:id/:name", element: <Product /> },
+        { path: "detail/:id/:name", element: <DetailProduct /> },
       ],
     },
     {
       element: (
-        // <ProtectedRoute role="user">
+        <ProtectedRoute role={2}>
           <DetailLayout />
-        // </ProtectedRoute>
+        </ProtectedRoute>
       ),
       children: [
         { path: "payment", element: <Payment /> },
@@ -63,19 +63,19 @@ export default function Router() {
     {
       path: "admin",
       element: (
-        // <ProtectedRoute role="admin">
+        <ProtectedRoute role={1}>
           <AdminLayout />
-        // </ProtectedRoute>
+        </ProtectedRoute>
       ),
       children: [
         {
           index: true,
           element: <Dashboard />,
         },
-        {
-          path: "products",
-          element: <ProductAdmin />,
-        },
+        // {
+        //   path: "products",
+        //   element: <ProductAdmin />,
+        // },
         {
           path: "orders",
           element: <OrderAdmin/>
