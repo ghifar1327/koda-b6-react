@@ -33,7 +33,7 @@ useEffect(() => {
   fetchData();
 }, []);
 
-console.log(products);
+// console.log(products);
   return (
     <>
       <main className={"flex flex-col-reverse md:flex-row md:h-auto h-screen"}>
