@@ -1,4 +1,4 @@
-import { use, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Input from "../components/common/Input";
 import {
   ArrowRight,
