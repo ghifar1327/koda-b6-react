@@ -78,10 +78,10 @@ export default function ForgotPwd() {
       
       
       <Modal success={isSuccess}>
-        <p className="text-3xl text-gray-700">{message}</p>
+        <p className="text-3xl text-gray-700">{"OTP has been sent, please reset your password"}</p>
         <div className="flex flex-col w-full gap-2">
           <Button orange onClick={() => setCount(0)}>
-            Enter
+            reset password
           </Button>
           <p className="text-gray-500 text-center">Redirect in {count}s</p>
         </div>
