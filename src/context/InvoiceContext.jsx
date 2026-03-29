@@ -6,6 +6,7 @@ const InvoiceContext = createContext(null);
 
 export function InvoiceProvider({ children }) {
   const [cart, setCart] = useLocalStorage("cart", []);
+  const [histories, setHistories] = useLocalStorage("histories", [])
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
   const [message, setMessage] = useState("")
@@ -67,8 +68,17 @@ export function InvoiceProvider({ children }) {
       setIsSuccess(false)
       setIsError(true)
     }
-}
+  }
 
+
+  async function setHistory(id){
+    try {
+      const res = await http(`/transactions/user/${id}`);
+      setHistories(res.results);
+    } catch (err) {
+      console.error(err);
+    }
+  } 
 
   function removeCart(id) {
     setCart((prev) => prev.filter((item) => item.id !== id));
@@ -76,7 +86,7 @@ export function InvoiceProvider({ children }) {
 
   return (
     <InvoiceContext.Provider
-      value={{ cart, setCart, addCart, checkout,removeCart ,isError, isSuccess ,setIsSuccess, setIsError ,message}}
+      value={{ cart, setCart, addCart, checkout,removeCart, histories, setHistory,isError, isSuccess ,setIsSuccess, setIsError ,message}}
     >
       {children}
     </InvoiceContext.Provider>
