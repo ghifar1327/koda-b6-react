@@ -3,7 +3,7 @@ import { Funnel, PenLine, Search, Trash2 } from "lucide-react"
 import { Button } from "../../components/common/Button"
 import ProductActions from "../../components/feature/ProductActions"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchProducts } from "../../redux/reduser/products.slice"
+// import { fetchProducts } from "../../redux/reduser/products.slice"
 
 export default function ProductAdmin() {      
     // const [product ] = useContext(FetchContext)
