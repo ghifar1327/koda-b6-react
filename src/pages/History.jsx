@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { use, useContext, useEffect } from "react";
 import Input from "../components/common/Input";
 import {
   ArrowRight,
@@ -11,10 +11,17 @@ import {
 import { Link } from "react-router";
 import { Button } from "../components/common/Button";
 import  AuthContext  from "../context/AuthContext";
+import InvoiceContext from "../context/InvoiceContext";
 
 export default function History() {
   const { user } = useContext(AuthContext);
-  console.log(user.history);
+  const {histories, setHistory } = useContext(InvoiceContext)
+  console.log(user.user.id)
+  useEffect(() => {
+    if (!user?.user?.id) return;
+    setHistory(user.user.id) 
+   }, [user]);
+  // console.log(histories);
   return (
     <>
       <h1 className="text-5xl">History Order</h1>
@@ -55,19 +62,20 @@ export default function History() {
               </div>
             </section>
           </form>
-          {user.history.slice(0, 4).reverse().map((item) => {
-            const date = item.create_at ? new Date(item.create_at).toLocaleDateString("id-ID", {
+          {histories.map((item) => {
+            const date = item.created_at ? new Date(item.created_at).toLocaleDateString("id-ID", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
                   }) : "-";
+            const shortId = item.id.slice(0, 8)
              return (<section
               key={item.id}
               className="flex p-5 md:p-2 w-full gap-3 h-auto bg-[#E8E8E899]"
             >
               <img
-                src={item.orders[0].image}
-                alt={item.orders[0].name}
+                src={item?.items?.[0]?.product_image}
+                alt={item?.itmes?.[0]?.name}
                 className="hidden md:block w-[12%]"
               />
               <div className="grid gap-4 md:grid-cols-2 w-full">
@@ -80,7 +88,7 @@ export default function History() {
                       </p>
                     </div>
                     <p className="flex-1/2 flex items-center font-semibold">
-                      #{item.id}
+                      #{shortId}
                     </p>
                   </div>
                   <div className="flex-1/2 flex flex-col">
@@ -102,7 +110,7 @@ export default function History() {
                       </p>
                     </div>
                     <p className="flex-1/2 flex items-center font-semibold">
-                      Idr {item.total}
+                      Idr {item.total_transaction.toLocaleString("id-ID")}
                     </p>
                   </div>
                   <div className="flex-1/2 flex flex-col">
@@ -113,7 +121,7 @@ export default function History() {
                     </div>
                     <div className="flex-1/2 flex items-center">
                       <p className="text-primary bg-[#FF890633] w-fit px-4 p-1 md:p-0 md:px-2 rounded-full md:text-xs lg:text-sm text-sm  font-semibold">
-                        On Progress
+                        {item.status}
                       </p>
                     </div>
                   </div>
