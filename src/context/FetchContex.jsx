@@ -4,6 +4,8 @@
 
 // export  function FetchProvider({children}) {
 //     const [products , setProducts] = useState([])
+//     const [sizes ,setSizes] = useState([])
+//     const [variants, setVariants] = useState([])
     
 //     useEffect(()=>{
 //         (async()=>{
