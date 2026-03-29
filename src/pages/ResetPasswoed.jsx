@@ -2,10 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from "yup"
 import Input from '../components/common/Input'
-import { KeyRound, Mail } from 'lucide-react'
+import { KeyRound, Mail, User } from 'lucide-react'
 import { Button } from '../components/common/Button'
 import { VscGistSecret } from 'react-icons/vsc'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import AuthContext from '../context/AuthContext'
 import { Link } from 'react-router'
 import Modal from '../components/feature/Modal'
@@ -30,7 +30,13 @@ export default function ResetPasswoed() {
   const {handleSubmit, register, formState : {errors}} = useForm({
     resolver : yupResolver(scehema)
   })
- function action(form){
+
+  useEffect(()=>{
+    setError(false)
+    setIsSuccess(false)
+  },[])
+ 
+  function action(form){
     resetPassword(form)
  }
   return (
