@@ -125,7 +125,7 @@ useEffect(()=>{
                       {item?.name}
                     </p>
                     <p className="text-xl xl:text-xl text-gray-400">
-                      {item?.quantity}pcs | {item?.size.name} | {item?.variant.name} |{" "}
+                      {item?.quantity}pcs | {item?.size?.name} | {item?.variant?.name} |{" "}
                       {selectedMethod?.name}
                     </p>
                     <div className="flex items-center gap-2">
