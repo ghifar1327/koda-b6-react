@@ -106,14 +106,14 @@ useEffect(()=>{
           return (
             <>
               <div
-                key={item.id}
+                key={item?.id}
                 className="bg-[#E8E8E84D] w-full p-2 pr-5 rounded flex justify-between items-center gap-2"
               >
                 <div className="flex gap-2">
                   <div className="w-[20%] h-[full] aspect-square overflow-hidden">
                     <img
-                      src={item.image}
-                      alt={item.name}
+                      src={item?.image}
+                      alt={item?.name}
                       className="object-cover"
                     />
                   </div>
@@ -122,10 +122,10 @@ useEffect(()=>{
                       FLASH SALE!
                     </p>
                     <p className="text-xl xl:text-xl font-semibold">
-                      {item.name}
+                      {item?.name}
                     </p>
                     <p className="text-xl xl:text-xl text-gray-400">
-                      {item.quantity}pcs | {item.size.name} | {item.variant.name} |{" "}
+                      {item?.quantity}pcs | {item?.size.name} | {item?.variant.name} |{" "}
                       {selectedMethod?.name}
                     </p>
                     <div className="flex items-center gap-2">
@@ -133,7 +133,7 @@ useEffect(()=>{
                         IDR {""}
                       </p> */}
                       <p className="text-xl xl:text-xl text-primary">
-                        IDR {item.price?.toLocaleString("id-ID")}
+                        IDR {item?.price?.toLocaleString("id-ID")}
                       </p>
                     </div>
                   </div>
