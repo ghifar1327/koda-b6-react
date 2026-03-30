@@ -67,7 +67,7 @@ useEffect(()=>{
     const trxDetail = cart.map((item) => ({
       product_id: item.product_id,
       size_id: item.size?.id,
-      variant_id: item.variant?.id,
+      variant_id: item.variant?.id ?? null, 
       quantity: item.quantity,
     }));
     
