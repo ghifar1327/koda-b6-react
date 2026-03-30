@@ -119,7 +119,7 @@ function submit(form) {
                 {description}
               </p>
               <div>
-                <p>{rating}</p>
+                <p>{rating.toFixed(2)}</p>
               </div>
             </section>
             <section className="flex flex-col gap-2">
