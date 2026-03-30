@@ -70,7 +70,8 @@ useEffect(()=>{
       variant_id: item.variant.id,
       quantity: item.quantity,
     }));
-  
+    
+    console.log(trxDetail)
     if (!form.email || !form.fullName || !selectedDelivery) {
       alert("Please complete all required fields");
       return;
