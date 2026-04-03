@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import InvoiceContext from "../context/InvoiceContext";
 // import { useSelector } from "react-redux";
 import http from "../lib/http";
-import { nanoid } from "nanoid";
 
 export default function DetailProduct() {
   const { id } = useParams();
@@ -52,7 +51,7 @@ export default function DetailProduct() {
       isMounted = false
     }
   },[id])
-  // const render = products.find((item) => Number(item.id) === Number(id));
+
 
   // paginationnnnnnnnnnnnn
   const [currentPage, setCurrentPage] = useState(1);
@@ -62,41 +61,22 @@ export default function DetailProduct() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentProducts = products.slice(startIndex, endIndex);
   const { handleSubmit, register, reset } = useForm();
-  function action(form) {
-  const selectedSize = sizes.find(s => s.id === Number(form.size));
-  const selectedVariant = variants.find(v => v.id === Number(form.variant));
-
-  const basePrice = render.price;
-  const sizePrice = selectedSize?.add_price || 0;
-  const variantPrice = selectedVariant?.add_price || 0;
-  const quantity = count;
-
-  const subtotal = (basePrice + sizePrice + variantPrice) * quantity;
-
-  const product = {
-    ...form,
-    id: nanoid(),
-    product_id: Number(id),
-    name: render.name,
-    image: render.image,
-    price:render.price,
-    quantity,
-    size: selectedSize,
-    variant: selectedVariant,
-    subtotal
-  };
-
-  // addCart(product);
-  // console.log(product);
-    addCart(product);
-    setCount(1);
-    reset();
+ 
+  function action(form) {   
+      const item = {
+        product_id: Number(id),
+        size_id: Number(form.size),
+        variant_id: Number(form.size),
+        quantity : count,
+      };
+      // console.log(item);
+      addCart(item)
+      setCount(1);
+      reset();
   }
 
   if (!render) return <p>Loading...</p>;
-  // const price = render.discountPercent
-  //   ? render.price - (render.price * render.discountPercent) / 100
-  //   : render.price;
+
   return (
     <main className="p-[5%] md:px-[3%] lg:px-[10%] flex flex-col gap-10">
       <section className="flex flex-col md:flex-row gap-5 w-full">

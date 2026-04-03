@@ -7,7 +7,6 @@ import Input from "../common/Input";
 import { useForm } from "react-hook-form";
 import InvoiceContext from "../../context/InvoiceContext";
 import http from "../../lib/http";
-import { nanoid } from "nanoid";
 
 export default function Card({
   id,
@@ -58,32 +57,15 @@ export default function Card({
 
 
 function submit(form) {
-  const selectedSize = sizes.find(s => s.id === Number(form.size));
-  const selectedVariant = variants.find(v => v.id === Number(form.variant));
-
-  const basePrice = price;
-  const sizePrice = selectedSize?.add_price || 0;
-  const variantPrice = selectedVariant?.add_price || 0;
   const quantity = form.quantity;
-
-  const subtotal = (basePrice + sizePrice + variantPrice) * quantity;
-
-  const product = {
-    ...form,
-    id: nanoid(),
+  const item = {
     product_id: id,
-    name,
-    image,
-    price,
+    size_id: Number(form.size),
+    variant_id: Number(form.size),
     quantity,
-    size: selectedSize,
-    variant: selectedVariant,
-    subtotal
   };
-
-  // console.log(selectedSize.add_price);
-  addCart(product);
-  console.log(product);
+  addCart(item)
+  console.log(item);
   reset();
   setToggle(false)
 }
