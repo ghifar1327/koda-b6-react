@@ -66,9 +66,24 @@ export function AuthProvider({ children }) {
      }
    }
 
-   async function updateProfile(data, id){
-    try {
-       const res = await http(`/auth/${id}/update`, JSON.stringify(data),{method: "PATCH"})
+   async function updateProfile(data, id, file){
+     try {
+   
+       const formData = new FormData();
+   
+       formData.append("full_name", data.full_name || "");
+       formData.append("email", data.email || "");
+       formData.append("address", data.address || "");
+       formData.append("phone", data.phone || "");
+   
+       if (file) {
+         formData.append("picture", file);
+       }
+   
+       const res = await http(`/auth/${id}/update`, formData, {
+         method: "PATCH",
+         isForm: true
+       })
    
        if (!res.success) {
          throw new Error(res.message)
