@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Input from "../components/common/Input";
 import { KeyRound, LogOut, Mail, MapPin, PhoneCall, User } from "lucide-react";
@@ -9,6 +9,7 @@ import Modal from "../components/feature/Modal";
 import { Link, useNavigate } from "react-router";
 
 export default function Profile() {
+  const [file, setFile] = useState(null);
   const navigate = useNavigate()
   const{user, updateProfile, isSuccess, setIsSuccess, error, setError, message, logout}= useContext(AuthContext)
   const{register, handleSubmit} = useForm()
@@ -20,24 +21,43 @@ export default function Profile() {
   }, [])
 function action(form){
   // console.log(form)
-  updateProfile(form, user.user.id)
+  updateProfile(form, user.user.id, file)
 }
   return (
      <>
       <Header/>
       <main className="p-[5%]">
           <h1 className="text-5xl font-semibold mb-6">Profile</h1>
-          <div className="flex flex-col md:flex-row md:gap-5 gap-10 lg:gap-10 w-full">
+          <form className="flex flex-col md:flex-row md:gap-5 gap-10 lg:gap-10 w-full" onSubmit={handleSubmit(action)}>
             <section className="flex-1 border-2 rounded border-gray-300 p-3 w-full h-fit flex flex-col items-center gap-3">
-                <h1 className="font-semibold text-2xl">Ghaluh Wizard</h1>
-                <p className="text-[#4F5665]">ghaluhwizz@gmail.com</p>
+                <h1 className="font-semibold text-2xl">{user.user.full_name}</h1>
+                <p className="text-[#4F5665]">{user.user.email}</p>
                 <div className="rounded-[100%] w-50 h-50 overflow-hidden">
-                    <img src="/Rectangle3.png" alt="" className="w-full h-full object-cover"/>
+                  <img
+                    src={
+                      file
+                        ? URL.createObjectURL(file) // preview
+                        : user?.user.picture || "/Rectangle3.png"
+                    }
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <Button orange>Upload New Photo</Button>
+                  
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {setFile(e.target.files[0]); console.log("TERPANGGIL");}}
+                  className="hidden"
+                  id="upload"
+                />
+
+                <label htmlFor="upload" className="p-2 px-3 bg-primary rounded-xl">
+                    add new picture
+                </label>
                 <p className="font-semibold text-[#4F5665]"><span className="font-normal">Since</span> 20 January 2022</p>
             </section>
-            <form className="border border-gray-300 flex-2/5 h-fit rounded p-3 flex flex-col gap-3" onSubmit={handleSubmit(action)}>
+            <div className="border border-gray-300 flex-2/5 h-fit rounded p-3 flex flex-col gap-3" >
                 <Input label="Full Name" type="text" id="fullName" defaultValue={user?.user.full_name} {...register("full_name")}><User size={18}/></Input>
                 <Input label="Email" type="email" id="email"defaultValue={user?.user.email} {...register("email")}><Mail size={18}/></Input>
                 <Input label="Phone" type="number" id="phone" defaultValue={user?.user.phone} {...register("phone")}><PhoneCall size={18}/></Input>
@@ -48,8 +68,8 @@ function action(form){
                 <Input label="" type="password" id="password" password><KeyRound size={18}/></Input> */}
                 <Input label="Address" type="text" id="address" defaultValue={user?.user.address} {...register("address")}><MapPin size={18}/></Input>
                 <Button orange>Submit</Button>
-            </form>
-          </div>
+            </div>
+          </form>
       </main>
       <Modal success={isSuccess} onClick={()=> setIsSuccess(!isSuccess)}>
         <p className="text-3xl text-gray-700">{message}</p>
