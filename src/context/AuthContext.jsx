@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
          throw new Error(res.message)
        }
        console.log(res)
-       setUser(res)
+       setUser(res.user)
        localStorage.setItem("token", res.token)
        setError(false)
        setIsSuccess(true)
@@ -66,21 +66,10 @@ export function AuthProvider({ children }) {
      }
    }
 
-   async function updateProfile(data, id, file){
+   async function updateProfile(data, id){
      try {
    
-       const formData = new FormData();
-   
-       formData.append("full_name", data.full_name || "");
-       formData.append("email", data.email || "");
-       formData.append("address", data.address || "");
-       formData.append("phone", data.phone || "");
-   
-       if (file) {
-         formData.append("picture", file);
-       }
-   
-       const res = await http(`/auth/${id}/update`, formData, {
+       const res = await http(`/auth/${id}/update`, JSON.stringify(data), {
          method: "PATCH",
          isForm: true
        })
@@ -88,7 +77,8 @@ export function AuthProvider({ children }) {
        if (!res.success) {
          throw new Error(res.message)
        }
-   
+       console.log(res)
+      //  setUser(res.results)
        setError(false)
        setIsSuccess(true)
        setMessage(res.message)
@@ -100,6 +90,32 @@ export function AuthProvider({ children }) {
      }
    }
    
+
+  async function updatePicture(file, id) {
+    try {
+      const formData = new FormData();
+      formData.append("picture", file);
+
+      const res = await http(`/auth/${id}/picture`, formData, {
+      method: "PATCH",
+        isForm: true,
+      });
+  
+      if (!res || !res.success) {
+        throw new Error(res?.message);
+      }
+  
+      setUser(res.results);
+      setError(false);
+      setIsSuccess(true);
+      setMessage(res.message);
+
+    } catch (err) {
+      setError(true);
+      setIsSuccess(false);
+      setMessage(err.message || "Something went wrong");
+  }
+}
 
 // =============================================================================== reqeust FG
 
@@ -147,6 +163,7 @@ export function AuthProvider({ children }) {
 
   function logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("token")
     setUser(null);
     setIsSuccess(false);
     setError(false);
@@ -161,6 +178,7 @@ export function AuthProvider({ children }) {
         registerUser,
         logout,
         updateProfile,
+        updatePicture,
         forgotPassword,
         resetPassword,
         error,
