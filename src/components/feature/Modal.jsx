@@ -10,13 +10,13 @@ export default function Modal({toggle, success, error, children, ...rest }) {
     <div
       {...rest}
       className={`fixed w-full min-h-screen inset-0 z-1000 flex items-start justify-center
-        bg-black/10
+        bg-black/15
         transition-opacity duration-300
         ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
     >
       <div
         onClick={(e) => e.stopPropagation()} className={`
-        mt-[15%]
+        mt-[10%]
           transform transition-all duration-500 ease-out
           bg-white rounded-xl p-6 shadow-xl
           ${isOpen ? "translate-y-0 opacity-100" : "-translate-y-100 opacity-0"}
