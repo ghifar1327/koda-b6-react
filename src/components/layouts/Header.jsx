@@ -56,7 +56,7 @@ export default function Header() {
               onClick={() => setToggle(!toggle)}
               className="cursor-pointer h-10 w-10 flex justify-center border-2 text-xl bg-purple-600 rounded-full"
             >
-              <p>{user.user.full_name.charAt(0)}</p>
+              <p>{user.full_name.charAt(0)}</p>
             </button>
             <div
               className={`absolute ${!toggle && "hidden"} w-70 p-2 shadow border-primary flex flex-col gap-10 py-5 bg-white text-black rounded-lg right-0 mt-5`}
@@ -70,9 +70,9 @@ export default function Header() {
                   />
                 </div>
                 <h1 className="font-semibold text-2xl line-clamp-1">
-                  {user.user.full_name}
+                  {user.full_name}
                 </h1>
-                <p className="line-clamp-1 text-gray-400">{user.user.email}</p>
+                <p className="line-clamp-1 text-gray-400">{user.email}</p>
                 <div className=" px-10 w-full text-center flex flex-col">
                   <Link
                     to={"/profile"}
@@ -125,7 +125,7 @@ export default function Header() {
                   onClick={() => setToggle(!toggle)}
                   className="cursor-pointer h-10 w-10 flex justify-center border-2 text-xl bg-purple-600 rounded-full"
                 >
-                  <p>{user.user.full_name.charAt(0)}</p>
+                  <p>{user?.full_name?.charAt(0)}</p>
                 </button>
                 <div
                   className={`absolute ${!toggle && "hidden"} w-70 p-2 shadow flex flex-col gap-10 py-5 bg-white text-black rounded-lg right-0 mt-5`}
@@ -139,9 +139,9 @@ export default function Header() {
                       />
                     </div>
                     <h1 className="font-semibold text-2xl line-clamp-1">
-                      {user.user.full_name}
+                      {user.full_name}
                     </h1>
-                    <p className="line-clamp-1 text-gray-400">{user.user.email}</p>
+                    <p className="line-clamp-1 text-gray-400">{user.email}</p>
                     <div className=" px-10 w-full text-center flex flex-col">
                       <Link
                         to={"/profile"}

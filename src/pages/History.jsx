@@ -16,10 +16,10 @@ import InvoiceContext from "../context/InvoiceContext";
 export default function History() {
   const { user } = useContext(AuthContext);
   const {histories, setHistory } = useContext(InvoiceContext)
-  console.log(user.user.id)
+  console.log(user.id)
   useEffect(() => {
-    if (!user?.user?.id) return;
-    setHistory(user.user.id) 
+    if (!user?.id) return;
+    setHistory(user.id) 
    }, [user]);
   // console.log(histories);
   return (
