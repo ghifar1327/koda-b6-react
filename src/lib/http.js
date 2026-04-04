@@ -1,8 +1,6 @@
 
 // const BASE_URL = import.meta.env.VITE_BASE_URL || "https://ghifar-backend.camps.fahrul.id"
 const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8888"
-
-
 async function http(url, body, opts = {}) {
   const token = localStorage.getItem("token");
 
@@ -13,32 +11,53 @@ async function http(url, body, opts = {}) {
     }),
   };
 
-  const res = await fetch(BASE_URL + url, {
-    method: opts.method || "GET",
-    body: opts.method === "GET" ? undefined : body,
-    headers,
-  });
-
-  const text = await res.text();
-
-  let data = null;
   try {
-    data = text ? JSON.parse(text) : null;
+    const res = await fetch(BASE_URL + url, {
+      method: opts.method || "GET",
+      body: opts.method === "GET" ? undefined : body,
+      headers,
+    });
+
+    if (res.status === 401) {
+      localStorage.removeItem("token");
+      return {
+        success: false,
+        message: "Unauthorized",
+      };
+    }
+
+    let data = null;
+
+    const text = await res.text();
+    console.log(text)
+    if (text) {
+      try {
+        data = JSON.parse(text);
+      } catch {
+        return {
+          success: false,
+          message: "Invalid JSON response",
+        };
+      }
+    }
+
+    if (!res.ok) {
+      return {
+        success: false,
+        message: data?.message || "Failed to fetch",
+      };
+    }
+
+    return data || {
+      success: true,
+      message: "Success",
+    };
+
   } catch (err) {
-    return err
-    // console.error("Response bukan JSON:", text);
+    return {
+      success: false,
+      message: err.message,
+    };
   }
-
-  if (res.status === 401) {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-    return;
-  }
-
-  if (!res.ok) {
-    throw new Error(data?.message || "Failed to fetch");
-  }
-
-  return data;
 }
 export default http;
