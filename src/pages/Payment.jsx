@@ -15,8 +15,10 @@ export default function Payment() {
 const navigate = useNavigate()
 const [methods, setMethods] = useState([]);
 const [selectedDelivery, setSelectedDelivery] = useState(null);
-  const { user } = useContext(AuthContext);
-  const [form, setForm] = useState({
+const { user } = useContext(AuthContext);
+const {cart, setCart} = useContext(InvoiceContext);
+
+const [form, setForm] = useState({
   email: "",
   fullName: "",
   address: "",
@@ -25,13 +27,23 @@ const [selectedDelivery, setSelectedDelivery] = useState(null);
     (()=>{
       if (user) {
       setForm({
-        email: user.user.email || "",
-        fullName: user.user.full_name || "",
+        email: user.email || "",
+        fullName: user.full_name || "",
         // address: user.address || "",
         // delivery: "",
       })
     }
     })();
+    (async()=>{
+      try{
+        const res = await http(`/cart/${user.id}`)
+        if(!res.success) throw new Error(res.message)
+        // console.log(res)
+        setCart(res.results)
+      }catch(err){
+        console.log(err)
+      }
+    })()
 }, [user]);
 
 useEffect(()=>{
@@ -46,13 +58,13 @@ useEffect(()=>{
   })()
 },[])
   const submitRef = useRef(null)
-  const { cart, removeCart, checkout, isError, isSuccess ,setIsSuccess, setIsError ,message } = useContext(InvoiceContext);
-  const subtotal = cart.reduce((acc, item) => acc + Number(item.subtotal), 0);
+  const { removeCart, checkout, isError, isSuccess ,setIsSuccess, setIsError ,message } = useContext(InvoiceContext);
+  const subtotal = cart?.reduce((acc, item) => acc + Number(item.subtotal), 0) || 0;
   const selectedMethod = methods.find(item => item.id === Number(selectedDelivery));
   const deliveryFee = selectedMethod?.add_price || 0;
-  const tax = (subtotal + deliveryFee) * 0.05;
+  const tax = (subtotal + deliveryFee) * 0.05 || 0;
 
-  const grandTotal = subtotal + deliveryFee + tax;
+  const grandTotal = subtotal + deliveryFee + tax || 0;
 
   function handleChange(e) {
     setForm((prev) => ({
@@ -64,24 +76,15 @@ useEffect(()=>{
   function handleSubmit(e) {
     e.preventDefault();
   
-    const trxDetail = cart.map((item) => ({
-      product_id: item.product_id,
-      size_id: item.size?.id,
-      variant_id: item.variant?.id ?? null, 
-      quantity: item.quantity,
-    }));
-    
-    console.log(trxDetail)
     if (!form.email || !form.fullName || !selectedDelivery) {
-      alert("Please complete all required fields");
+      // alert("Please complete all required fields");
       return;
     }
   
     const trx = {
-      user_id: user.user.id,
+      user_id: user.id,
       address: form.address,
       id_method: selectedDelivery,
-      items: trxDetail,
     };
   
     // console.log(trx);
@@ -97,24 +100,24 @@ useEffect(()=>{
           <p className="text-4xl">Your order</p>
           <Link to="/product" className="w-fitt p-2 px-5 bg-primary border border-primary rounded-md hover:bg-white">+ Add menu</Link>
         </div>
-        {cart.length === 0 ? 
+        {cart?.length === 0 ? 
             <div className="flex flex-col items-center justify-center gap-5 h-full   py-10 rounded">
               <TbPaperBagOff size={50} className="text-gray-400"/>
               <p className="text-xl font-semibold">Your cart is empty ☕</p>
               <p className="text-gray-400">Please add some products first</p>
           </div> :
-        cart.slice(0, 4).map((item) => {
+        cart?.slice(0, 4).map((item) => {
           return (
             <>
               <div
-                key={item?.id}
+                key={item.id}
                 className="bg-[#E8E8E84D] w-full p-2 pr-5 rounded flex justify-between items-center gap-2"
               >
                 <div className="flex gap-2">
                   <div className="w-[20%] h-[full] aspect-square overflow-hidden">
                     <img
-                      src={item?.image}
-                      alt={item?.name}
+                      src={item?.product_image}
+                      alt={item?.product_name}
                       className="object-cover"
                     />
                   </div>
@@ -123,10 +126,10 @@ useEffect(()=>{
                       FLASH SALE!
                     </p>
                     <p className="text-xl xl:text-xl font-semibold">
-                      {item?.name}
+                      {item?.product_name}
                     </p>
                     <p className="text-xl xl:text-xl text-gray-400">
-                      {item?.quantity}pcs | {item?.size?.name} | {item?.variant?.name} |{" "}
+                      {item?.quantity}pcs | {item?.size} | {item?.variant} |{""}
                       {selectedMethod?.name}
                     </p>
                     <div className="flex items-center gap-2">
@@ -134,7 +137,7 @@ useEffect(()=>{
                         IDR {""}
                       </p> */}
                       <p className="text-xl xl:text-xl text-primary">
-                        IDR {item?.price?.toLocaleString("id-ID")}
+                        IDR {item?.subtotal.toLocaleString("id-ID")}
                       </p>
                     </div>
                   </div>
@@ -243,13 +246,12 @@ useEffect(()=>{
     </div>
     <Modal success={isSuccess} onClick={()=> setIsSuccess(!isSuccess)}>
       <p className="text-3xl text-gray-700">{message}</p>
-      <Link
-        to="/"
+      <Button
         onClick={()=> setIsSuccess(!isSuccess)}
-        className="bg-primary p-2 rounded-md w-full text-center"
+          orange
       >
-        Back to Home
-      </Link>
+        Continue
+      </Button>
     </Modal>
     <Modal error={isError} onClick={() => setIsError(!isError)}>
       <p className="text-2xl text-gray-700">{message}</p>
