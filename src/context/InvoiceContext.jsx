@@ -10,49 +10,31 @@ export function InvoiceProvider({ children }) {
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
   const [message, setMessage] = useState("")
+  const [user] = useLocalStorage("user")
 
-  const addCart = (data) => {
-    if (!data) return;
-
-    setCart((prev) => {
-      const index = prev.findIndex(
-        (item) =>
-          item.product_id === Number(data.product_id) &&
-          item.size?.id === data.size?.id &&
-          item.variant?.id === data.variant?.id
-      );
-
-      if (index !== -1) {
-        const updated = [...prev];
-        const existing = updated[index];
-
-        const newQty = existing.quantity + data.quantity;
-
-        const pricePerItem =
-           data.subtotal / data.quantity;
-         
-         updated[index] = {
-           ...existing,
-           quantity: newQty,
-           subtotal: pricePerItem * newQty,
-         };
-
-        return updated;
+  const addCart = async (data) => {
+    data = {...data, user_id: user?.id}
+    // console.log(data)
+    try{
+      const res = await http(`/cart`,JSON.stringify(data), {method : "POST"})
+      if (!res.success){
+        throw new Error(res.message)
       }
-
-      return [...prev, data];
-    });
+      // console.log()
+      setMessage(res.message)
+      setIsSuccess(true)
+      setIsError(false)
+    }catch (err){
+      console.log(err)  
+      setMessage(err.message || "Someting is Wrong")
+      setIsSuccess(false)
+      setIsError(true)
+    }
+    
   };
 
   async function checkout(data) {
     const req = {...data, id_vocher : null, payment_method: "cash", }
-    if (req.items.length === 0 ){
-      setMessage("Cart Is Empty")
-      setIsSuccess(false)
-      setIsError(true)
-      return
-    }
-    console.log(req)
     try{
       const res = await http("/transactions",JSON.stringify(req), {method : "POST"})
       if (!res.success){
@@ -80,8 +62,22 @@ export function InvoiceProvider({ children }) {
     }
   } 
 
-  function removeCart(id) {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+  async function removeCart(id) {
+    try{
+      const res = await http(`/cart/${id}`, null,{method : "DELETE"})
+      if (!res.success){
+        throw new Error(res.message)
+      }
+      setMessage(res.message)
+      setIsSuccess(true)
+      setIsError(false)
+      setCart(res.results)
+    }catch (err){
+      console.log(err)
+      setMessage(err.message || "Someting is Wrong")
+      setIsSuccess(false)
+      setIsError(true)
+    }
   }
 
   return (
