@@ -1,18 +1,33 @@
 import { CgNotes } from "react-icons/cg"; 
 import { Button } from '../../components/common/Button'
 import { Funnel, PenLine, Search, Trash2 } from 'lucide-react'
-import { useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
 import OrderAction from '../../components/feature/OrderAction'
 import InvoiceContext from "../../context/InvoiceContext";
+import http from "../../lib/http";
+import { useNavigate } from "react-router";
 
 export default function OrderAdmin() {
-  const { users } = useContext(InvoiceContext)
+  const navigate = useNavigate()
+  const [transactions, setTransactions] = useState([])
   const [showDetailOrder, setShowDetailOrder] = useState(false)
   const [showEditOrder, setShowEditOrder] = useState(false)
   const [selectOrder, setSelectOrder] = useState(null)
   
-  const historyOreder =users.filter(item => item.role === "user").flatMap(item => item.history)
-  
+  useEffect(()=>{
+    (async()=>{
+      try{
+        const res = await http("/admin/transaction")
+        if(!res) throw new Error("failed to fetch")
+          // console.log(res.results)
+          setTransactions(res.results)
+      }catch(err){
+      if (err.status === 401) {
+         navigate("/login")
+      }
+      }
+    })()
+  },[])
 
   // console.log(historyOreder)
   return (
@@ -56,26 +71,26 @@ export default function OrderAdmin() {
                      </tr>
                  </thead>
                  <tbody className="text-center">
-                   {historyOreder.map((item, index) => (
+                   {transactions.map((item, index) => (
                      <tr key={item.id} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
                        <td className="py-4"> 
                          #{item.id}
                        </td>
                        <td className="py-4">{
-                         new Date(item.create_at).toLocaleDateString("id-ID", {
+                         new Date(item.created_at).toLocaleDateString("id-ID", {
                            day: "2-digit",
                            month: "long",
                            year: "numeric"
                           })}</td>
                        <td>
                           <ul className='w-full flex flex-col items-center'>
-                            {item.orders.map(item => {
-                              return <li className='list-disc w-fit'>{item.name}</li> 
+                            {item.items.map(item => {
+                              return <li className='list-disc w-fit'>{item.product_name}</li> 
                             })}
                           </ul>
                         </td>
                        <td className={`py-4 text-sm flex justify-center`}><p className={`${item.status == "On Progress" ? "bg-orange-200 text-orange-600" : item.status == "Pending"? "bg-red-200 text-red-600" : item.status == "Done"? "bg-green-200 text-green-600": "bg-gray-200 text-gray-600"} w-fit px-3 p-0.5 rounded-full`}>{item.status}</p></td>
-                       <td className="py-4">IDR {item.total}</td>
+                       <td className="py-4">IDR {item.total_transaction.toLocaleString("id-ID")}</td>
                        <td className="py-4">
                          <div className="flex justify-center gap-2">
                            <button onClick={()=>{setSelectOrder(item); setShowDetailOrder(true)}} className="cursor-pointer w-8 h-8 bg-primary/10 text-amber-900 flex items-center justify-center rounded-full">
