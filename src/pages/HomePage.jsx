@@ -1,9 +1,12 @@
-import {  useEffect, useState } from "react";
+import {  useContext, useEffect, useState } from "react";
 import { Button } from "../components/common/Button";
 import Message from "../components/feature/Message";
 import Card from "../components/product/Card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import http from "../lib/http";
+import Modal from "../components/feature/Modal";
+import InvoiceContext from "../context/InvoiceContext";
+import { Link } from "react-router";
 
 
 export default function HomePage() {
@@ -17,6 +20,7 @@ export default function HomePage() {
   //   }
   // },[dispatch])
 
+const {isError, isSuccess ,setIsSuccess, setIsError ,message } = useContext(InvoiceContext);
 
 const [products, setProducts] = useState([]);
 
@@ -29,7 +33,8 @@ useEffect(() => {
       console.error("Error fetching products:", err);
     }
   };
-
+  setIsError(false);
+  setIsSuccess(false)
   fetchData();
 }, []);
 
@@ -215,6 +220,25 @@ useEffect(() => {
           </section>
         </article>
       </main>
+      <Modal success={isSuccess} onClick={()=> setIsSuccess(!isSuccess)}>
+        <p className="text-3xl text-gray-700">{message}</p>
+        <Button
+          onClick={()=> setIsSuccess(!isSuccess)}
+            orange
+        >
+          OK
+        </Button>
+      </Modal>
+      <Modal error={isError} onClick={()=> setIsError(!isError)}>
+        <p className="text-3xl text-gray-700">{"you need to login first"}</p>
+        <Link
+        to={"/login"}
+          onClick={()=> setIsError(!isError)}
+         className="bg-primary p-2 rounded-md w-full text-center"
+        >
+          Please to Login
+        </Link>
+      </Modal>
     </>
   );
 }

@@ -1,17 +1,21 @@
 import Voucher from "../components/common/Voucher";
 import { Button } from "../components/common/Button";
-import { ArrowLeft, ArrowRight, Search, SlidersHorizontal } from "lucide-react";
+import { ArrowLeft, ArrowRight, Link, Search, SlidersHorizontal } from "lucide-react";
 import Input from "../components/common/Input";
 import Card from "../components/product/Card";
 import Filter from "../components/feature/Filter";
 // import { useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 import http from "../lib/http";
+import InvoiceContext from "../context/InvoiceContext";
+import Modal from "../components/feature/Modal";
 
 export default function ProductsPage() {
   const [toggle, setToggle] = useState(false);
   const [searchParams] = useSearchParams();
+  const {isError, isSuccess ,setIsSuccess, setIsError ,message } = useContext(InvoiceContext);
+
   // const products = useSelector((state) => state.products.products);
   // console.log(products)
 // ========== filter =========
@@ -81,6 +85,7 @@ return result;
     setToggle((prev) => !prev);
   }
   return (
+  <>
     <main className="relative flex flex-col gap-10">
       <img src="/Rectangle4.png" alt="" className="w-full hidden md:block" />
       <div className="absolute px-[10%] inset-x-0 top-0 p-[5%] hidden md:block">
@@ -210,5 +215,25 @@ return result;
         <Filter />
       </div>
     </main>
+   <Modal success={isSuccess} onClick={()=> setIsSuccess(!isSuccess)}>
+        <p className="text-3xl text-gray-700">{message}</p>
+        <Button
+          onClick={()=> setIsSuccess(!isSuccess)}
+            orange
+        >
+          OK
+        </Button>
+      </Modal>
+      <Modal error={isError} onClick={()=> setIsError(!isError)}>
+        <p className="text-3xl text-gray-700">{"you need to login first"}</p>
+        <Link
+        to={"/login"}
+          onClick={()=> setIsError(!isError)}
+         className="bg-primary p-2 rounded-md w-full text-center"
+        >
+          Please to Login
+        </Link>
+    </Modal>  
+  </>
   );
 }

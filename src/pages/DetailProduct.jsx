@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import InvoiceContext from "../context/InvoiceContext";
 // import { useSelector } from "react-redux";
 import http from "../lib/http";
+import Modal from "../components/feature/Modal";
 
 export default function DetailProduct() {
   const { id } = useParams();
@@ -19,6 +20,8 @@ export default function DetailProduct() {
   const [render, setRender] = useState({})
   const [sizes, setSizes] = useState([])
   const [variants, setVariants] = useState([])
+  const {isError, isSuccess ,setIsSuccess, setIsError ,message } = useContext(InvoiceContext);
+
   // console.log(products)
 
   useEffect(()=>{
@@ -78,6 +81,7 @@ export default function DetailProduct() {
   if (!render) return <p>Loading...</p>;
 
   return (
+    <>
     <main className="p-[5%] md:px-[3%] lg:px-[10%] flex flex-col gap-10">
       <section className="flex flex-col md:flex-row gap-5 w-full">
         <figure className="flex-1/2">
@@ -255,5 +259,25 @@ export default function DetailProduct() {
         </div>
       </section>
     </main>
+    <Modal success={isSuccess} onClick={()=> setIsSuccess(!isSuccess)}>
+       <p className="text-3xl text-gray-700">{message}</p>
+       <Button
+         onClick={()=> setIsSuccess(!isSuccess)}
+           orange
+       >
+         OK
+       </Button>
+     </Modal>
+     <Modal error={isError} onClick={()=> setIsError(!isError)}>
+       <p className="text-3xl text-gray-700">{"you need to login first"}</p>
+       <Link
+       to={"/login"}
+         onClick={()=> setIsError(!isError)}
+        className="bg-primary p-2 rounded-md w-full text-center"
+       >
+         Please to Login
+       </Link>
+      </Modal>
+    </>
   );
 }
