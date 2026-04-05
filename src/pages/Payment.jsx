@@ -250,7 +250,7 @@ useEffect(()=>{
         onClick={()=> setIsSuccess(!isSuccess)}
           orange
       >
-        Continue
+        OK
       </Button>
     </Modal>
     <Modal error={isError} onClick={() => setIsError(!isError)}>
