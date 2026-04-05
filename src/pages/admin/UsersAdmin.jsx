@@ -1,15 +1,31 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../../components/common/Button';
 import { Funnel, PenLine, Search, Trash2 } from 'lucide-react';
 import UserAction from '../../components/feature/UserAction';
-import AuthContext from '../../context/AuthContext';
+import http from '../../lib/http';
+import { useNavigate } from 'react-router';
 
 export default function UsersAdmin() {
-  const { users } = useContext(AuthContext);
-
+  const [users, setUsers]= useState([]) 
+  const navigate = useNavigate()
   const [showAddUser, setShowAddUser] = useState(false)
   const [showEditUser, setShowEditUser] = useState(false)
   const [selectedUser, setSelectedUser] = useState(null)
+    useEffect(()=>{
+        (async()=>{
+          try{
+            const res = await http("/admin/users")
+              // console.log(res.results)
+              setUsers(res.results)
+          }catch(err){
+            console.log(err)
+            if (err.status === 401) {
+            navigate("/login")
+            }
+            return
+          }
+        })()
+      },[])
 
   return (
     <>
@@ -44,17 +60,17 @@ export default function UsersAdmin() {
               </tr>
           </thead>
           <tbody className="text-center">
-            {users.map((item, index) => (
+            {users?.map((item, index) => (
               <tr key={item.id} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
                 <td className="py-4">#{item.id}</td>
                 <td className="py-4">
                   <img
-                    src={item.image}
-                    alt={item.FullName}
+                    src={`${import.meta.env.VITE_BASE_URL}${item?.picture}`}
+                    alt={item.full_name}
                     className="w-12 h-12 mx-auto object-cover rounded"
                     />
                 </td>
-                <td className="py-4">{item.fullName}</td>
+                <td className="py-4">{item.full_name}</td>
                 <td className="py-4">{item.phone}</td>
                 <td className="py-4">{item.address}</td>
                 <td className="py-4">{item.email}</td>
