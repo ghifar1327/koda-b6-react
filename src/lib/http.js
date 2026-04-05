@@ -20,16 +20,13 @@ async function http(url, body, opts = {}) {
 
     if (res.status === 401) {
       localStorage.removeItem("token");
-      return {
-        success: false,
-        message: "Unauthorized",
-      };
+      throw { status: 401, message: "Unauthorized" };
     }
 
     let data = null;
 
     const text = await res.text();
-    console.log(text)
+    // console.log(text)
     if (text) {
       try {
         data = JSON.parse(text);
@@ -42,10 +39,10 @@ async function http(url, body, opts = {}) {
     }
 
     if (!res.ok) {
-      return {
-        success: false,
+        throw {
+        status: res.status,
         message: data?.message || "Failed to fetch",
-      };
+      }
     }
 
     return data || {
@@ -54,10 +51,7 @@ async function http(url, body, opts = {}) {
     };
 
   } catch (err) {
-    return {
-      success: false,
-      message: err.message,
-    };
+    return err
   }
 }
 export default http;
