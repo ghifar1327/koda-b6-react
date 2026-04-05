@@ -38,7 +38,7 @@ export default function Header() {
       setShowModal(!showModal)
     }
 
-  return user?.role === 1 ? (
+  return user?.role_id === 1 ? (
     <nav
       className={`w-full h-auto border-b-2 border-gray-300  flex justify-between px-[5%] p-3`}
     >
