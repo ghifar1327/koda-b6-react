@@ -1,6 +1,6 @@
 
-// const BASE_URL = import.meta.env.VITE_BASE_URL || "https://ghifar-backend.camps.fahrul.id"
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8888"
+const BASE_URL = import.meta.env.VITE_BASE_URL || "https://ghifar-backend.camps.fahrul.id"
+// const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8888"
 async function http(url, body, opts = {}) {
   const token = localStorage.getItem("token");
 
