@@ -18,7 +18,6 @@ export default function Profile() {
   setError(false)
   }, [])
 function action(form){
-  // console.log(form)
   updateProfile(form, user.id)
 }
   return (
@@ -32,10 +31,10 @@ function action(form){
                 <p className="text-[#4F5665]">{user?.email}</p>
                 <div className="rounded-[100%] w-50 h-50 overflow-hidden">
                   <img
-                    src={
+                    src={ 
                       file
                         ? URL.createObjectURL(file)
-                        : user?.picture || "/Rectangle3.png"
+                        : `${import.meta.env.VITE_BASE_URL}${user?.picture}` || "/Rectangle3.png"
                     }
                     alt=""
                     className="w-full h-full object-cover"
