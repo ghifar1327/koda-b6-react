@@ -2,28 +2,35 @@ import { useEffect, useState } from "react"
 import { Funnel, PenLine, Search, Trash2 } from "lucide-react"
 import { Button } from "../../components/common/Button"
 import ProductActions from "../../components/feature/ProductActions"
-import { useDispatch, useSelector } from "react-redux"
+import http from "../../lib/http";
+import { useNavigate } from "react-router";
 // import { fetchProducts } from "../../redux/reduser/products.slice"
 
 export default function ProductAdmin() {      
     // const [product ] = useContext(FetchContext)
+const [products, setProducts] = useState([]);
+    const navigate = useNavigate()
     const [showAddProduct, setShowAddProduct] = useState(true)
     const [showEditProduct, setShowEditProduct] = useState(true)
-    const product = useSelector(state => state.products.products)
-    const {products } = useSelector(state => state.products)
     const [selectedProduct, setSelectedProduct] = useState(null)
 
-    // console.log(product)
-    // console.log(loading)
-
-    const dispatch = useDispatch()
-    useEffect(()=>{
-      if (products.length === 0) {
-        dispatch(fetchProducts())
-      }
-    },[dispatch])
 
     
+  useEffect(()=>{
+    const fetchData = async () => {
+    try {
+      const res = await http("/products");
+      setProducts(res.results);
+    } catch (err) {
+      // console.error("Error fetching products:", err);
+      if (err.status === 401) {
+         navigate("/login")
+      }
+    }
+  };
+  fetchData();
+  },[])
+  console.log(products)  
 
   return (
     <>
@@ -60,12 +67,12 @@ export default function ProductAdmin() {
               </tr>
           </thead>
           <tbody className="text-center">
-            {product.map((item, index) => (
+            {products?.map((item, index) => (
               <tr key={item.id} className={`${index %2 === 0 && "bg-gray-100"} text-gray-500`}>
                 <td className="py-4">{index + 1}</td>
                 <td className="py-4">
                   <img
-                    src={item.images[0]}
+                    src={item.image}
                     alt={item.name}
                     className="w-12 h-12 mx-auto object-cover rounded"
                   />
@@ -74,9 +81,9 @@ export default function ProductAdmin() {
                 <td className="py-4">IDR {item.price}</td>
                 <td className="py-4 text-sm line-clamp-2">{item.description}
                 </td>
-                <td className="py-4">-</td>
-                <td className="py-4">-</td>
-                <td className="py-4">-</td>
+                <td className="py-4">{item.sizes.join(", ")}</td>
+                <td className="py-4">{item.variants.join(", ")}</td>
+                <td className="py-4">{item.stock}</td>
                 <td className="py-4">
                   <div className="flex justify-center gap-2">
                     <button onClick={()=> {setSelectedProduct(item); setShowEditProduct(!showAddProduct)}} className="cursor-pointer w-8 h-8 bg-primary/30 text-primary flex items-center justify-center rounded-full">
