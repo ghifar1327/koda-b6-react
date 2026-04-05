@@ -72,10 +72,10 @@ export default function Router() {
           index: true,
           element: <Dashboard />,
         },
-        // {
-        //   path: "products",
-        //   element: <ProductAdmin />,
-        // },
+        {
+          path: "products",
+          element: <ProductAdmin />,
+        },
         {
           path: "orders",
           element: <OrderAdmin/>
