@@ -77,8 +77,7 @@ export function AuthProvider({ children }) {
        if (!res.success) {
          throw new Error(res.message)
        }
-       console.log(res)
-      //  setUser(res.results)
+       setUser(res.results)
        setError(false)
        setIsSuccess(true)
        setMessage(res.message)
