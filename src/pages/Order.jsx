@@ -128,7 +128,7 @@ export default function Order() {
                   </p>
                   <div className="flex items-center gap-2">
                     <p className="text-xl xl:text-xl text-primary">
-                      IDR {item.subtotal}
+                      IDR {item.subtotal.toLocaleString("id-ID")}
                     </p>
                   </div>
                 </div>
