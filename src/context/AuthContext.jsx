@@ -25,7 +25,6 @@ export function AuthProvider({ children }) {
        if (!res.success) {
          throw new Error(res.message)
        }
-       console.log(res)
        setUser(res.user)
        localStorage.setItem("token", res.token)
        setError(false)

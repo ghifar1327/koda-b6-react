@@ -65,7 +65,6 @@ function submit(form) {
     quantity,
   };
   addCart(item)
-  console.log(item);
   reset();
   setToggle(false)
 }
