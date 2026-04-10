@@ -107,6 +107,7 @@ useEffect(()=>{
               <p className="text-gray-400">Please add some products first</p>
           </div> :
         cart?.slice(0, 4).map((item) => {
+          console.log("ITEM:", item);
           return (
             <>
               <div
