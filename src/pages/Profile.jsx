@@ -35,7 +35,7 @@ function action(form){
                        file
                          ? URL.createObjectURL(file)
                          : user?.picture
-                           ? `${import.meta.env.VITE_BASE_URL}/uploads/${user.picture}`
+                           ? `${import.meta.env.VITE_BASE_URL}${user.picture}`
                            : "/Rectangle3.png"
                      }
                     alt=""
