@@ -31,11 +31,13 @@ function action(form){
                 <p className="text-[#4F5665]">{user?.email}</p>
                 <div className="rounded-[100%] w-50 h-50 overflow-hidden">
                   <img
-                    src={ 
-                      file
-                        ? URL.createObjectURL(file)
-                        : `${import.meta.env.VITE_BASE_URL}${user?.picture}` || "/Rectangle3.png"
-                    }
+                    src={
+                       file
+                         ? URL.createObjectURL(file)
+                         : user?.picture
+                           ? `${import.meta.env.VITE_BASE_URL}/uploads/${user.picture}`
+                           : "/Rectangle3.png"
+                     }
                     alt=""
                     className="w-full h-full object-cover"
                   />
