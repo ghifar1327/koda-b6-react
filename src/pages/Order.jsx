@@ -16,7 +16,7 @@ export default function Order() {
   const [histories ]= useLocalStorage("histories")
 
   const render = histories.find(item => id === item.id) || {};
-  console.log(render)
+  //  console.log(render)
   // const date = render.create_at
   //   ? new Date(render.create_at).toLocaleDateString("en-ID", {
   //       day: "numeric",

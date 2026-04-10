@@ -44,7 +44,7 @@ export default function ForgotPwd() {
  
  
   function action(form){
-  console.log(form)
+  //  console.log(form)
   forgotPassword(form)
   reset()
  }

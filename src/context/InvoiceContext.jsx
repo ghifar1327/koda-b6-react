@@ -25,10 +25,10 @@ export function InvoiceProvider({ children }) {
       setIsSuccess(true)
       setIsError(false)
     }catch (err){
-      console.log(err)  
       setMessage(err.message || "Someting is Wrong")
       setIsSuccess(false)
       setIsError(true)
+      return err  
     }
     
   };
@@ -45,10 +45,10 @@ export function InvoiceProvider({ children }) {
       setIsError(false)
       setCart([])
     }catch (err){
-      console.log(err)
       setMessage(err.message || "Someting is Wrong")
       setIsSuccess(false)
       setIsError(true)
+      return err
     }
   }
 
@@ -73,10 +73,10 @@ export function InvoiceProvider({ children }) {
       setIsError(false)
       setCart(res.results)
     }catch (err){
-      console.log(err)
       setMessage(err.message || "Someting is Wrong")
       setIsSuccess(false)
       setIsError(true)
+      return err
     }
   }
 

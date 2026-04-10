@@ -18,7 +18,7 @@ export default function UsersAdmin() {
               // console.log(res.results)
               setUsers(res.results)
           }catch(err){
-            console.log(err)
+            //  //  return err
             if (err.status === 401) {
             navigate("/login")
             }

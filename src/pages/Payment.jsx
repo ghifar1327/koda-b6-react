@@ -41,7 +41,7 @@ const [form, setForm] = useState({
         // console.log(res)
         setCart(res.results)
       }catch(err){
-        console.log(err)
+        return err
       }
     })()
 }, [user]);
