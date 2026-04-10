@@ -28,7 +28,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const res = await http("/landing/recommended-product");
-      setProducts(Array.isArray(res.results) ? res.results : []);
+      setProducts(Array.isArray(res) ? res : []);
     } catch (err) {
       console.error("Error fetching products:", err);
     }
@@ -37,8 +37,6 @@ useEffect(() => {
   setIsSuccess(false)
   fetchData();
 }, []);
-
-// console.log(products);
   return (
     <>
       <main className={"flex flex-col-reverse md:flex-row md:h-auto h-screen"}>
