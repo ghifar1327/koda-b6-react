@@ -28,7 +28,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const res = await http("/landing/recommended-product");
-      setProducts(res);
+      setProducts(Array.isArray(res.results) ? res.results : []);
     } catch (err) {
       console.error("Error fetching products:", err);
     }
@@ -153,15 +153,15 @@ useEffect(() => {
         </article>
         {/* {loading && <p>Loading... </p>} */}
         <figure className="grid grid-cols-2 md:grid-cols-4 px-[5%] md:px-[10%] gap-2 md:gap-3">
-          {products.slice(0, 4).map((item) => {
+          {products?.slice(0, 4).map((item) => {
             return (
               <Card
-                id={item.id}
-                name={item.name}
+                id={item?.id}
+                name={item?.name}
                 image={item?.image}
-                description={item.description}
-                rating={item.avg_rating}
-                price={item.price}
+                description={item?.description}
+                rating={item?.avg_rating}
+                price={item?.price}
               />
             );
           })}
