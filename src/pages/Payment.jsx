@@ -107,7 +107,7 @@ useEffect(()=>{
               <p className="text-gray-400">Please add some products first</p>
           </div> :
         cart?.slice(0, 4).map((item) => {
-          console.log("ITEM:", item);
+          // console.log("ITEM:", item);
           return (
             <>
               <div
@@ -130,7 +130,7 @@ useEffect(()=>{
                       {item?.product_name}
                     </p>
                     <p className="text-xl xl:text-xl text-gray-400">
-                      {item?.quantity}pcs | {item?.size} | {item?.variant} |{""}
+                      {item?.quantity}pcs | {item?.size?.name} | {item?.variant?.name} |{""}
                       {selectedMethod?.name}
                     </p>
                     <div className="flex items-center gap-2">
