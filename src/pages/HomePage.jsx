@@ -29,7 +29,6 @@ useEffect(() => {
     try {
       const res = await http("/landing/recommended-product");
       setProducts(Array.isArray(res) ? res : []);
-      console.log(products)
     } catch (err) {
       console.error("Error fetching products:", err);
     }
@@ -37,6 +36,7 @@ useEffect(() => {
   setIsError(false);
   setIsSuccess(false)
   fetchData();
+  console.log(products)
 }, []);
   return (
     <>
