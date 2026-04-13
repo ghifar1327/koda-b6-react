@@ -28,7 +28,6 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const res = await http("/landing/recommended-product");
-      console.log("API RESULT:", res);
       setProducts(Array.isArray(res) ? res : []);
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -37,7 +36,7 @@ useEffect(() => {
   setIsError(false);
   setIsSuccess(false)
   fetchData();
-  console.log(products)
+  // console.log(products)
 }, []);
   return (
     <>
