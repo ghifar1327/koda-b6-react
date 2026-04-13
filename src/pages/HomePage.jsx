@@ -36,6 +36,7 @@ useEffect(() => {
   setIsError(false);
   setIsSuccess(false)
   fetchData();
+  console.log(products)
 }, []);
   return (
     <>
