@@ -16,8 +16,8 @@ export default function Profile() {
   useEffect(() => {
   setIsSuccess(false)
   setError(false)
-  console.log(import.meta.env.VITE_BASE_URL);
-  console.log(user.picture);
+  // console.log(import.meta.env.VITE_BASE_URL);
+  // console.log(user.picture);
   }, [])
 function action(form){
   updateProfile(form, user.id)
