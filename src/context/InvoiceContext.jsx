@@ -5,8 +5,8 @@ import http from "../lib/http";
 const InvoiceContext = createContext(null);
 
 export function InvoiceProvider({ children }) {
-  const [cart, setCart] = useLocalStorage("cart", []);
-  const [histories, setHistories] = useLocalStorage("histories", [])
+  const [cart, setCart] = useState([]);
+  const [histories, setHistories] = useState([])
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
   const [message, setMessage] = useState("")
@@ -25,6 +25,7 @@ export function InvoiceProvider({ children }) {
       setIsSuccess(true)
       setIsError(false)
     }catch (err){
+      // console.error(err)
       setMessage(err.message || "Someting is Wrong")
       setIsSuccess(false)
       setIsError(true)
