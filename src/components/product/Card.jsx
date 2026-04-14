@@ -100,7 +100,7 @@ function submit(form) {
                 {description}
               </p>
               <div>
-                <p>{rating.toFixed(2)}</p>
+                <p>{Number(rating).toFixed(2)}</p>
               </div>
             </section>
             <section className="flex flex-col gap-2">
@@ -165,7 +165,7 @@ function submit(form) {
            <div className="flex flex-col gap-2">
              <label className="font-semibold">Choose Size</label>
              <div className="grid grid-cols-3 gap-2">
-               {sizes.map((size)=>{
+               {sizes?.map((size)=>{
                 return(
                 <Input
                 key={size.id}
@@ -184,7 +184,7 @@ function submit(form) {
            <div className="flex flex-col gap-2">
              <label className="font-semibold">Choose Variant</label>
              <div className="grid grid-cols-2 gap-2">
-               {variants.map((variant) => {
+               {variants?.map((variant) => {
                  return (
                    <Input
                      key={variant.id}
