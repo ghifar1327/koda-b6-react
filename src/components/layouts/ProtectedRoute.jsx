@@ -4,7 +4,7 @@ import AuthContext from "../../context/AuthContext";
 
 export function ProtectedRoute({ children, role }) {
   const { user } = useContext(AuthContext);
-  console.log(user.role_id)
+  // console.log(user.role_id)
 
   if(!user){
     return <Navigate to="/" replace/>
