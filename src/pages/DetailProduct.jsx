@@ -120,10 +120,10 @@ export default function DetailProduct() {
             </h1>
             <div className="flex gap-5 items-center">
               <p className="text-3xl md:text-xl text-primary">
-                IDR {render?.price?.toLocaleString("id-ID")}
+                IDR {Number(render?.price).toLocaleString("id-ID")}
               </p>
             </div>
-            <p>{render.rating}</p>
+            <p>{Number(render.rating).toFixed(2)}</p>
             <div className="flex items-center text-xl md:text-xs lg:text-lg gap-3 text-gray-500">
               <p>200+ Review</p>
               <p>|</p>
