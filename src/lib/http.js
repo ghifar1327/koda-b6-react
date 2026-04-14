@@ -33,7 +33,7 @@ async function http(url, body, opts = {}) {
       } catch {
         return {
           success: false,
-          message: "Invalid JSON response",
+          message: "Failed to parse response",
         };
       }
     }
