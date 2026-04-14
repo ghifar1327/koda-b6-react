@@ -91,7 +91,6 @@ useEffect(()=>{
     checkout(trx)
   }
   
-  // console.log(user)
   return (
     <>
     <div className="grid md:grid-cols-5 gap-10">
@@ -138,7 +137,7 @@ useEffect(()=>{
                         IDR {""}
                       </p> */}
                       <p className="text-xl xl:text-xl text-primary">
-                        IDR {item?.subtotal.toLocaleString("id-ID")}
+                        IDR {Number(item?.subtotal).toLocaleString("id-ID")}
                       </p>
                     </div>
                   </div>
