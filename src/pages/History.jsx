@@ -62,7 +62,7 @@ export default function History() {
               </div>
             </section>
           </form>
-          {histories.map((item) => {
+          {histories?.map((item) => {
             const date = item.created_at ? new Date(item.created_at).toLocaleDateString("id-ID", {
                     day: "numeric",
                     month: "long",
