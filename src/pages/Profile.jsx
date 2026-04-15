@@ -19,9 +19,9 @@ export default function Profile() {
   // console.log(import.meta.env.VITE_BASE_URL);
   // console.log(user.picture);
   }, [])
-function action(form){
-  updateProfile(form, user.id)
-}
+   function action(form){
+     updateProfile(form, user.id)
+   }
   return (
      <>
       <Header/>
@@ -37,7 +37,7 @@ function action(form){
                        file
                          ? URL.createObjectURL(file)
                          : `${user?.picture}`
-                           ? `${user.picture}`
+                           ? `${user?.picture}`
                            : "/Rectangle3.png"
                      }
                     alt=""
