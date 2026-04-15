@@ -7,25 +7,27 @@ import {
   User,
 } from "lucide-react";
 import { useParams } from "react-router";
-import AuthContext from "../context/AuthContext";
-import InvoiceContext from "../context/InvoiceContext";
-import useLocalStorage from "../hooks/useLocalStotage";
+import { useEffect, useState } from "react";
+import http from "../lib/http";
 
 export default function Order() {
   const { id } = useParams();
-  const [histories ]= useLocalStorage("histories")
+  const [render, setRender] = useState({});
 
-  const render = histories.find(item => id === item.id) || {};
-  //  console.log(render)
-  // const date = render.create_at
-  //   ? new Date(render.create_at).toLocaleDateString("en-ID", {
-  //       day: "numeric",
-  //       month: "long",
-  //       year: "numeric",
-  //       hour: "2-digit",
-  //       minute: "2-digit",
-  //     })
-  //   : "-";
+  useEffect(() => {
+   (async () => {
+      try {
+        const res = await http(`/transactions/${id}`);
+        if (!res.success) {
+          throw new Error(res.message);
+        }
+        setRender(res.results);
+      } catch (err) {
+        return err;
+      }
+    })();
+  }, [id]);
+    
   return (
     <>
       <h1 className="text-3xl">
@@ -96,7 +98,7 @@ export default function Order() {
               <div className="flex gap-3 items-center">
                 <p className="text-[#4f5665]">Total Transaction</p>
               </div>
-              <p className="font-bold text-primary">Idr. {render?.total_transaction.toLocaleString("id-ID")}</p>
+              <p className="font-bold text-primary">Idr. {Number(render?.total_transaction || 0).toLocaleString("id-ID")}</p>
             </div>
           </article>
         </section>
@@ -128,7 +130,7 @@ export default function Order() {
                   </p>
                   <div className="flex items-center gap-2">
                     <p className="text-xl xl:text-xl text-primary">
-                      IDR {item.subtotal.toLocaleString("id-ID")}
+                      IDR {Number(item.subtotal || 0).toLocaleString("id-ID")}
                     </p>
                   </div>
                 </div>
