@@ -39,7 +39,7 @@ const [form, setForm] = useState({
         const res = await http(`/cart/${user.id}`)
         if(!res.success) throw new Error(res.message)
         // console.log(res)
-        setCart(res.results)
+        setCart(res.results || [])
       }catch(err){
         return err
       }
@@ -59,7 +59,7 @@ useEffect(()=>{
 },[])
   const submitRef = useRef(null)
   const { removeCart, checkout, isError, isSuccess ,setIsSuccess, setIsError ,message } = useContext(InvoiceContext);
-  const subtotal = cart?.reduce((acc, item) => acc + Number(item.subtotal), 0) || 0;
+  const subtotal = Array.isArray(cart)? cart.reduce((acc, item) => acc + Number(item.subtotal || 0), 0): 0;
   const selectedMethod = methods.find(item => item.id === Number(selectedDelivery));
   const deliveryFee = selectedMethod?.add_price || 0;
   const tax = (subtotal + deliveryFee) * 0.05 || 0;
@@ -90,6 +90,7 @@ useEffect(()=>{
     // console.log(trx);
     checkout(trx)
   }
+  // console.log(cart)
   
   return (
     <>
@@ -129,7 +130,7 @@ useEffect(()=>{
                       {item?.product_name}
                     </p>
                     <p className="text-xl xl:text-xl text-gray-400">
-                      {item?.quantity}pcs | {item?.size?.name} | {item?.variant?.name} |{""}
+                      {item?.quantity}pcs | {item?.size} | {item?.variant} |{" "}
                       {selectedMethod?.name}
                     </p>
                     <div className="flex items-center gap-2">
