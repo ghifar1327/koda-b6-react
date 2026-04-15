@@ -76,6 +76,7 @@ export function AuthProvider({ children }) {
        if (!res.success) {
          throw new Error(res.message)
        }
+       console.log(res.results)
        setUser(res.results)
        setError(false)
        setIsSuccess(true)
@@ -95,7 +96,7 @@ export function AuthProvider({ children }) {
       formData.append("picture", file);
 
       const res = await http(`/auth/${id}/picture`, formData, {
-      method: "PATCH",
+        method: "PATCH",
         isForm: true,
       });
   
@@ -103,7 +104,7 @@ export function AuthProvider({ children }) {
         throw new Error(res?.message);
       }
   
-      setUser(res.results);
+      setUser(res.user);
       setError(false);
       setIsSuccess(true);
       setMessage(res.message);
@@ -123,7 +124,6 @@ export function AuthProvider({ children }) {
        if (!res.success) {
          throw new Error(res.message)
        }   
-
        setError(false)
        setIsSuccess(true)
        setMessage(res.message)
