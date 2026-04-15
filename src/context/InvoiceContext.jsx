@@ -72,7 +72,7 @@ export function InvoiceProvider({ children }) {
       setMessage(res.message)
       setIsSuccess(true)
       setIsError(false)
-      setCart(res.results)
+      setCart(res.results || [])
     }catch (err){
       setMessage(err.message || "Someting is Wrong")
       setIsSuccess(false)
