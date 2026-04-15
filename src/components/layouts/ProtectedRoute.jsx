@@ -4,13 +4,13 @@ import AuthContext from "../../context/AuthContext";
 
 export function ProtectedRoute({ children, role }) {
   const { user } = useContext(AuthContext);
-  // console.log(user.role_id)
+  // console.log(user)
 
   if(!user){
     return <Navigate to="/" replace/>
   }
   
-  if (role && user.role_id !== role) {
+  if (role && user.role !== role) {
     return <Navigate to="/404" replace />;
   }
 
@@ -21,7 +21,7 @@ export function ProtectedRoute({ children, role }) {
 export function PublicRoute({ children }) {
   const { user } = useContext(AuthContext);
 
-  if (user?.role_id === 1) {
+  if (user?.role === "admin") {
     return <Navigate to="/admin" replace />;
   }
 

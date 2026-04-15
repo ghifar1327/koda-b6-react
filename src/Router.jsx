@@ -41,7 +41,7 @@ export default function Router() {
     },
     {
       element: (
-        <ProtectedRoute role={2}>
+        <ProtectedRoute role={"user"}>
           <DetailLayout />
         </ProtectedRoute>
       ),
@@ -63,7 +63,7 @@ export default function Router() {
     {
       path: "admin",
       element: (
-        <ProtectedRoute role={1}>
+        <ProtectedRoute role={"admin"}>
           <AdminLayout />
         </ProtectedRoute>
       ),
