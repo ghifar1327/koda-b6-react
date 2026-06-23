@@ -49,6 +49,6 @@ jobs:
       #       docker compose up frontend -d
       - name: Deploy Container from GHCR to Server
         run: |
-         cd /home/ghifar/server-ghifar
+         cd /home/ghifar/ghifar-server
          docker compose pull frontend
          docker compose up -d frontend
